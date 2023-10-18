@@ -1,5 +1,5 @@
 const Banner = () => {
-  return <div></div>;
+  return <div className="h-screen">Banner</div>;
 };
 
 export default Banner;

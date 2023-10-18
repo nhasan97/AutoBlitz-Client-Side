@@ -5,6 +5,7 @@ import AddProduct from "../pages/AddProduct";
 import MyCart from "../pages/MyCart";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import BrandBasedProducts from "../pages/BrandBasedProducts";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("http://localhost:5000/brands"),
       },
       {
         path: "/add-product",
@@ -22,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/my-cart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "/:name",
+        element: <BrandBasedProducts></BrandBasedProducts>,
       },
       {
         path: "/login",
