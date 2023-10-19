@@ -1,22 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
-// import { useContext } from "react";
-// import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 import logo from "../../assets/logo.png";
 
 const Navbar = () => {
-  //   const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
-  //   const handleSignOut = () => {
-  //     logOut()
-  //       .then((result) => {
-  //         console.log(result);
-  //         // setUser(null);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //       });
-  //   };
+  const handleSignOut = () => {
+    logOut()
+      .then((result) => {
+        console.log(result);
+        // setUser(null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const links = (
     <>
@@ -69,7 +69,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end gap-6">
-          {/* {user && (
+          {user && (
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src={user.photoURL} />
@@ -81,11 +81,11 @@ const Navbar = () => {
             <Link className="btn normal-case" onClick={handleSignOut}>
               Logout
             </Link>
-          ) : ( */}
-          <Link className="btn normal-case" to="/login">
-            Login/Reg
-          </Link>
-          {/* )} */}
+          ) : (
+            <Link className="btn normal-case" to="/login">
+              Login/Reg
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -42,7 +42,13 @@ const AddProduct = () => {
     <div className="w-2/3 mx-auto space-y-6 py-10">
       <div className=" bg-[#F4F3F0] text-center space-y-6 p-10 ">
         <h1>Add New Car</h1>
-
+        {/* <input
+          type=""
+          name=""
+          id="hiddent"
+          defaultValue={""}
+          value={document.getElementById("in1").value()}
+        /> */}
         <form className="space-y-6 text-left" onSubmit={handleAddCar}>
           <div className="flex justify-center items-center gap-8 mb-6">
             <div className="w-1/2 flex flex-col gap-6 ">
@@ -126,7 +132,13 @@ const AddProduct = () => {
           <input type="submit" value="Add" className="input w-full" />
         </form>
 
-        <Link className="btn">Add More Info</Link>
+        <Link
+          className="btn"
+          to={`/add-product-details
+          }`}
+        >
+          Add More Info
+        </Link>
       </div>
     </div>
   );
