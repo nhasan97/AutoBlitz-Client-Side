@@ -3,6 +3,30 @@ import { Link } from "react-router-dom";
 const BrandCarCards = ({ car }) => {
   const { _id, name, brandName, type, price, description, rating, imageUrl } =
     car;
+
+  const handleAddToCart = (productId) => {
+    console.log(productId);
+
+    const productInCart = {
+      carID: productId,
+    };
+
+    fetch("http://localhost:5000/cart", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(productInCart),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          alert("inserted");
+        } else {
+          alert("not inserted");
+        }
+      });
+  };
+
   return (
     <div className="card bg-base-100 shadow-xl">
       <figure>
@@ -61,7 +85,9 @@ const BrandCarCards = ({ car }) => {
             </Link>
           </div>
 
-          <button className="btn w-full">Add to Cart</button>
+          <button className="btn w-full" onClick={() => handleAddToCart(_id)}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
