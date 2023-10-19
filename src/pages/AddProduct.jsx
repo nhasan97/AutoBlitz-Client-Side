@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AddProduct = () => {
   const handleAddCar = (e) => {
     e.preventDefault();
@@ -123,6 +125,8 @@ const AddProduct = () => {
 
           <input type="submit" value="Add" className="input w-full" />
         </form>
+
+        <Link className="btn">Add More Info</Link>
       </div>
     </div>
   );

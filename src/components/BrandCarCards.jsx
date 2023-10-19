@@ -4,11 +4,16 @@ const BrandCarCards = ({ car }) => {
   const { _id, name, brandName, type, price, description, rating, imageUrl } =
     car;
 
-  const handleAddToCart = (productId) => {
-    console.log(productId);
+  const handleAddToCart = () => {
+    console.log(car);
 
     const productInCart = {
-      carID: productId,
+      carId: _id,
+      name,
+      brandName,
+      type,
+      price,
+      imageUrl,
     };
 
     fetch("http://localhost:5000/cart", {
@@ -85,7 +90,7 @@ const BrandCarCards = ({ car }) => {
             </Link>
           </div>
 
-          <button className="btn w-full" onClick={() => handleAddToCart(_id)}>
+          <button className="btn w-full" onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>
