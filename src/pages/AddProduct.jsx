@@ -52,7 +52,7 @@ const AddProduct = () => {
                   id="in1"
                   name="name"
                   placeholder="Type here"
-                  className="input w-full"
+                  className="input w-full capitalize"
                 />
               </label>
               <label htmlFor="in2">
@@ -62,7 +62,7 @@ const AddProduct = () => {
                   id="in2"
                   name="brand_name"
                   placeholder="Type here"
-                  className="input w-full"
+                  className="input w-full capitalize"
                 />
               </label>
               <label htmlFor="in3">
@@ -72,7 +72,7 @@ const AddProduct = () => {
                   id="in3"
                   name="type"
                   placeholder="Type here"
-                  className="input w-full "
+                  className="input w-full  capitalize"
                 />
               </label>
             </div>
@@ -90,12 +90,12 @@ const AddProduct = () => {
               </label>
               <label htmlFor="in5">
                 Description
-                <input
+                <textarea
                   type="text"
                   id="in5"
                   name="description"
                   placeholder="Type here"
-                  className="input w-full"
+                  className="input w-full capitalize"
                 />
               </label>
               <label htmlFor="in6">
