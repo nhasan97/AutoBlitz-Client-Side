@@ -11,7 +11,7 @@ const OfferSection = () => {
   };
   //  border-l border-[#df454596]
   return (
-    <div className="max-w-screen-xl mx-auto my-20 px-28 py-10 ">
+    <div className="max-w-screen-xl mx-auto mt-20 px-28 py-10 ">
       <div className="flex justify-center items-center">
         <div className="w-2/3" data-aos="zoom-in" data-aos-duration="1000">
           <img src={car} alt="" className="w-full" />
@@ -41,7 +41,7 @@ const OfferSection = () => {
                   Financing
                 </h1>
                 <p className="text-[rgba(255,255,255,0.75)]">
-                  Puchase high quality product with out worry
+                  Get your dream car at an attractive price
                 </p>
               </div>
             </div>
@@ -54,7 +54,7 @@ const OfferSection = () => {
                   Trade in Service
                 </h1>
                 <p className="text-[rgba(255,255,255,0.75)]">
-                  Puchase high quality product with out worry
+                  Exchange your old car to get up to 50% discount
                 </p>
               </div>
             </div>
@@ -67,7 +67,7 @@ const OfferSection = () => {
                   1 year warranty
                 </h1>
                 <p className="text-[rgba(255,255,255,0.75)]">
-                  Puchase high quality product with out worry
+                  Warranty covers repairs, replacements and refund
                 </p>
               </div>
             </div>

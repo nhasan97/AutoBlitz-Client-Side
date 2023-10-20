@@ -1,6 +1,9 @@
 import AwesomeSlider from "react-awesome-slider";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
+import bn1 from "../../public/gridfiti.png";
+import bn2 from "../../public/bmw.png";
+import bn3 from "../../public/lamborghini.jpg";
 
 const Banner = () => {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
@@ -13,9 +16,9 @@ const Banner = () => {
         cancelOnInteraction={false} // should stop playing on user interaction
         interval={1500}
       >
-        <div data-src="/public/gridfiti.jpg" />
-        <div data-src="/public/bmw.webp" />
-        <div data-src="/public/lamborghini.jpg" />
+        <div data-src={bn1} />
+        <div data-src={bn2} />
+        <div data-src={bn3} />
       </AutoplaySlider>
     </div>
   );

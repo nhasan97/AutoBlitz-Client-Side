@@ -32,11 +32,11 @@ const Navbar = () => {
     </>
   );
 
-  //
+  //bg-[rgba(255,255,255,0.75)]
 
   return (
     <div className="bg-transparent relative z-10">
-      <div className="navbar bg-[rgba(255,255,255,0.75)]  py-2 px-32 absolute top-0 left-0">
+      <div className="navbar text-white py-4 px-[148px] absolute top-0 left-0">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -62,7 +62,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl" to="/">
+          <Link className="font-rac normal-case text-xl flex" to="/">
             <img src={logo} alt="" className="w-[20%]" />
             AutoBlitz
           </Link>
