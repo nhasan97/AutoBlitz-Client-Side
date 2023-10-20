@@ -12,9 +12,9 @@ const UpdateProduct = () => {
     const name = form.name.value;
     const brandName = form.brand_name.value.toLowerCase();
     const type = form.type.value;
-    const price = form.price.value;
+    const price = parseFloat(form.price.value);
     const description = form.description.value;
-    const rating = form.rating.value;
+    const rating = parseFloat(form.rating.value);
     const imageUrl = form.photo_url.value;
 
     const updatedCarInfo = {
@@ -93,6 +93,7 @@ const UpdateProduct = () => {
                   id="in4"
                   name="price"
                   placeholder="Type here"
+                  step="0.01"
                   defaultValue={loadedCar.price}
                   className="input w-full"
                 />
@@ -116,6 +117,7 @@ const UpdateProduct = () => {
                   name="rating"
                   placeholder="Type here"
                   defaultValue={loadedCar.rating}
+                  step="0.5"
                   className="input w-full"
                 />
               </label>

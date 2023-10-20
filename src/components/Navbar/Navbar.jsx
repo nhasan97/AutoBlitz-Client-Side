@@ -32,8 +32,10 @@ const Navbar = () => {
     </>
   );
 
+  //
+
   return (
-    <div className="bg-transparent relative">
+    <div className="bg-transparent relative z-10">
       <div className="navbar bg-[rgba(255,255,255,0.75)]  py-2 px-32 absolute top-0 left-0">
         <div className="navbar-start">
           <div className="dropdown">
