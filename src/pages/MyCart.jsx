@@ -31,11 +31,12 @@ const MyCart = () => {
     );
   } else {
     return (
-      <div className="max-w-screen-xl mx-auto px-32 pt-32">
-        <div className="overflow-x-auto">
-          <table className="table">
+      <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/add-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+        <div className="h-[400px] mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm overflow-y-auto">
+          <h1 className="font-rac text-3xl text-white">Cart Items</h1>
+          <table className="table text-black text-base ">
             {/* head */}
-            <thead>
+            <thead className="text-black text-base">
               <tr>
                 <th>ID</th>
                 <th>Image</th>
@@ -70,7 +71,7 @@ const MyCart = () => {
                   <td className="capitalize">{product.name}</td>
                   <td className="capitalize">{product.brandName}</td>
                   <td>
-                    <span className="badge badge-ghost badge-sm capitalize">
+                    <span className="badge badge-ghost badge-sm p-2 capitalize">
                       {product.type}
                     </span>
                   </td>
