@@ -6,7 +6,7 @@ import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
 import bn1 from "../../public/gridfiti.png";
 import bn2 from "../../public/bmw.png";
-import bn3 from "../../public/lamborghini1.jpg";
+import bn3 from "../../public/Picture1.png";
 
 const BrandBasedProducts = () => {
   const loadedCars = useLoaderData();

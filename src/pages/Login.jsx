@@ -65,10 +65,10 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-24 py-24">
-      <div className="w-[50%] mx-auto flex flex-col justify-center items-center p-10 gap-6 border rounded-lg">
-        <div className="bg-[url('/public/Resources/1494-removebg-preview.png')] bg-cover bg-no-repeat bg-center p-16 ">
-          <h1 className="text-[#AC9B74] text-4xl font-bold mt-6">Login</h1>
+    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/gridfiti.png')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+      <div className="w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm">
+        <div className="bg-[url('/public/Resources/1494-removebg-preview.png')] bg-cover bg-no-repeat bg-center py-10 px-16">
+          <h1 className="font-rac text-gray-800 text-7xl font-bold">Login</h1>
         </div>
 
         <form
@@ -109,7 +109,9 @@ const Login = () => {
             {loginSuccess && <h1 className="text-green-500">{loginSuccess}</h1>}
             {user && <img src={user.photoURL} alt="" />}
           </div>
-          <button className="btn bg-[#617663] text-white w-full">Login</button>
+          <button className="btn bg-red-600 text-white w-1/2 mb-6">
+            Login
+          </button>
         </form>
 
         <div className="w-full border-t flex flex-col justify-center items-center">
@@ -118,7 +120,7 @@ const Login = () => {
           </h1>
           <div className="flex gap-4">
             <button
-              className="btn bg-[#AC9B74] text-white w-full"
+              className="btn bg-[#0e0d0d] text-white w-full"
               onClick={handleGoogleSignIn}
             >
               google

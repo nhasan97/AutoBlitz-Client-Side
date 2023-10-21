@@ -63,13 +63,15 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-24 py-24">
-      <div className="w-[50%] mx-auto flex flex-col justify-center items-center p-10 gap-6 border rounded-lg">
-        <div className="bg-[url('/public/Resources/1494-removebg-preview.png')] bg-cover bg-no-repeat bg-center p-16 ">
-          <h1 className="text-[#AC9B74] text-4xl font-bold mt-6">Register</h1>
+    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/gridfiti.png')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+      <div className="w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm">
+        <div className="px-16 py-10">
+          <h1 className="font-rac text-gray-800 text-7xl font-bold">
+            Register
+          </h1>
         </div>
         <form
-          className="w-full flex flex-col justify-center items-center gap-6"
+          className="w-full flex flex-col justify-center items-center gap-6 px-16"
           onSubmit={handleRegister}
         >
           <input
@@ -124,9 +126,7 @@ const Register = () => {
             <p className="text-red-500">{registrationError}</p>
           )}
 
-          <button className="btn bg-[#617663] text-white w-full">
-            Sign Up
-          </button>
+          <button className="btn bg-red-600 text-white w-1/2">Sign Up</button>
         </form>
         <p className="">
           Already user?

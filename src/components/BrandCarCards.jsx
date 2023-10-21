@@ -54,12 +54,12 @@ const BrandCarCards = ({ car }) => {
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card bg-gray-500 shadow-xl text-white text-lg mx-2">
       <figure>
-        <img src={imageUrl} alt="Shoes" className="h-200px" />
+        <img src={imageUrl} alt="Shoes" className="w-full h-[200px]" />
       </figure>
       <div className="card-body gap-6">
-        <h2 className="card-title capitalize text-red-500">
+        <h2 className="card-title capitalize text-2xl text-black">
           {name}
           {/* <div className="badge badge-secondary">NEW</div> */}
         </h2>
@@ -74,28 +74,28 @@ const BrandCarCards = ({ car }) => {
               <input
                 type="radio"
                 name="rating-4"
-                className="mask mask-star-2 bg-gray-600"
+                className="mask mask-star-2 bg-gray-800"
               />
               <input
                 type="radio"
                 name="rating-4"
-                className="mask mask-star-2 bg-gray-600"
+                className="mask mask-star-2 bg-gray-800"
                 checked
               />
               <input
                 type="radio"
                 name="rating-4"
-                className="mask mask-star-2 bg-gray-600"
+                className="mask mask-star-2 bg-gray-800"
               />
               <input
                 type="radio"
                 name="rating-4"
-                className="mask mask-star-2 bg-gray-600"
+                className="mask mask-star-2 bg-gray-800"
               />
               <input
                 type="radio"
                 name="rating-4"
-                className="mask mask-star-2 bg-gray-600"
+                className="mask mask-star-2 bg-gray-800"
               />
             </div>
             {rating}

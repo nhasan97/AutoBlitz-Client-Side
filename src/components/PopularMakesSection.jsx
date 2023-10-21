@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import PopularCarCards from "./PopularCarCards";
+import BrandCarCards from "./BrandCarCards";
 
 const PopularMakesSection = () => {
   const title = {
@@ -40,7 +41,7 @@ const PopularMakesSection = () => {
       <div className="py-12">
         <Slider {...settings}>
           {popularCars.map((car) => (
-            <PopularCarCards key={car._id} car={car}></PopularCarCards>
+            <BrandCarCards key={car._id} car={car}></BrandCarCards>
           ))}
         </Slider>
       </div>
