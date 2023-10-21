@@ -6,7 +6,7 @@ import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
 import bn1 from "../../public/gridfiti.png";
 import bn2 from "../../public/bmw.png";
-import bn3 from "../../public/lamborghini.jpg";
+import bn3 from "../../public/lamborghini1.jpg";
 
 const BrandBasedProducts = () => {
   const loadedCars = useLoaderData();
@@ -18,7 +18,9 @@ const BrandBasedProducts = () => {
   if (loadedCars.length === 0) {
     return (
       <div className="max-w-screen-xl mx-auto h-screen flex justify-center items-center">
-        <h1 className="font-rac text-7xl font-bold">Sorry no autos found</h1>
+        <h1 className="font-rac text-7xl font-bold text-white">
+          Sorry no autos found
+        </h1>
       </div>
     );
   } else {

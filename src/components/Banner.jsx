@@ -1,15 +1,15 @@
 import AwesomeSlider from "react-awesome-slider";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
-import bn1 from "../../public/gridfiti.png";
-import bn2 from "../../public/bmw.png";
-import bn3 from "../../public/lamborghini.jpg";
+import bn1 from "../../public/lamborghini1.jpg";
+import bn2 from "../../public/add-bg.jpg";
+import bn3 from "../../public/lamborghini2.jpg";
 
 const Banner = () => {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
 
   return (
-    <div className="reletive">
+    <div className="relative">
       <AutoplaySlider
         className="h-screen w-full"
         play={true}

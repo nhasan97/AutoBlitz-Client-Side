@@ -40,14 +40,18 @@ const UpdateProduct = () => {
         } else {
           alert("not modified");
         }
+        form.reset();
       });
   };
   return (
-    <div className="w-2/3 mx-auto space-y-6 py-10">
-      <div className=" bg-[#F4F3F0] text-center space-y-6 p-10 ">
-        <h1>Add New Car</h1>
+    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+      <div className="w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm">
+        <h1 className="font-rac text-3xl">Update Car Info</h1>
 
-        <form className="space-y-6 text-left" onSubmit={handleUpdateCar}>
+        <form
+          className="space-y-6 text-left text-black font-semibold text-lg"
+          onSubmit={handleUpdateCar}
+        >
           <div className="flex justify-center items-center gap-8 mb-6">
             <div className="w-1/2 flex flex-col gap-6 ">
               <label htmlFor="in1">
@@ -118,6 +122,8 @@ const UpdateProduct = () => {
                   placeholder="Type here"
                   defaultValue={loadedCar.rating}
                   step="0.5"
+                  min="0"
+                  max="5"
                   className="input w-full"
                 />
               </label>

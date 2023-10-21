@@ -3,7 +3,7 @@ const PopularCarCards = ({ car }) => {
     car;
 
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-xl mr-4">
       <figure>
         <img src={imageUrl} alt="Shoes" />
       </figure>

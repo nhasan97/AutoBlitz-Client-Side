@@ -13,9 +13,9 @@ const Brands = () => {
   const [brands, setBrands] = useState(loadedBrands);
 
   return (
-    <div className="max-w-screen-xl mx-auto my-20 px-28 py-10">
+    <div className="max-w-screen-xl mx-auto my-10 px-28 py-10 bg-[url('/public/smoke.png')] bg-no-repeat bg-contain bg-left bg-fixed">
       <Title title={title}></Title>
-      <div className="flex items-center justify-center flex-wrap gap-6 mx-auto py-12 border-l border-[#df454596]">
+      <div className="flex items-center justify-center flex-wrap gap-6 mx-auto py-12 border-r border-[#df454596]">
         {brands.map((brand) => (
           <BrandCard key={brand._id} brand={brand}></BrandCard>
         ))}

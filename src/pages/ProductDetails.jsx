@@ -16,7 +16,12 @@ const ProductDetails = () => {
   return (
     <div>
       <h1 className="text-6xl">{loadedCar.description}</h1>
-      <img src={loadedCar.imageUrl} alt="" />
+      <img
+        src={loadedCar.imageUrl}
+        alt=""
+        data-aos="fade-left"
+        data-aos-duration="1000"
+      />
     </div>
   );
 };

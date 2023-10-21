@@ -11,13 +11,23 @@ const OfferSection = () => {
   };
   //  border-l border-[#df454596]
   return (
-    <div className="max-w-screen-xl mx-auto mt-20 px-28 py-10 ">
+    <div className="max-w-screen-xl mx-auto mt-10 px-28 py-10">
       <div className="flex justify-center items-center">
-        <div className="w-2/3" data-aos="zoom-in" data-aos-duration="1000">
+        <div
+          className="w-2/3 flex justify-center items-center"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          data-aos-delay="1000"
+        >
           <img src={car} alt="" className="w-full" />
         </div>
 
-        <div className="w-1/3" data-aos="fade-down" data-aos-duration="1000">
+        <div
+          className="w-1/3"
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          data-aos-delay="1000"
+        >
           <Title title={title}></Title>
           <div className="my-10 space-y-6">
             {/* offer1 */}

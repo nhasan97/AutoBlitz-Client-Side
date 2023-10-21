@@ -35,13 +35,14 @@ const AddProduct = () => {
         } else {
           alert("not inserted");
         }
+        form.reset();
       });
   };
 
   return (
     <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/add-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
       <div className="w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm">
-        <h1 className="font-rac text-3xl ">Add New Car</h1>
+        <h1 className="font-rac text-3xl">Add New Car</h1>
         <form
           className="space-y-6 text-left text-black font-semibold text-lg"
           onSubmit={handleAddCar}
@@ -110,6 +111,8 @@ const AddProduct = () => {
                   name="rating"
                   placeholder="Type here"
                   step="0.5"
+                  min="0"
+                  max="5"
                   className="input w-full"
                 />
               </label>

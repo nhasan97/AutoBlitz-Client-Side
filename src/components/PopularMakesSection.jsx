@@ -1,6 +1,8 @@
 import Title from "./Title";
 import { useEffect, useState } from "react";
-import ScrollCarousel from "scroll-carousel-react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import PopularCarCards from "./PopularCarCards";
 
 const PopularMakesSection = () => {
@@ -20,29 +22,28 @@ const PopularMakesSection = () => {
   }, []);
 
   console.log(popularCars);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+  };
+
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto my-10 px-28 py-10 bg-[url('/public/home-bg.png')] bg-no-repeat bg-contain bg-right bg-fixed">
       <Title title={title}></Title>
-
-      <ScrollCarousel
-        autoplay
-        autoplaySpeed={8}
-        speed={7}
-        onReady={() => console.log("I am ready")}
-      >
-        {popularCars.map((car) => (
-          <PopularCarCards key={car._id} car={car}></PopularCarCards>
-        ))}
-
-        {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((item) => (
-          <div
-            key={item}
-            className="bg-blue-300/20 border-2 border-blue-300/70 rounded h-36 w-48"
-          >
-            rerg
-          </div>
-        ))} */}
-      </ScrollCarousel>
+      <div className="py-12">
+        <Slider {...settings}>
+          {popularCars.map((car) => (
+            <PopularCarCards key={car._id} car={car}></PopularCarCards>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };
