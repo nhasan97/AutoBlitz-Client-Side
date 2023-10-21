@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyCart = () => {
   const loadedCartProducts = useLoaderData();
@@ -12,9 +14,27 @@ const MyCart = () => {
       .then((data) => {
         console.log(data);
         if (data.deletedCount === 1) {
-          alert("Successfully deleted one document.");
+          toast.success("Successfully deleted one document.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else {
-          alert("No documents matched the query. Deleted 0 documents.");
+          toast.error("No documents matched the query. Deleted 0 documents.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
         const remainingProducts = cartProducts.filter(
           (product) => product._id !== id
@@ -89,6 +109,7 @@ const MyCart = () => {
             </tbody>
           </table>
         </div>
+        <ToastContainer />
       </div>
     );
   }

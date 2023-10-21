@@ -1,9 +1,23 @@
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateProduct = () => {
   const loadedCar = useLoaderData();
+  const [carName, setCarName] = useState("");
+  const [loadedSpecs, setLoadedSpecs] = useState([]);
 
-  // console.log(loadedCar);
+  useEffect(() => {
+    setCarName(loadedCar.name);
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/car-specs/${loadedCar.name}`)
+      .then((res) => res.json())
+      .then((data) => setLoadedSpecs(data));
+  }, []);
+  console.log(loadedSpecs);
 
   const handleUpdateCar = (e) => {
     e.preventDefault();
@@ -17,6 +31,8 @@ const UpdateProduct = () => {
     const rating = parseFloat(form.rating.value);
     const imageUrl = form.photo_url.value;
 
+    setCarName(name);
+
     const updatedCarInfo = {
       name,
       brandName,
@@ -25,6 +41,21 @@ const UpdateProduct = () => {
       description,
       rating,
       imageUrl,
+    };
+
+    const updatedSpecs = {
+      name,
+      body: loadedSpecs.body,
+      seg: loadedSpecs.seg,
+      py: loadedSpecs.py,
+      eng: loadedSpecs.eng,
+      pow: loadedSpecs.pow,
+      fuel: loadedSpecs.fuel,
+      fuelc: loadedSpecs.fuelc,
+      ps: loadedSpecs.ps,
+      d: loadedSpecs.d,
+      ts: loadedSpecs.ts,
+      gw: loadedSpecs.gw,
     };
 
     fetch(`http://localhost:5000/all-cars/${loadedCar._id}`, {
@@ -36,10 +67,44 @@ const UpdateProduct = () => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount === 1) {
-          alert("modified");
+          toast.success("Updated!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else {
-          alert("not modified");
+          toast.error("Error! Not Updated", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
+        form.reset();
+      });
+
+    fetch(`http://localhost:5000/car-specs/${loadedSpecs.name}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(updatedSpecs),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // if (data.modifiedCount === 1) {
+        //   alert("modified");
+        // } else {
+        //   alert("not modified");
+        // }
         form.reset();
       });
   };
@@ -52,13 +117,13 @@ const UpdateProduct = () => {
           className="space-y-6 text-left text-black font-semibold text-lg"
           onSubmit={handleUpdateCar}
         >
-          <div className="flex justify-center items-center gap-8 mb-6">
-            <div className="w-1/2 flex flex-col gap-6 ">
+          <div className="flex justify-center items-center gap-8 mb-3">
+            <div className="w-1/2 flex flex-col gap-3 ">
               <label htmlFor="in1">
                 Name
                 <input
                   type="text"
-                  id="in1"
+                  id="upin1"
                   name="name"
                   placeholder="Type here"
                   defaultValue={loadedCar.name}
@@ -89,7 +154,7 @@ const UpdateProduct = () => {
               </label>
             </div>
 
-            <div className="w-1/2 flex flex-col gap-6">
+            <div className="w-1/2 flex flex-col gap-3">
               <label htmlFor="in4">
                 Price
                 <input
@@ -144,7 +209,16 @@ const UpdateProduct = () => {
 
           <input type="submit" value="Update" className="input w-full" />
         </form>
+
+        {carName ? (
+          <Link className="btn" to={`/update-product-details/${carName}`}>
+            Update Specs
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

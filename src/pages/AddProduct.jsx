@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
+  const [carName, setCarName] = useState("");
+
   const handleAddCar = (e) => {
     e.preventDefault();
 
@@ -12,7 +17,7 @@ const AddProduct = () => {
     const description = form.description.value;
     const rating = parseFloat(form.rating.value);
     const imageUrl = form.photo_url.value;
-
+    setCarName(name);
     const newCar = {
       name,
       brandName,
@@ -31,9 +36,27 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          alert("inserted");
+          toast.success("Added!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else {
-          alert("not inserted");
+          toast.error("Error! Not Added", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
         form.reset();
       });
@@ -47,8 +70,8 @@ const AddProduct = () => {
           className="space-y-6 text-left text-black font-semibold text-lg"
           onSubmit={handleAddCar}
         >
-          <div className="flex justify-center items-center gap-8 mb-6">
-            <div className="w-1/2 flex flex-col gap-6 ">
+          <div className="flex justify-center items-center gap-8 mb-3">
+            <div className="w-1/2 flex flex-col gap-3 ">
               <label htmlFor="in1">
                 Name
                 <input
@@ -81,7 +104,7 @@ const AddProduct = () => {
               </label>
             </div>
 
-            <div className="w-1/2 flex flex-col gap-6">
+            <div className="w-1/2 flex flex-col gap-3">
               <label htmlFor="in4">
                 Price
                 <input
@@ -132,15 +155,15 @@ const AddProduct = () => {
 
           <input type="submit" value="Add" className="input w-full" />
         </form>
-
-        <Link
-          className="btn"
-          to={`/add-product-details
-          }`}
-        >
-          Add More Info
-        </Link>
+        {carName ? (
+          <Link className="btn" to={`/add-product-details/${carName}`}>
+            Add Specs
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -10,15 +10,19 @@ import UpdateProduct from "../pages/UpdateProduct";
 import ProductDetails from "../pages/ProductDetails";
 import AddProductDetails from "../pages/AddProductDetails";
 import PrivateRoute from "./PrivateRoute";
+import UpdateProductDetails from "../pages/UpdateProductDetails";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
         element: <Home></Home>,
+        errorElement: <Error></Error>,
         loader: () => fetch("http://localhost:5000/brands"),
       },
       {
@@ -28,11 +32,12 @@ const router = createBrowserRouter([
             <AddProduct></AddProduct>
           </PrivateRoute>
         ),
+        errorElement: <Error></Error>,
       },
       {
-        // path: "/add-product-details/:name",
-        path: "/add-product-details",
+        path: "/add-product-details/:name",
         element: <AddProductDetails></AddProductDetails>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/my-cart",
@@ -41,11 +46,13 @@ const router = createBrowserRouter([
             <MyCart></MyCart>
           </PrivateRoute>
         ),
+        errorElement: <Error></Error>,
         loader: () => fetch("http://localhost:5000/cart"),
       },
       {
-        path: "/:name",
+        path: "/branded-car/:name",
         element: <BrandBasedProducts></BrandBasedProducts>,
+        errorElement: <Error></Error>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/cars/${params.name}`),
       },
@@ -56,8 +63,16 @@ const router = createBrowserRouter([
             <UpdateProduct></UpdateProduct>
           </PrivateRoute>
         ),
+        errorElement: <Error></Error>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/all-cars/${params.id}`),
+      },
+      {
+        path: "/update-product-details/:name",
+        element: <UpdateProductDetails></UpdateProductDetails>,
+        errorElement: <Error></Error>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/car-specs/${params.name}`),
       },
       {
         path: "/product-details/:id",
@@ -66,16 +81,19 @@ const router = createBrowserRouter([
             <ProductDetails></ProductDetails>
           </PrivateRoute>
         ),
+        errorElement: <Error></Error>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/all-cars/${params.id}`),
       },
       {
         path: "/login",
         element: <Login></Login>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/register",
         element: <Register></Register>,
+        errorElement: <Error></Error>,
       },
     ],
   },

@@ -17,7 +17,7 @@ const OfferSection = () => {
           className="w-2/3 flex justify-center items-center"
           data-aos="zoom-in"
           data-aos-duration="1000"
-          data-aos-delay="1000"
+          data-aos-delay="50"
         >
           <img src={car} alt="" className="w-full" />
         </div>
@@ -26,7 +26,7 @@ const OfferSection = () => {
           className="w-1/3"
           data-aos="fade-down"
           data-aos-duration="1000"
-          data-aos-delay="1000"
+          data-aos-delay="50"
         >
           <Title title={title}></Title>
           <div className="my-10 space-y-6">

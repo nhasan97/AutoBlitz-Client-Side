@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const BrandCarCards = ({ car }) => {
   const { _id, name, brandName, type, price, description, rating, imageUrl } =
     car;
@@ -25,9 +28,27 @@ const BrandCarCards = ({ car }) => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
-          alert("inserted");
+          toast.success("Added to cart!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else {
-          alert("not inserted");
+          toast.error("Error! Not Added", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       });
   };
@@ -95,6 +116,7 @@ const BrandCarCards = ({ car }) => {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

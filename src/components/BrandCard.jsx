@@ -4,7 +4,7 @@ const BrandCard = ({ brand }) => {
   const { _id, name, image } = brand;
   const navigate = useNavigate();
   const handleBrandCardClick = () => {
-    navigate(`/${name}`);
+    navigate(`/branded-car/${name}`);
   };
   return (
     <div

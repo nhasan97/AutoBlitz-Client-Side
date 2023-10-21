@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AddProductDetails = () => {
-  const info = useParams();
-  const name = info.name;
+const UpdateProductDetails = () => {
+  const loadedSpecs = useLoaderData();
+  console.log(loadedSpecs);
 
-  const handleAddCarDetails = (e) => {
+  const handleUpdateCarDetails = (e) => {
     e.preventDefault();
+
     const form = e.target;
     const body = form.body.value;
     const seg = form.seg.value;
@@ -21,8 +22,8 @@ const AddProductDetails = () => {
     const ts = form.ts.value;
     const gw = form.gw.value;
 
-    const specs = {
-      name,
+    const updatedSpecs = {
+      name: loadedSpecs.name,
       body,
       seg,
       py,
@@ -36,15 +37,16 @@ const AddProductDetails = () => {
       gw,
     };
 
-    fetch("http://localhost:5000/car-details", {
-      method: "POST",
+    fetch(`http://localhost:5000/car-specs/${loadedSpecs.name}`, {
+      method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(specs),
+      body: JSON.stringify(updatedSpecs),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
-          toast.success("Added!", {
+        console.log(data);
+        if (data.modifiedCount === 1) {
+          toast.success("Updated!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -55,7 +57,7 @@ const AddProductDetails = () => {
             theme: "light",
           });
         } else {
-          toast.error("Error! Not Added", {
+          toast.error("Error! Not Updated", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -70,13 +72,13 @@ const AddProductDetails = () => {
       });
   };
   return (
-    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/add-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
       <div className="w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm">
-        <h1 className="font-rac text-3xl">Add Car Specs</h1>
+        <h1 className="font-rac text-3xl">Update Car Specs</h1>
 
         <form
           className="space-y-6 text-left text-black font-semibold text-lg"
-          onSubmit={handleAddCarDetails}
+          onSubmit={handleUpdateCarDetails}
         >
           <div className="flex justify-center items-center gap-8 mb-6">
             <div className="w-full flex flex-col gap-6 ">
@@ -85,6 +87,7 @@ const AddProductDetails = () => {
                 id="in1"
                 name="body"
                 placeholder="Body"
+                defaultValue={loadedSpecs.body}
                 className="input w-full capitalize"
               />
 
@@ -93,6 +96,7 @@ const AddProductDetails = () => {
                 id="in1"
                 name="seg"
                 placeholder="Segment"
+                defaultValue={loadedSpecs.seg}
                 className="input w-full capitalize"
               />
               <input
@@ -100,6 +104,7 @@ const AddProductDetails = () => {
                 id="in1"
                 name="py"
                 placeholder="Production year"
+                defaultValue={loadedSpecs.py}
                 className="input w-full capitalize"
               />
               <div>
@@ -110,6 +115,7 @@ const AddProductDetails = () => {
                     id="in1"
                     name="eng"
                     placeholder="Engine"
+                    defaultValue={loadedSpecs.eng}
                     className="input w-full capitalize"
                   />
                   <input
@@ -117,6 +123,7 @@ const AddProductDetails = () => {
                     id="in1"
                     name="pow"
                     placeholder="Power"
+                    defaultValue={loadedSpecs.pow}
                     className="input w-full capitalize"
                   />
                   <input
@@ -124,6 +131,7 @@ const AddProductDetails = () => {
                     id="in1"
                     name="fuel"
                     placeholder="Fuel"
+                    defaultValue={loadedSpecs.fuel}
                     className="input w-full capitalize"
                   />
                   <input
@@ -131,6 +139,7 @@ const AddProductDetails = () => {
                     id="in1"
                     name="fuelc"
                     placeholder="Fuel Capacity"
+                    defaultValue={loadedSpecs.fuelc}
                     className="input w-full capitalize"
                   />
                 </div>
@@ -143,6 +152,7 @@ const AddProductDetails = () => {
                   id="in1"
                   name="ps"
                   placeholder="Top Speed"
+                  defaultValue={loadedSpecs.ps}
                   className="input w-full capitalize"
                 />
               </div>
@@ -154,6 +164,7 @@ const AddProductDetails = () => {
                   id="in1"
                   name="d"
                   placeholder="Dimension"
+                  defaultValue={loadedSpecs.d}
                   className="input w-full capitalize"
                 />
               </div>
@@ -165,6 +176,7 @@ const AddProductDetails = () => {
                   id="in1"
                   name="ts"
                   placeholder="Tire Size"
+                  defaultValue={loadedSpecs.ts}
                   className="input w-full capitalize"
                 />
               </div>
@@ -176,13 +188,14 @@ const AddProductDetails = () => {
                   id="in1"
                   name="gw"
                   placeholder="Gross Weight"
+                  defaultValue={loadedSpecs.gw}
                   className="input w-full capitalize"
                 />
               </div>
             </div>
           </div>
           <div className="flex justify-center">
-            <input type="submit" value="Add" className="input mx-auto" />
+            <input type="submit" value="Update" className="input mx-auto" />
           </div>
         </form>
       </div>
@@ -191,4 +204,4 @@ const AddProductDetails = () => {
   );
 };
 
-export default AddProductDetails;
+export default UpdateProductDetails;
