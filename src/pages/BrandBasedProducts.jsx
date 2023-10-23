@@ -1,19 +1,59 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import BrandCarCards from "../components/BrandCarCards";
-import AwesomeSlider from "react-awesome-slider";
-import withAutoplay from "react-awesome-slider/dist/autoplay";
-import "react-awesome-slider/dist/styles.css";
-import bn1 from "../../public/gridfiti.png";
-import bn2 from "../../public/bmw.png";
-import bn3 from "../../public/Picture1.png";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+import bn1 from "../../public/Picture1.png";
+import bn2 from "../../public/gridfiti.png";
+import bn3 from "../../public/bmw.png";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BrandBasedProducts = () => {
   const loadedCars = useLoaderData();
   const [brandBasedCars, setBrandBasedCars] = useState(loadedCars);
   console.log(brandBasedCars);
 
-  const AutoplaySlider = withAutoplay(AwesomeSlider);
+  const displayToast = (msg) => {
+    if (msg === "success") {
+      toast.success("Added to cart!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error("Error! Not Added", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 4000,
+    autoplaySpeed: 4000,
+    cssEase: "linear",
+  };
 
   if (loadedCars.length === 0) {
     return (
@@ -26,23 +66,38 @@ const BrandBasedProducts = () => {
   } else {
     return (
       <div>
-        <div className="">
-          <AutoplaySlider
-            className="h-screen w-full"
-            play={true}
-            cancelOnInteraction={false} // should stop playing on user interaction
-            interval={1500}
-          >
-            <div data-src={bn1} />
-            <div data-src={bn2} />
-            <div data-src={bn3} />
-          </AutoplaySlider>
+        <div className="max-w-screen-xl mx-auto px-28 pt-20">
+          <Slider {...settings}>
+            <div>
+              <img src={bn1} alt="" className="w-full h-[530px]" />
+            </div>
+            <div>
+              <img src={bn2} alt="" className="w-full h-[530px]" />
+            </div>
+            <div>
+              <img src={bn3} alt="" className="w-full h-[530px]" />
+            </div>
+            <div>
+              <img src={bn1} alt="" className="w-full h-[530px]" />
+            </div>
+            <div>
+              <img src={bn2} alt="" className="w-full h-[530px]" />
+            </div>
+            <div>
+              <img src={bn3} alt="" className="w-full h-[530px]" />
+            </div>
+          </Slider>
         </div>
-        <div className="max-w-screen-xl mx-auto px-28 py-20 grid grid-cols-3 gap-6 bg-[url('/public/prod-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+        <div className="max-w-screen-xl mx-auto px-28 py-12 grid grid-cols-3 gap-6 bg-[url('/public/prod-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
           {brandBasedCars.map((car) => (
-            <BrandCarCards key={car._id} car={car}></BrandCarCards>
+            <BrandCarCards
+              key={car._id}
+              car={car}
+              displayToast={displayToast}
+            ></BrandCarCards>
           ))}
         </div>
+        <ToastContainer />
       </div>
     );
   }

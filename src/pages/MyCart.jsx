@@ -58,7 +58,7 @@ const MyCart = () => {
             {/* head */}
             <thead className="text-black text-base">
               <tr>
-                <th>ID</th>
+                {/* <th>ID</th> */}
                 <th>Image</th>
                 <th>Name</th>
                 <th>Brand</th>
@@ -71,7 +71,7 @@ const MyCart = () => {
               {/* row 1 */}
               {cartProducts.map((product) => (
                 <tr key={product._id}>
-                  <td>{product.carId}</td>
+                  {/* <td>{product.carId}</td> */}
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">

@@ -63,7 +63,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/add-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+    <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/add-bg2.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
       <div className="w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm">
         <h1 className="font-rac text-3xl">Add New Car</h1>
         <form

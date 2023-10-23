@@ -4,7 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import PopularCarCards from "./PopularCarCards";
-import BrandCarCards from "./BrandCarCards";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PopularMakesSection = () => {
   const title = {
@@ -24,8 +25,37 @@ const PopularMakesSection = () => {
 
   console.log(popularCars);
 
+  const displayToast = (msg) => {
+    if (msg === "success") {
+      toast.success("Added to cart!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error("Error! Not Added", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   const settings = {
     dots: true,
+    className: "center",
+    centerMode: true,
+    centerPadding: "60px",
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -41,10 +71,15 @@ const PopularMakesSection = () => {
       <div className="py-12">
         <Slider {...settings}>
           {popularCars.map((car) => (
-            <BrandCarCards key={car._id} car={car}></BrandCarCards>
+            <PopularCarCards
+              key={car._id}
+              car={car}
+              displayToast={displayToast}
+            ></PopularCarCards>
           ))}
         </Slider>
       </div>
+      <ToastContainer />
     </div>
   );
 };
