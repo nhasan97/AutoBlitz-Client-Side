@@ -1,10 +1,17 @@
+import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
   const [carName, setCarName] = useState("");
+  const loadedBrands = useLoaderData();
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    setBrands(loadedBrands);
+  }, []);
 
   const handleAddCar = (e) => {
     e.preventDefault();
@@ -84,13 +91,22 @@ const AddProduct = () => {
               </label>
               <label htmlFor="in2">
                 Brand Name
-                <input
+                <select
+                  name="brand_name"
+                  id=""
+                  className="input w-full capitalize"
+                >
+                  {brands.map((brand) => (
+                    <option key={brand._id}>{brand.name}</option>
+                  ))}
+                </select>
+                {/* <input
                   type="text"
                   id="in2"
                   name="brand_name"
                   placeholder="Type here"
                   className="input w-full capitalize"
-                />
+                /> */}
               </label>
               <label htmlFor="in3">
                 Type

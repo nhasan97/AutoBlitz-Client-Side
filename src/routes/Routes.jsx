@@ -32,6 +32,7 @@ const router = createBrowserRouter([
             <AddProduct></AddProduct>
           </PrivateRoute>
         ),
+        loader: () => fetch("http://localhost:5000/brands"),
         errorElement: <Error></Error>,
       },
       {

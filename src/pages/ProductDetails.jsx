@@ -115,7 +115,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div className="py-10 my-16">
+      <div className="py-10 mt-16">
         <div
           className="text-[rgba(255,255,255,.65)] text-left "
           data-aos="fade-right"

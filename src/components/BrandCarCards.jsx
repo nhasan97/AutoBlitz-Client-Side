@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
+import PropTypes from "prop-types";
 
 const BrandCarCards = ({ car, displayToast }) => {
-  const { _id, name, brandName, type, price, description, rating, imageUrl } =
-    car;
+  const { _id, name, brandName, type, price, rating, imageUrl } = car;
 
   const handleAddToCart = () => {
     console.log(car);
@@ -95,6 +95,11 @@ const BrandCarCards = ({ car, displayToast }) => {
       </div>
     </div>
   );
+};
+
+BrandCarCards.propTypes = {
+  displayToast: PropTypes.func.isRequired,
+  car: PropTypes.object.isRequired,
 };
 
 export default BrandCarCards;
