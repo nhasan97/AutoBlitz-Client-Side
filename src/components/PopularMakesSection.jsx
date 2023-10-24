@@ -16,7 +16,9 @@ const PopularMakesSection = () => {
   const [popularCars, setPopularCars] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/popular-makes")
+    fetch(
+      "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/popular-makes"
+    )
       .then((res) => res.json())
       .then((data) => {
         setPopularCars(data);

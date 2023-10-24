@@ -23,7 +23,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         errorElement: <Error></Error>,
-        loader: () => fetch("http://localhost:5000/brands"),
+        loader: () =>
+          fetch(
+            "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/brands"
+          ),
       },
       {
         path: "/add-product",
@@ -32,7 +35,10 @@ const router = createBrowserRouter([
             <AddProduct></AddProduct>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/brands"),
+        loader: () =>
+          fetch(
+            "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/brands"
+          ),
         errorElement: <Error></Error>,
       },
       {
@@ -48,14 +54,19 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         errorElement: <Error></Error>,
-        loader: () => fetch("http://localhost:5000/cart"),
+        loader: () =>
+          fetch(
+            "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/cart"
+          ),
       },
       {
         path: "/branded-car/:name",
         element: <BrandBasedProducts></BrandBasedProducts>,
         errorElement: <Error></Error>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/cars/${params.name}`),
+          fetch(
+            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/cars/${params.name}`
+          ),
       },
       {
         path: "/update/:id",
@@ -66,14 +77,18 @@ const router = createBrowserRouter([
         ),
         errorElement: <Error></Error>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-cars/${params.id}`),
+          fetch(
+            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/all-cars/${params.id}`
+          ),
       },
       {
         path: "/update-product-details/:name",
         element: <UpdateProductDetails></UpdateProductDetails>,
         errorElement: <Error></Error>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/car-specs/${params.name}`),
+          fetch(
+            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-specs/${params.name}`
+          ),
       },
       {
         path: "/product-details/:id",
@@ -84,7 +99,9 @@ const router = createBrowserRouter([
         ),
         errorElement: <Error></Error>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-cars/${params.id}`),
+          fetch(
+            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/all-cars/${params.id}`
+          ),
       },
       {
         path: "/login",

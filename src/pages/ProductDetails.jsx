@@ -11,7 +11,9 @@ const ProductDetails = () => {
   console.log(loadedCar.name);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/car-specs/${loadedCar.name}`)
+    fetch(
+      `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-specs/${loadedCar.name}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setLoadedSpecs(data);

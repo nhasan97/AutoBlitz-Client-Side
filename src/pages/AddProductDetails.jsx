@@ -36,11 +36,14 @@ const AddProductDetails = () => {
       gw,
     };
 
-    fetch("http://localhost:5000/car-details", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(specs),
-    })
+    fetch(
+      "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-details",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(specs),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

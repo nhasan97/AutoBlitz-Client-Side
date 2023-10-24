@@ -13,7 +13,9 @@ const UpdateProduct = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/car-specs/${loadedCar.name}`)
+    fetch(
+      `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-specs/${loadedCar.name}`
+    )
       .then((res) => res.json())
       .then((data) => setLoadedSpecs(data));
   }, []);
@@ -58,11 +60,14 @@ const UpdateProduct = () => {
       gw: loadedSpecs.gw,
     };
 
-    fetch(`http://localhost:5000/all-cars/${loadedCar._id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedCarInfo),
-    })
+    fetch(
+      `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/all-cars/${loadedCar._id}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(updatedCarInfo),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -92,11 +97,14 @@ const UpdateProduct = () => {
         form.reset();
       });
 
-    fetch(`http://localhost:5000/car-specs/${loadedSpecs.name}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedSpecs),
-    })
+    fetch(
+      `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-specs/${loadedSpecs.name}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(updatedSpecs),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

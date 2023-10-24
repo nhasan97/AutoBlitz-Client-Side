@@ -9,7 +9,10 @@ const MyCart = () => {
   console.log(cartProducts);
 
   const handleDeleteProduct = (id) => {
-    fetch(`http://localhost:5000/cart/${id}`, { method: "DELETE" })
+    fetch(
+      `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/cart/${id}`,
+      { method: "DELETE" }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
