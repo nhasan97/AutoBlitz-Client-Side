@@ -33,7 +33,7 @@ const Brands = () => {
       </div>
     );
   } else {
-    return <NoData text="No Survey Found"></NoData>;
+    return <NoData text="No Brand Found"></NoData>;
   }
 };
 

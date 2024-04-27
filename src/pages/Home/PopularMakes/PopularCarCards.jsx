@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-const PopularCarCards = ({ car, displayToast }) => {
+const PopularCarCards = ({ car }) => {
   const { _id, name, brandName, type, price, rating, imageUrl } = car;
 
   const handleAddToCart = () => {
@@ -29,9 +29,9 @@ const PopularCarCards = ({ car, displayToast }) => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
-          displayToast("success");
+          // displayToast("success");
         } else {
-          displayToast("failed");
+          // displayToast("failed");
         }
       });
   };
