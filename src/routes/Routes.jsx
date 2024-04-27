@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/Root";
-import Home from "../pages/Home";
 import AddProduct from "../pages/AddProduct";
 import MyCart from "../pages/MyCart";
 import Login from "../pages/Login";
@@ -12,6 +11,7 @@ import AddProductDetails from "../pages/AddProductDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateProductDetails from "../pages/UpdateProductDetails";
 import Error from "../pages/Error";
+import Home from "../pages/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +22,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        errorElement: <Error></Error>,
-        loader: () =>
-          fetch(
-            "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/brands"
-          ),
       },
       {
         path: "/add-product",

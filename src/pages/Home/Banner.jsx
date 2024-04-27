@@ -1,9 +1,9 @@
 import AwesomeSlider from "react-awesome-slider";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
-import bn1 from "../../public/lamborghini1.jpg";
-import bn2 from "../../public/bn2.png";
-import bn3 from "../../public/lamborghini2.jpg";
+import bn1 from "../../../public/lamborghini1.jpg";
+import bn2 from "../../../public/bn2.png";
+import bn3 from "../../../public/lamborghini2.jpg";
 
 const Banner = () => {
   const AutoplaySlider = withAutoplay(AwesomeSlider);

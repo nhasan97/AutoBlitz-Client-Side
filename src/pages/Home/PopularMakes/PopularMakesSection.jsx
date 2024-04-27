@@ -1,4 +1,4 @@
-import Title from "./Title";
+import Title from "../../../components/Title";
 import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

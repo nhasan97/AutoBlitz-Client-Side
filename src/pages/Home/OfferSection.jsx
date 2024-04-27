@@ -1,5 +1,5 @@
-import Title from "./Title";
-import car from "../assets/offer.jpg";
+import Title from "../../components/Title";
+import car from "../../assets/offer.jpg";
 import { AiFillSafetyCertificate } from "react-icons/ai";
 import { GiReceiveMoney, GiTrade } from "react-icons/gi";
 import { MdMiscellaneousServices } from "react-icons/md";
