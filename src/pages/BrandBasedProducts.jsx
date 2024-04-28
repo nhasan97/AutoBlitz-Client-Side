@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BrandCarCards from "../components/BrandCarCards";
 
 import "slick-carousel/slick/slick.css";
@@ -10,39 +9,47 @@ import bn1 from "../../public/Picture1.png";
 import bn2 from "../../public/gridfiti.png";
 import bn3 from "../../public/bmw.png";
 
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getBrandBasedCars } from "../api/carsAPIs";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../components/Loading";
+import NoData from "../components/NoData";
 
 const BrandBasedProducts = () => {
-  const loadedCars = useLoaderData();
-  const [brandBasedCars, setBrandBasedCars] = useState(loadedCars);
-  console.log(brandBasedCars);
+  const loadedBrandName = useParams();
 
-  const displayToast = (msg) => {
-    if (msg === "success") {
-      toast.success("Added to cart!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else {
-      toast.error("Error! Not Added", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  };
+  //fetching brand based data
+  const { isLoading: loadingBrandBasedCars, data: brandBasedCars } = useQuery({
+    queryKey: ["getBrandBasedCars"],
+    queryFn: () => getBrandBasedCars(loadedBrandName.name),
+  });
+
+  // const displayToast = (msg) => {
+  //   if (msg === "success") {
+  //     toast.success("Added to cart!", {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   } else {
+  //     toast.error("Error! Not Added", {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   }
+  // };
 
   const settings = {
     dots: true,
@@ -55,15 +62,11 @@ const BrandBasedProducts = () => {
     cssEase: "linear",
   };
 
-  if (loadedCars.length === 0) {
-    return (
-      <div className="max-w-screen-xl mx-auto h-screen flex justify-center items-center">
-        <h1 className="font-rac text-7xl font-bold text-white">
-          Sorry no autos found
-        </h1>
-      </div>
-    );
-  } else {
+  if (loadingBrandBasedCars) {
+    return <Loading />;
+  }
+
+  if (brandBasedCars.length > 0) {
     return (
       <div>
         <div className="max-w-screen-xl mx-auto px-28 pt-20">
@@ -93,12 +96,21 @@ const BrandBasedProducts = () => {
             <BrandCarCards
               key={car._id}
               car={car}
-              displayToast={displayToast}
+              // displayToast={displayToast}
             ></BrandCarCards>
           ))}
         </div>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
+    );
+  } else {
+    return (
+      <NoData text="Sorry no autos found"></NoData>
+      // <div className="max-w-screen-xl mx-auto h-screen flex justify-center items-center">
+      //   <h1 className="font-rac text-7xl font-bold text-white">
+      //     Sorry no autos found
+      //   </h1>
+      // </div>
     );
   }
 };

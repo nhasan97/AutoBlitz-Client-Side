@@ -57,11 +57,6 @@ const router = createBrowserRouter([
       {
         path: "/branded-car/:name",
         element: <BrandBasedProducts></BrandBasedProducts>,
-        errorElement: <Error></Error>,
-        loader: ({ params }) =>
-          fetch(
-            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/cars/${params.name}`
-          ),
       },
       {
         path: "/update/:id",
@@ -92,11 +87,6 @@ const router = createBrowserRouter([
             <ProductDetails></ProductDetails>
           </PrivateRoute>
         ),
-        errorElement: <Error></Error>,
-        loader: ({ params }) =>
-          fetch(
-            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/all-cars/${params.id}`
-          ),
       },
       {
         path: "/login",

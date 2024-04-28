@@ -4,11 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import { getBrands } from "../../../api/brandAPIs";
 import Loading from "../../../components/Loading";
 import NoData from "../../../components/NoData";
+import { useNavigate } from "react-router-dom";
 
 const Brands = () => {
   const title = {
     mainTitle: "Brands",
     subTitle: "Brands we deal with",
+  };
+
+  const navigate = useNavigate();
+  const handleBrandCardClick = (name) => {
+    navigate(`/branded-car/${name}`);
   };
 
   //fetching brands data
@@ -27,7 +33,11 @@ const Brands = () => {
         <Title title={title}></Title>
         <div className="flex items-center justify-center flex-wrap gap-6 mx-auto py-12 border-dotted border-r-4 border-[#df454596]">
           {brands.map((brand) => (
-            <BrandCard key={brand._id} brand={brand}></BrandCard>
+            <BrandCard
+              key={brand._id}
+              brand={brand}
+              handleBrandCardClick={handleBrandCardClick}
+            ></BrandCard>
           ))}
         </div>
       </div>

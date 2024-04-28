@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
 import PropTypes from "prop-types";
+import {
+  showToastOnError,
+  showToastOnSuccess,
+} from "../utilities/displayToast";
 
-const BrandCarCards = ({ car, displayToast }) => {
+const BrandCarCards = ({ car }) => {
   const { _id, name, brandName, type, price, rating, imageUrl } = car;
 
   const handleAddToCart = () => {
@@ -29,9 +33,9 @@ const BrandCarCards = ({ car, displayToast }) => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
-          displayToast("success");
+          showToastOnSuccess("success");
         } else {
-          displayToast("failed");
+          showToastOnError("failed");
         }
       });
   };
