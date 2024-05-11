@@ -1,10 +1,15 @@
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import usePerformMutation from "../hooks/usePerformMutation";
+import { saveCarSpecs } from "../api/carsAPIs";
+import { ToastContainer } from "react-toastify";
 
 const AddProductDetails = () => {
   const info = useParams();
   const name = info.name;
+
+  //saving car specs in db
+  const mutation = usePerformMutation("saveCarSpecs", saveCarSpecs);
 
   const handleAddCarDetails = (e) => {
     e.preventDefault();
@@ -36,41 +41,8 @@ const AddProductDetails = () => {
       gw,
     };
 
-    fetch(
-      "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-details",
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(specs),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          toast.success("Added!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        } else {
-          toast.error("Error! Not Added", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-        form.reset();
-      });
+    mutation.mutate(specs);
+    form.reset();
   };
   return (
     <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/add-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
@@ -188,7 +160,7 @@ const AddProductDetails = () => {
             <input type="submit" value="Add" className="input mx-auto" />
           </div>
         </form>
-      </div>
+      </div>{" "}
       <ToastContainer />
     </div>
   );

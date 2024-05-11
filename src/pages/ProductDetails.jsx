@@ -2,24 +2,15 @@ import { useParams } from "react-router-dom";
 import eng from "../../public/engine.jpg";
 import tire from "../../public/tire.jpg";
 import speedometer from "../../public/speedometer.jpg";
-import { useQuery } from "@tanstack/react-query";
-import { getSingleCarData, getSingleCarSpecs } from "../api/carsAPIs";
 import Loading from "../components/Loading";
+import useGetSingleCarDataAndSpecs from "../hooks/useGetSingleCarDataAndSpecs";
 
 const ProductDetails = () => {
   const loadedCarId = useParams();
 
-  //fetching single car data
-  const { isLoading: loadingCar, data: loadedCar } = useQuery({
-    queryKey: ["getSingleCarData"],
-    queryFn: () => getSingleCarData(loadedCarId.id),
-  });
-
-  //fetching single car specs
-  const { isLoading: loadingCarSpecs, data: loadedSpecs } = useQuery({
-    queryKey: ["getSingleCarSpecs"],
-    queryFn: () => getSingleCarSpecs(loadedCar.name),
-  });
+  //fetching single car data and specs
+  const [loadingCar, loadedCar, loadingCarSpecs, loadedSpecs] =
+    useGetSingleCarDataAndSpecs(loadedCarId.id);
 
   if (loadingCar || loadingCarSpecs) {
     return <Loading></Loading>;

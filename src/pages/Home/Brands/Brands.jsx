@@ -1,10 +1,9 @@
 import Title from "../../../components/Title";
 import BrandCard from "./BrandCard";
-import { useQuery } from "@tanstack/react-query";
-import { getBrands } from "../../../api/brandAPIs";
 import Loading from "../../../components/Loading";
 import NoData from "../../../components/NoData";
 import { useNavigate } from "react-router-dom";
+import useGetAllBrands from "../../../hooks/useGetAllBrands";
 
 const Brands = () => {
   const title = {
@@ -18,10 +17,7 @@ const Brands = () => {
   };
 
   //fetching brands data
-  const { isLoading: loadingBrands, data: brands } = useQuery({
-    queryKey: ["getBrands"],
-    queryFn: getBrands,
-  });
+  const [loadingBrands, brands] = useGetAllBrands();
 
   if (loadingBrands) {
     return <Loading />;

@@ -30,11 +30,6 @@ const router = createBrowserRouter([
             <AddProduct></AddProduct>
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch(
-            "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/brands"
-          ),
-        errorElement: <Error></Error>,
       },
       {
         path: "/add-product-details/:name",
@@ -65,20 +60,10 @@ const router = createBrowserRouter([
             <UpdateProduct></UpdateProduct>
           </PrivateRoute>
         ),
-        errorElement: <Error></Error>,
-        loader: ({ params }) =>
-          fetch(
-            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/all-cars/${params.id}`
-          ),
       },
       {
-        path: "/update-product-details/:name",
+        path: "/update-product-details/:id",
         element: <UpdateProductDetails></UpdateProductDetails>,
-        errorElement: <Error></Error>,
-        loader: ({ params }) =>
-          fetch(
-            `https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/car-specs/${params.name}`
-          ),
       },
       {
         path: "/product-details/:id",
