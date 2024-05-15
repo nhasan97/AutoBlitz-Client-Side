@@ -1,14 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
-import { useContext } from "react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
 import logo from "../../assets/logo.png";
+import useAuth from "../../hooks/useAuth";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { logoutUser } = useAuth();
+
+  const [user, loading, role, roleLoading, , refetchRole] = useUserRole();
+
+  refetchRole();
 
   const handleSignOut = () => {
-    logOut()
+    logoutUser()
       .then((result) => {
         console.log(result);
         // setUser(null);
@@ -19,18 +23,30 @@ const Navbar = () => {
   };
 
   const links = (
-    <>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/add-product">Add Product</NavLink>
-      </li>
-      <li>
+    <div className="text-[#757575] text-base font-medium space-x-8">
+      <NavLink to="/">Home</NavLink>
+      {loading || roleLoading ? (
+        <span className="loading loading-dots loading-xs"></span>
+      ) : user && role === "admin" ? (
+        <NavLink to="/dashboard/add-product">Dashboard</NavLink>
+      ) : user && role === "customer" ? (
         <NavLink to="/my-cart">My Cart</NavLink>
-      </li>
-    </>
+      ) : (
+        ""
+      )}
+    </div>
   );
+
+  // const links = (
+  //   <>
+  //     <li>
+  //       <NavLink to="/add-product">Add Product</NavLink>
+  //     </li>
+  //     <li>
+  //       <NavLink to="/my-cart">My Cart</NavLink>
+  //     </li>
+  //   </>
+  // );
 
   //bg-[rgba(255,255,255,0.75)]
 

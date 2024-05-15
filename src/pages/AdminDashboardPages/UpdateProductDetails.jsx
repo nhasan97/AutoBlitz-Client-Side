@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useGetSingleCarDataAndSpecs from "../hooks/useGetSingleCarDataAndSpecs";
-import Loading from "../components/Loading";
-import usePerformMutation from "../hooks/usePerformMutation";
-import { updateCarSpecs } from "../api/carsAPIs";
+import useGetSingleCarDataAndSpecs from "../../hooks/useGetSingleCarDataAndSpecs";
+import Loading from "../../components/Loading";
+import usePerformMutation from "../../hooks/usePerformMutation";
+import { updateCarSpecs } from "../../api/carsAPIs";
 
 const UpdateProductDetails = () => {
   const loadedCarId = useParams();

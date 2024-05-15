@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import usePerformMutation from "../hooks/usePerformMutation";
-import { saveCarSpecs } from "../api/carsAPIs";
+import usePerformMutation from "../../hooks/usePerformMutation";
+import { saveCarSpecs } from "../../api/carsAPIs";
 import { ToastContainer } from "react-toastify";
 
 const AddProductDetails = () => {

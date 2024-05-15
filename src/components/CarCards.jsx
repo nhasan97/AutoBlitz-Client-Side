@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import { AiTwotoneEdit } from "react-icons/ai";
 import PropTypes from "prop-types";
+import { Rating } from "@smastrom/react-rating";
+
 import {
   showToastOnError,
   showToastOnSuccess,
 } from "../utilities/displayToast";
+import StarRating from "./StarRating";
 
-const BrandCarCards = ({ car }) => {
+const CarCards = ({ car, caller }) => {
   const { _id, name, brandName, type, price, rating, imageUrl } = car;
 
   const handleAddToCart = () => {
@@ -41,7 +43,11 @@ const BrandCarCards = ({ car }) => {
   };
 
   return (
-    <div className="card bg-[rgba(255,255,255,.3)] shadow-xl text-white text-lg backdrop-blur-lg">
+    <div
+      className={`card bg-[rgba(255,255,255,.3)] shadow-xl text-white text-lg ${
+        caller === "PopularMakesSection" ? "mx-2" : ""
+      } backdrop-blur-lg`}
+    >
       <figure>
         <img src={imageUrl} alt="Shoes" className="w-full h-[200px]" />
       </figure>
@@ -50,51 +56,22 @@ const BrandCarCards = ({ car }) => {
           {name}
           {/* <div className="badge badge-secondary">NEW</div> */}
         </h2>
+
         <div className="card-actions">
           <div className="badge badge-outline capitalize">{brandName}</div>
           <div className="badge badge-outline capitalize">{type}</div>
         </div>
+
         <p className="flex justify-start items-center gap-4">
           <span className="">$ {price}</span>
-          <div className="flex justify-center items-center border-l pl-2 border-gray-800">
-            <div className="rating">
-              <input
-                type="radio"
-                name="rating-4"
-                className="mask mask-star-2 bg-gray-800"
-              />
-              <input
-                type="radio"
-                name="rating-4"
-                className="mask mask-star-2 bg-gray-800"
-                checked
-              />
-              <input
-                type="radio"
-                name="rating-4"
-                className="mask mask-star-2 bg-gray-800"
-              />
-              <input
-                type="radio"
-                name="rating-4"
-                className="mask mask-star-2 bg-gray-800"
-              />
-              <input
-                type="radio"
-                name="rating-4"
-                className="mask mask-star-2 bg-gray-800"
-              />
-            </div>
-            <p className="ml-2">{rating}</p>
-          </div>
+          <StarRating rating={rating}></StarRating>
         </p>
+
         <div className="flex gap-4">
           <Link className="btn btn-square" to={`/product-details/${_id}`}>
             <i className="fa-solid fa-info text-lg"></i>
           </Link>
-          <Link className="btn btn-square text-lg" to={`/update/${_id}`}>
-            <AiTwotoneEdit></AiTwotoneEdit>
-          </Link>
+
           <button className="btn btn-square" onClick={handleAddToCart}>
             <i className="fa-solid fa-cart-plus text-lg"></i>
           </button>
@@ -104,9 +81,9 @@ const BrandCarCards = ({ car }) => {
   );
 };
 
-BrandCarCards.propTypes = {
-  displayToast: PropTypes.func.isRequired,
+CarCards.propTypes = {
   car: PropTypes.object.isRequired,
+  caller: PropTypes.string.isRequired,
 };
 
-export default BrandCarCards;
+export default CarCards;

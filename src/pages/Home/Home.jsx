@@ -1,7 +1,7 @@
 import Banner from "./Banner";
 import Brands from "./Brands/Brands";
 import OfferSection from "./OfferSection";
-import PopularMakesSection from "./PopularMakes/PopularMakesSection";
+import PopularMakesSection from "./PopularMakesSection";
 
 //bg-black
 const Home = () => {

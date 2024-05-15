@@ -1,64 +1,71 @@
-import { updateProfile } from "firebase/auth";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import { FaEye } from "react-icons/fa6";
-import { FaEyeSlash } from "react-icons/fa6";
-import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../AuthProvider/AuthProvider";
+import { useForm } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
+import { uploadImage } from "../utilities/imageUploader";
+import { saveUserData } from "../api/authAPIs";
+import {
+  showToastOnError,
+  showToastOnSuccess,
+} from "../utilities/displayToast";
+import { GoogleAuthProvider } from "firebase/auth";
+import { BiLogoGoogle } from "react-icons/bi";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
+  const [showPass, setShowPass] = useState(false);
+  const { registerWithEmailAndPassword, updateUsersProfile, signInWithGoogle } =
+    useAuth();
+  const navigate = useNavigate();
 
-  const [registrationError, setRegistrationError] = useState("");
-  const [registrationSuccess, setRegistrationSuccess] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  //==================== Register Using Email and Password ====================
+  const onSubmit = async (data) => {
+    try {
+      const imageData = await uploadImage(data.photo[0]);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-
-    const name = e.target.name.value;
-    const img = e.target.pic.value;
-    const email = e.target.mail.value;
-    const password = e.target.pw.value;
-
-    console.log(img);
-    setRegistrationSuccess("");
-    setRegistrationError("");
-
-    if (password.length < 6) {
-      setRegistrationError("Password must be at least 6 characters");
-      return;
-    } else if (/[A-Z]/.test(password) === false) {
-      setRegistrationError("Password must have at least 1 uppercase letter");
-      return;
-    } else if (!/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/.test(password)) {
-      setRegistrationError("At least one special character is required");
-      return;
-    }
-
-    createUser(email, password)
-      .then((result) => {
-        updateProfile(result.user, {
-          displayName: name,
-          photoURL: img,
+      registerWithEmailAndPassword(data.email, data.pass)
+        .then(async (result) => {
+          updateUsersProfile(data.name, imageData?.data?.display_url)
+            .then(async () => {
+              const dbResponse = await saveUserData(result?.user);
+              console.log(dbResponse);
+              reset();
+              showToastOnSuccess("Account created successfully");
+              navigate("/");
+            })
+            .catch((err) => {
+              showToastOnError(err.code + "---------" + err.message);
+            });
         })
-          .then()
-          .catch();
-        setRegistrationSuccess("Account created successfully");
-        toast.success("Account created successfully", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
+        .catch((err) => {
+          showToastOnError(err.code + "---------" + err.message);
         });
+    } catch (err) {
+      showToastOnError(err.message);
+    }
+  };
+
+  //================== Register using Google ==================
+  const handleRegistrationWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithGoogle(provider)
+      .then(async (result) => {
+        if (result?.user?.email) {
+          const dbResponse = await saveUserData(result?.user);
+          console.log(dbResponse);
+          navigate(location?.state ? location.state : "/");
+        }
       })
-      .catch((error) => {
-        setRegistrationError(error.message);
+      .catch((err) => {
+        showToastOnError(err.code + "---" + err.message);
       });
   };
 
@@ -70,7 +77,7 @@ const Register = () => {
             Register
           </h1>
         </div>
-        <form
+        {/* <form
           className="w-full flex flex-col justify-center items-center gap-6 px-16"
           onSubmit={handleRegister}
         >
@@ -127,15 +134,134 @@ const Register = () => {
           )}
 
           <button className="btn bg-red-600 text-white w-1/2">Sign Up</button>
+        </form> */}
+
+        <form
+          className="w-full lg:w-3/4 h-fit flex flex-col gap-2 sm:gap-3 lg:gap-4 px-0 text-left"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h1 className="text-[#444] text-4xl font-semibold text-center mt-4 sm:mt-0">
+            Sign UP
+          </h1>
+
+          <div className="relative">
+            <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+              <i className="fa-solid fa-signature text-xl text-white"></i>
+            </div>
+            <input
+              id="in1"
+              type="text"
+              {...register("name", { required: true })}
+              placeholder="Name"
+              className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-red-500">Name is required</p>
+            )}
+          </div>
+
+          <div className="relative">
+            <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+              <i className="fa-solid fa-envelope text-xl text-white"></i>
+            </div>
+            <input
+              id="in2"
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Email"
+              className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+            />
+            {errors.email?.type === "required" && (
+              <p className="text-red-500">Email is required</p>
+            )}
+          </div>
+
+          <div className="relative">
+            <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+              <i className="fa-solid fa-key text-xl text-white"></i>
+            </div>
+            <input
+              id="in3"
+              type={showPass ? "text" : "password"}
+              {...register("pass", {
+                required: true,
+                minLength: 6,
+                maxLength: 20,
+                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+              })}
+              placeholder="Password"
+              className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+            />
+            <span
+              className=" text-base absolute right-4 translate-y-[50%]"
+              onClick={() => setShowPass(!showPass)}
+            >
+              {showPass ? (
+                <i className="fa-solid fa-eye-slash"></i>
+              ) : (
+                <i className="fa-solid fa-eye"></i>
+              )}
+            </span>
+            {errors.pass?.type === "required" && (
+              <p className="text-red-500">Password is required</p>
+            )}
+            {errors.pass?.type === "minLength" && (
+              <p className="text-red-500">
+                Password has to be at least 6 characters long
+              </p>
+            )}
+            {errors.pass?.type === "pattern" && (
+              <p className="text-red-500">
+                <ul className="list-disc">
+                  Password must have at least
+                  <li>1 uppercase letter</li>
+                  <li>1 lowercase letter</li>
+                  <li>1 digit</li>
+                  <li>1 special character</li>
+                </ul>
+              </p>
+            )}
+          </div>
+
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text text-base">
+                Pick your profile picture
+              </span>
+            </label>
+            <input
+              type="file"
+              {...register("photo")}
+              required
+              className="file-input file-input-bordered w-full"
+            />
+          </div>
+
+          <input
+            type="submit"
+            value="Sign Up"
+            className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+          />
         </form>
-        <p className="">
-          Already user?
-          <Link to="/login" className="underline">
-            Login
-          </Link>
-        </p>
+        <div
+          className="w-full lg:w-3/4 h-fit flex flex-col items-center gap-2 sm:gap-4 px-0
+          text-[#444]"
+        >
+          <p className="text-sm sm:text-lg  text-center">
+            Already registered?
+            <Link className="font-bold" to="/login">
+              Go to log in
+            </Link>
+          </p>
+          <p className="text-sm sm:text-lg font-medium">Or sign in with</p>
+
+          <BiLogoGoogle
+            className="btn w-1/2 mx-auto bg-[#FE7E51] text-sm sm:text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+            onClick={handleRegistrationWithGoogle}
+          ></BiLogoGoogle>
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };

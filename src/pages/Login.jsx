@@ -1,66 +1,68 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useContext, useRef, useState } from "react";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaEye } from "react-icons/fa6";
-import { FaEyeSlash } from "react-icons/fa6";
-import { ToastContainer, toast } from "react-toastify";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import app from "../firebase/firebase.config";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
-  const auth = getAuth(app);
-  const { signInUser } = useContext(AuthContext);
-
-  const provider = new GoogleAuthProvider();
-  const [user, setUser] = useState(null);
+  const [showPass, setShowPass] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const [loginSuccess, setLoginSuccess] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const emailRef = useRef(null);
+
+  const { loginWithEmailAndPassword, signInWithGoogle, loginWithGitHub } =
+    useContext(AuthContext);
+
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLoginWithEmailPass = (e) => {
+  //================== Login using Email and Password ==================
+  const handleLoginWithEmailAndPassword = (e) => {
     e.preventDefault();
-    const email = e.target.mail.value;
-    const password = e.target.pw.value;
+
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.pass.value;
 
     setLoginError("");
-    setLoginSuccess("");
 
-    signInUser(email, password)
+    loginWithEmailAndPassword(email, password)
       .then((result) => {
-        setUser(result.user);
-        setLoginSuccess("welcome" + result.user.email);
-        e.target.reset();
-        toast.success("Login Successful!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-        navigate(location?.state ? location.state : `/`);
+        form.reset();
+        if (result?.user?.email) {
+          navigate(location?.state ? location.state : "/");
+        }
       })
-      .catch((error) => {
-        setLoginError(error.message);
+      .catch((err) => setLoginError(err.code + "---" + err.message));
+  };
+
+  //================== Login using Google ==================
+  const handleLoginWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithGoogle(provider)
+      .then((result) => {
+        if (result?.user?.email) {
+          navigate(location?.state ? location.state : "/");
+        }
+      })
+      .catch((err) => {
+        setLoginError(err.code + "---" + err.message);
       });
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider)
+  //================== Login using Github ==================
+  const handleLoginWithGitHub = () => {
+    const provider = new GithubAuthProvider();
+
+    loginWithGitHub(provider)
       .then((result) => {
-        const loggedInUser = result.user;
-        setUser(loggedInUser);
-        navigate(location?.state ? location.state : `/`);
+        if (result?.user?.email) {
+          navigate(location?.state ? location.state : "/");
+        }
       })
-      .catch((error) => {
-        const msg = error.message;
-        console.log(msg);
+      .catch((err) => {
+        setLoginError(err.code + "---" + err.message);
       });
   };
 
@@ -71,9 +73,9 @@ const Login = () => {
           <h1 className="font-rac text-gray-800 text-7xl font-bold">Login</h1>
         </div>
 
-        <form
+        {/* <form
           className="w-full flex flex-col justify-center items-center gap-6"
-          onSubmit={handleLoginWithEmailPass}
+          onSubmit={handleLoginWithEmailAndPassword}
         >
           <input
             type="email"
@@ -86,7 +88,7 @@ const Login = () => {
           />
           <div className="w-full flex relative">
             <input
-              type={showPassword ? "text" : "password"}
+              type={showPass ? "text" : "password"}
               name="pw"
               id=""
               placeholder="password"
@@ -95,9 +97,9 @@ const Login = () => {
             />
             <span
               className="p-4 absolute top-0 right-0"
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setShowPass(!showPass)}
             >
-              {showPassword ? (
+              {showPass ? (
                 <FaEyeSlash className="text-2xl"></FaEyeSlash>
               ) : (
                 <FaEye className="text-2xl"></FaEye>
@@ -133,7 +135,88 @@ const Login = () => {
           <Link to="/register" className="underline">
             Sign Up
           </Link>
-        </p>
+        </p> */}
+
+        <form
+          className="flex flex-col gap-5 text-left w-full"
+          onSubmit={handleLoginWithEmailAndPassword}
+        >
+          <h1 className="text-[#444] text-[30px] font-semibold text-center">
+            Login
+          </h1>
+
+          <div className="relative">
+            <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-s-full">
+              <i className="fa-solid fa-envelope text-xl text-white"></i>
+            </div>
+            <input
+              type="email"
+              id="in1"
+              name="email"
+              placeholder="Email"
+              required
+              className="input bg-[#a1dada41] w-full pl-16 rounded-full border focus:border-[#7DDDD9] focus:outline-none"
+            />
+          </div>
+
+          <div className="relative">
+            <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-s-full">
+              <i className="fa-solid fa-key text-xl text-white"></i>
+            </div>
+            <input
+              type={showPass ? "text" : "password"}
+              id="in2"
+              name="pass"
+              placeholder="Password"
+              required
+              className="input bg-[#a1dada41] w-full pl-16 rounded-full border focus:border-[#7DDDD9] focus:outline-none"
+            />
+            <span
+              className="text-2xl absolute right-4 top-0 translate-y-[50%]"
+              onClick={() => setShowPass(!showPass)}
+            >
+              {showPass ? (
+                <AiFillEyeInvisible></AiFillEyeInvisible>
+              ) : (
+                <AiFillEye></AiFillEye>
+              )}
+            </span>
+          </div>
+
+          {loginError && (
+            <p className="text-red-500 text-center font-bold">{loginError}</p>
+          )}
+
+          <input
+            type="submit"
+            value="Sign In"
+            className="btn w-1/2 mx-auto bg-[#323484] text-lg font-medium text-white hover:text-[#323484] normal-case rounded-full"
+          />
+        </form>
+
+        <div className="flex flex-col justify-center items-center mt-5 space-y-5">
+          <p className="text-base font-medium">Or Sign In with</p>
+          <div className="flex gap-3">
+            <button
+              className="btn btn-circle bg-[#ff5c11dc] text-white hover:text-[#ff5c11dc]"
+              onClick={handleLoginWithGoogle}
+            >
+              <i className="fa-brands fa-google text-xl"></i>
+            </button>
+            <button
+              className="btn btn-circle hidden"
+              onClick={handleLoginWithGitHub}
+            >
+              <i className="fa-brands fa-github text-xl"></i>
+            </button>
+          </div>
+          <p className="text-base font-medium">
+            Dont have an account?
+            <Link className="ml-3 text-[#ff5c11dc]" to="/register">
+              Sign Up
+            </Link>
+          </p>
+        </div>
       </div>
       <ToastContainer />
     </div>

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import BrandCarCards from "../components/BrandCarCards";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,19 +10,18 @@ import bn3 from "../../public/bmw.png";
 
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getBrandBasedCars } from "../api/carsAPIs";
-import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
 import NoData from "../components/NoData";
+import useGetBrandsBasedCars from "../hooks/useGetBrandsBasedCars";
+import CarCards from "../components/CarCards";
 
 const BrandBasedProducts = () => {
   const loadedBrandName = useParams();
 
   //fetching brand based data
-  const { isLoading: loadingBrandBasedCars, data: brandBasedCars } = useQuery({
-    queryKey: ["getBrandBasedCars"],
-    queryFn: () => getBrandBasedCars(loadedBrandName.name),
-  });
+  const [loadingBrandBasedCars, brandBasedCars] = useGetBrandsBasedCars(
+    loadedBrandName.name
+  );
 
   // const displayToast = (msg) => {
   //   if (msg === "success") {
@@ -93,11 +91,12 @@ const BrandBasedProducts = () => {
         </div>
         <div className="max-w-screen-xl mx-auto px-28 py-12 grid grid-cols-3 gap-6 bg-[url('/public/prod-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
           {brandBasedCars.map((car) => (
-            <BrandCarCards
+            <CarCards
               key={car._id}
               car={car}
+              caller={"BrandBasedProducts"}
               // displayToast={displayToast}
-            ></BrandCarCards>
+            ></CarCards>
           ))}
         </div>
         {/* <ToastContainer /> */}

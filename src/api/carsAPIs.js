@@ -10,7 +10,14 @@ export const getPopularCars = async () => {
 };
 
 export const getBrandBasedCars = async (name) => {
-  const response = await axiosPublic.get(`/cars/${name}`);
+  console.log(name);
+  let response;
+  if (name === "") {
+    response = await axiosPublic.get(`/cars`);
+  } else {
+    response = await axiosPublic.get(`/cars?brandName=${name}`);
+  }
+
   return response.data;
 };
 
@@ -74,4 +81,16 @@ export const updateCarSpecs = async (obj) => {
   }
 
   return response.data;
+};
+
+export const deleteCarData = async (obj) => {
+  const response1 = await axiosPublic.delete(`/delete-car/${obj._id}`);
+  const response2 = await axiosPublic.delete(`/delete-car-specs/${obj.name}`);
+
+  if (response1.data.deletedCount && response2.data.deletedCount) {
+    showToastOnSuccess("Deleted!");
+  } else {
+    showToastOnError("Something went wrong!");
+  }
+  return response1.data;
 };

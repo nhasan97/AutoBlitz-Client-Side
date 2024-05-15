@@ -1,13 +1,13 @@
-import Title from "../../../components/Title";
+import Title from "../../components/Title";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import PopularCarCards from "./PopularCarCards";
 import "react-toastify/dist/ReactToastify.css";
 import { useQuery } from "@tanstack/react-query";
-import { getPopularCars } from "../../../api/carsAPIs";
-import NoData from "../../../components/NoData";
-import Loading from "../../../components/Loading";
+import { getPopularCars } from "../../api/carsAPIs";
+import NoData from "../../components/NoData";
+import Loading from "../../components/Loading";
+import CarCards from "../../components/CarCards";
 
 const PopularMakesSection = () => {
   const title = {
@@ -46,7 +46,11 @@ const PopularMakesSection = () => {
         <div className="py-12">
           <Slider {...settings}>
             {popularCars.map((car) => (
-              <PopularCarCards key={car._id} car={car}></PopularCarCards>
+              <CarCards
+                key={car._id}
+                car={car}
+                caller={"PopularMakesSection"}
+              ></CarCards>
             ))}
           </Slider>
         </div>
