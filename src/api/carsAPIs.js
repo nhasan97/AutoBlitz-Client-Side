@@ -10,7 +10,6 @@ export const getPopularCars = async () => {
 };
 
 export const getBrandBasedCars = async (name) => {
-  console.log(name);
   let response;
   if (name === "") {
     response = await axiosPublic.get(`/cars`);
@@ -58,7 +57,6 @@ export const updateCarInfo = async (obj) => {
 
 export const saveCarSpecs = async (data) => {
   const response = await axiosPublic.post("/car-details", data);
-  console.log(response);
   if (response.data.insertedId) {
     showToastOnSuccess("Added!");
   } else {
@@ -68,7 +66,6 @@ export const saveCarSpecs = async (data) => {
 };
 
 export const updateCarSpecs = async (obj) => {
-  console.log(obj);
   const response = await axiosPublic.patch(
     `/car-specs/${obj.name}`,
     obj.updatedCarInfo

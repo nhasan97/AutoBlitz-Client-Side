@@ -1,7 +1,6 @@
 import axiosSecure from "./axiosSecure";
 
 export const saveUserData = async (user) => {
-  console.log(user);
   const currentUser = {
     name: user.displayName,
     email: user.email,

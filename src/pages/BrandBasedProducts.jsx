@@ -23,32 +23,6 @@ const BrandBasedProducts = () => {
     loadedBrandName.name
   );
 
-  // const displayToast = (msg) => {
-  //   if (msg === "success") {
-  //     toast.success("Added to cart!", {
-  //       position: "top-right",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   } else {
-  //     toast.error("Error! Not Added", {
-  //       position: "top-right",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   }
-  // };
-
   const settings = {
     dots: true,
     infinite: true,
@@ -95,7 +69,6 @@ const BrandBasedProducts = () => {
               key={car._id}
               car={car}
               caller={"BrandBasedProducts"}
-              // displayToast={displayToast}
             ></CarCards>
           ))}
         </div>

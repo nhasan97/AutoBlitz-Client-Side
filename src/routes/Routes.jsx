@@ -29,20 +29,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-
-      // {
-      //   path: "/my-cart",
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyCart></MyCart>
-      //     </PrivateRoute>
-      //   ),
-      //   errorElement: <Error></Error>,
-      //   loader: () =>
-      //     fetch(
-      //       "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/cart"
-      //     ),
-      // },
       {
         path: "/branded-car/:name",
         element: <BrandBasedProducts></BrandBasedProducts>,
