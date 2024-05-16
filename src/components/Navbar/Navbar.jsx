@@ -30,23 +30,12 @@ const Navbar = () => {
       ) : user && role === "admin" ? (
         <NavLink to="/dashboard/add-product">Dashboard</NavLink>
       ) : user && role === "customer" ? (
-        <NavLink to="/my-cart">My Cart</NavLink>
+        <NavLink to="/dashboard/my-cart">My Cart</NavLink>
       ) : (
         ""
       )}
     </div>
   );
-
-  // const links = (
-  //   <>
-  //     <li>
-  //       <NavLink to="/add-product">Add Product</NavLink>
-  //     </li>
-  //     <li>
-  //       <NavLink to="/my-cart">My Cart</NavLink>
-  //     </li>
-  //   </>
-  // );
 
   //bg-[rgba(255,255,255,0.75)]
 

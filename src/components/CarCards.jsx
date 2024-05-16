@@ -1,20 +1,21 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Rating } from "@smastrom/react-rating";
-
-import {
-  showToastOnError,
-  showToastOnSuccess,
-} from "../utilities/displayToast";
 import StarRating from "./StarRating";
+import useUserRole from "../hooks/useUserRole";
+import usePerformMutation from "../hooks/usePerformMutation";
+import { insertItemInCart } from "../api/cartAPIs";
 
 const CarCards = ({ car, caller }) => {
+  const [user] = useUserRole();
+
   const { _id, name, brandName, type, price, rating, imageUrl } = car;
 
-  const handleAddToCart = () => {
-    console.log(car);
+  const mutation = usePerformMutation("insertItemInCart", insertItemInCart);
 
+  const handleAddToCart = () => {
     const productInCart = {
+      user_name: user?.displayName,
+      user_email: user?.email,
       carId: _id,
       name,
       brandName,
@@ -23,23 +24,7 @@ const CarCards = ({ car, caller }) => {
       imageUrl,
     };
 
-    fetch(
-      "https://b8-a10-brand-shop-server-side-8yni0jrx6-nhs-projects-704a9e8f.vercel.app/cart",
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(productInCart),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          showToastOnSuccess("success");
-        } else {
-          showToastOnError("failed");
-        }
-      });
+    mutation.mutate(productInCart);
   };
 
   return (
