@@ -1,11 +1,11 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useUserRole from "../hooks/useUserRole";
-import NoData from "../components/NoData";
-import Loading from "../components/Loading";
-import useGetItemsFromCart from "../hooks/useGetItemsFromCart";
-import usePerformMutation from "../hooks/usePerformMutation";
-import { deleteItemFromCart } from "../api/cartAPIs";
+import useUserRole from "../../hooks/useUserRole";
+import NoData from "../../components/NoData";
+import Loading from "../../components/Loading";
+import useGetItemsFromCart from "../../hooks/useGetItemsFromCart";
+import usePerformMutation from "../../hooks/usePerformMutation";
+import { deleteItemFromCart } from "../../api/cartAPIs";
 
 const MyCart = () => {
   const [user, loading] = useUserRole();
@@ -16,7 +16,6 @@ const MyCart = () => {
   const mutation = usePerformMutation("deleteItemFromCart", deleteItemFromCart);
 
   const handleDeleteProduct = (id) => {
-    console.log(id);
     mutation.mutate(id);
     refetchCartItems();
     // fetch(

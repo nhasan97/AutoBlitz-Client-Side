@@ -17,7 +17,7 @@ import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct";
 import UpdateProductDetails from "../pages/AdminDashboardPages/UpdateProductDetails";
 import ViewProducts from "../pages/AdminDashboardPages/ViewProducts/ViewProducts";
 import CustomerRoute from "./CustomerRoute";
-import MyCart from "../pages/MyCart";
+import MyCart from "../pages/CustomerDashboardPages/MyCart";
 
 const router = createBrowserRouter([
   {
