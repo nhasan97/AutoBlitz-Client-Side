@@ -1,11 +1,12 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useUserRole from "../../hooks/useUserRole";
-import NoData from "../../components/NoData";
-import Loading from "../../components/Loading";
-import useGetItemsFromCart from "../../hooks/useGetItemsFromCart";
-import usePerformMutation from "../../hooks/usePerformMutation";
-import { deleteItemFromCart } from "../../api/cartAPIs";
+import useUserRole from "../hooks/useUserRole";
+import NoData from "../components/NoData";
+import Loading from "../components/Loading";
+import useGetItemsFromCart from "../hooks/useGetItemsFromCart";
+import usePerformMutation from "../hooks/usePerformMutation";
+import { deleteItemFromCart } from "../api/cartAPIs";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [user, loading] = useUserRole();
@@ -60,10 +61,23 @@ const MyCart = () => {
   }
 
   if (cartItems.length > 0) {
+    const totalPrice = cartItems.reduce((accumulator, currentItem) => {
+      return accumulator + currentItem.price;
+    }, 0);
+
     return (
       <div className="max-w-screen-xl mx-auto px-28 py-10 bg-[url('/public/cart-bg.webp')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
         <div className="h-[400px] mx-auto bg-[#f4f3f081] text-center my-16 p-10 space-y-6 rounded-lg backdrop-blur-sm overflow-y-auto">
           <h1 className="font-rac text-3xl text-white">Cart Items</h1>
+
+          <div className="flex justify-between border">
+            <p>Items : {cartItems.length}</p>
+            <p>Total : ${totalPrice}</p>
+            <Link to="/checkout">
+              <button disabled={!cartItems.length}>Checkout</button>
+            </Link>
+          </div>
+
           <table className="table text-black text-base ">
             {/* head */}
             <thead className="text-black text-base">
@@ -81,7 +95,6 @@ const MyCart = () => {
               {/* row 1 */}
               {cartItems.map((product) => (
                 <tr key={product._id}>
-                  {/* <td>{product.carId}</td> */}
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
@@ -92,10 +105,6 @@ const MyCart = () => {
                           />
                         </div>
                       </div>
-                      {/* <div>
-                        <div className="font-bold">Hart Hagerty</div>
-                        <div className="text-sm opacity-50">United States</div>
-                      </div> */}
                     </div>
                   </td>
                   <td className="capitalize">{product.name}</td>

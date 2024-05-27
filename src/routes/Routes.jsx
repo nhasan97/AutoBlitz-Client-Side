@@ -16,8 +16,11 @@ import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers";
 import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct";
 import UpdateProductDetails from "../pages/AdminDashboardPages/UpdateProductDetails";
 import ViewProducts from "../pages/AdminDashboardPages/ViewProducts/ViewProducts";
-import CustomerRoute from "./CustomerRoute";
-import MyCart from "../pages/CustomerDashboardPages/MyCart";
+import AddService from "../pages/AdminDashboardPages/AddService";
+import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
+import ServiceBooking from "../pages/ServiceBooking";
+import MyCart from "../pages/MyCart";
+import ProPayment from "../pages/Checkout/ProPayment";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,35 @@ const router = createBrowserRouter([
             <ProductDetails></ProductDetails>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/my-cart",
+        element: (
+          <PrivateRoute>
+            <MyCart></MyCart>
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/service-details/:id",
+        element: (
+          <PrivateRoute>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/service-booking/:id",
+        element: (
+          <PrivateRoute>
+            <ServiceBooking></ServiceBooking>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: <ProPayment></ProPayment>,
       },
     ],
   },
@@ -98,7 +130,23 @@ const router = createBrowserRouter([
       },
       {
         path: "update-product-details/:id",
-        element: <UpdateProductDetails></UpdateProductDetails>,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <UpdateProductDetails></UpdateProductDetails>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-service",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AddService></AddService>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "customers",
@@ -107,16 +155,6 @@ const router = createBrowserRouter([
             <AdminRoute>
               <ViewCustomers></ViewCustomers>
             </AdminRoute>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "my-cart",
-        element: (
-          <PrivateRoute>
-            <CustomerRoute>
-              <MyCart></MyCart>
-            </CustomerRoute>
           </PrivateRoute>
         ),
       },

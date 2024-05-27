@@ -30,7 +30,8 @@ const Navbar = () => {
       ) : user && role === "admin" ? (
         <NavLink to="/dashboard/add-product">Dashboard</NavLink>
       ) : user && role === "customer" ? (
-        <NavLink to="/dashboard/my-cart">My Cart</NavLink>
+        // <NavLink to="/dashboard/my-cart">My Cart</NavLink>
+        <NavLink to="/my-cart">My Cart</NavLink>
       ) : (
         ""
       )}
