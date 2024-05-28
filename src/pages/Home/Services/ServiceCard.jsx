@@ -15,7 +15,7 @@ const ServiceCard = ({ service }) => {
         </h2>
 
         <div className="card-actions justify-between items-center">
-          <p className="text-red-600">
+          <p className="text-sm md:text-base text-red-600">
             Price : $<span>{price}</span>
           </p>
           <Link to={`/service-details/${_id}`} className="btn bg-transparent">
