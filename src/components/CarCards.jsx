@@ -56,7 +56,7 @@ const CarCards = ({ car, caller }) => {
         <img src={imageUrl} alt="Shoes" className="w-full h-[200px]" />
       </figure>
       <div className="card-body gap-6 p-0 px-4 py-5 justify-center ">
-        <h2 className="card-title capitalize text-2xl text-black font-semibold">
+        <h2 className="card-title capitalize text-xl md:text-2xl text-black font-semibold">
           {name}
           {/* <div className="badge badge-secondary">NEW</div> */}
         </h2>

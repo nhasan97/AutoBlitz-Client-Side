@@ -9,9 +9,9 @@ const Banner = () => {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
 
   return (
-    <div className="relative">
+    <div className="flex justify-center relative ">
       <AutoplaySlider
-        className="h-screen w-full"
+        className="xl:h-screen w-full"
         play={true}
         cancelOnInteraction={false} // should stop playing on user interaction
         interval={1500}
@@ -20,7 +20,7 @@ const Banner = () => {
         <div data-src={bn2} />
         <div data-src={bn3} />
       </AutoplaySlider>
-      <h1 className="text-[rgba(255,255,255,.6)] text-7xl font-rac font-bold absolute left-0 bottom-0 z-10 translate-x-[25%] translate-y-[-40%]">
+      <h1 className="text-center text-[rgba(255,255,255,.6)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-rac font-bold absolute bottom-0 z-10  translate-y-[-40%]">
         Let your dream car be yours
       </h1>
     </div>

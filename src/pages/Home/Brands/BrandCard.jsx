@@ -11,9 +11,9 @@ const BrandCard = ({ brand, handleBrandCardClick }) => {
       <img
         src={image}
         alt=""
-        className="w-[50%] h-[50%] transition ease-out delay-100 group-hover:scale-125"
+        className="w-[40%] h-[40%] sm:w-[50%] sm:h-[50%] transition ease-out delay-100 group-hover:scale-125"
       />
-      <h1 className="text-lg font-medium">{name}</h1>
+      <h1 className="text-base md:text-lg font-medium">{name}</h1>
     </div>
   );
 };

@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
-// import HomeSectionHeading from "./HomeSectionHeading";
 import ServiceCard from "./ServiceCard";
 import useGetServices from "../../../hooks/useGetServices";
 import Loading from "../../../components/Loading";
 import NoData from "../../../components/NoData";
+import Container from "../../../components/shared/Container";
+import Title from "../../../components/Title";
 
 const Services = () => {
-  const mainTitle = "Service";
-  const subTitle = "Our Service Area";
-  const paragraph =
-    "the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. ";
-
-  const heading = { mainTitle, subTitle, paragraph };
+  const title = {
+    mainTitle: "Services",
+    subTitle: "Our Service Area",
+  };
 
   const [loadingServices, services] = useGetServices();
 
@@ -21,19 +20,22 @@ const Services = () => {
 
   if (services.length > 0) {
     return (
-      <div className="min-h-screen">
-        {/* <HomeSectionHeading heading={heading}></HomeSectionHeading> */}
-        <div className="grid grid-cols-3 gap-6 py-12">
-          {services.map((service) => (
-            <ServiceCard key={service._id} service={service}></ServiceCard>
-          ))}
+      <Container>
+        <div className="w-full flex flex-col justify-center items-center bg-[url('/public/home-bg.png')] bg-no-repeat bg-contain bg-right bg-fixed">
+          <Title title={title}></Title>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-12">
+            {services.map((service) => (
+              <ServiceCard key={service._id} service={service}></ServiceCard>
+            ))}
+          </div>
+          <div className="flex justify-center items-center">
+            <button className="btn bg-transparent border border-red-600 text-red-600">
+              More Services
+            </button>
+          </div>
         </div>
-        <div className="flex justify-center items-center gap-6">
-          <button className="btn bg-transparent border border-[#FF3811] text-[#FF3811]">
-            More Services
-          </button>
-        </div>
-      </div>
+      </Container>
     );
   } else {
     return <NoData text="No services found"></NoData>;

@@ -14,9 +14,7 @@ const OfferSection = () => {
   //  border-l border-[#df454596]
   return (
     <Container>
-      {/* <div className="max-w-screen-xl mx-auto mt-10 px-28 py-10"> */}
-
-      <div className="w-full flex flex-col lg:flex-row justify-center items-center border">
+      <div className="w-full flex flex-col lg:flex-row justify-center items-center">
         <div
           className="w-full lg:w-2/3 flex justify-center items-center"
           data-aos="zoom-in"
@@ -33,7 +31,7 @@ const OfferSection = () => {
           data-aos-delay="50"
         >
           <Title title={title}></Title>
-          <div className="my-10 space-y-6">
+          <div className="py-12 space-y-6">
             {/* offer1 */}
             <OfferCards
               icon={
