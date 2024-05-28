@@ -5,7 +5,7 @@ import useUserRole from "../../hooks/useUserRole";
 import AdminMenu from "./AdminMenu";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { showToastOnError } from "../../utilities/displayToast";
-import MainLogo from "../MainLogo";
+import MainLogo from "../shared/MainLogo";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();

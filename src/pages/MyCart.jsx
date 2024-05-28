@@ -1,12 +1,12 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUserRole from "../hooks/useUserRole";
-import NoData from "../components/NoData";
-import Loading from "../components/Loading";
 import useGetItemsFromCart from "../hooks/useGetItemsFromCart";
 import usePerformMutation from "../hooks/usePerformMutation";
 import { deleteItemFromCart } from "../api/cartAPIs";
 import { Link } from "react-router-dom";
+import Loading from "../components/shared/Loading";
+import NoData from "../components/shared/NoData";
 
 const MyCart = () => {
   const [user, loading] = useUserRole();

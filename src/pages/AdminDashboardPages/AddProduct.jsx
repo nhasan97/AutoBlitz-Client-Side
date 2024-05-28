@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import useGetAllBrands from "../../hooks/useGetAllBrands";
-import Loading from "../../components/Loading";
+import Loading from "../../components/shared/Loading";
 import usePerformMutation from "../../hooks/usePerformMutation";
 import { saveCarData } from "../../api/carsAPIs";
 import { ToastContainer } from "react-toastify";

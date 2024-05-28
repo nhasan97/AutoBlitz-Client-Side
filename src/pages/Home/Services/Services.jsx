@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import useGetServices from "../../../hooks/useGetServices";
-import Loading from "../../../components/Loading";
-import NoData from "../../../components/NoData";
+import Loading from "../../../components/shared/Loading";
+import NoData from "../../../components/shared/NoData";
 import Container from "../../../components/shared/Container";
-import Title from "../../../components/Title";
+import Title from "../../../components/shared/Title";
 
 const Services = () => {
   const title = {

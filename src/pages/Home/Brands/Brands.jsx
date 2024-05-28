@@ -1,7 +1,7 @@
-import Title from "../../../components/Title";
+import Title from "../../../components/shared/Title";
 import BrandCard from "./BrandCard";
-import Loading from "../../../components/Loading";
-import NoData from "../../../components/NoData";
+import Loading from "../../../components/shared/Loading";
+import NoData from "../../../components/shared/NoData";
 import { useNavigate } from "react-router-dom";
 import useGetAllBrands from "../../../hooks/useGetAllBrands";
 import Container from "../../../components/shared/Container";

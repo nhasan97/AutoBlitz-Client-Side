@@ -1,12 +1,12 @@
-import Title from "../../components/Title";
+import Title from "../../components/shared/Title";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "react-toastify/dist/ReactToastify.css";
 import { useQuery } from "@tanstack/react-query";
 import { getPopularCars } from "../../api/carsAPIs";
-import NoData from "../../components/NoData";
-import Loading from "../../components/Loading";
+import NoData from "../../components/shared/NoData";
+import Loading from "../../components/shared/Loading";
 import CarCards from "../../components/CarCards";
 import Container from "../../components/shared/Container";
 

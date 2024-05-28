@@ -10,10 +10,11 @@ import bn3 from "../../public/bmw.png";
 
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loading from "../components/Loading";
-import NoData from "../components/NoData";
+
 import useGetBrandsBasedCars from "../hooks/useGetBrandsBasedCars";
 import CarCards from "../components/CarCards";
+import Loading from "../components/shared/Loading";
+import NoData from "../components/shared/NoData";
 
 const BrandBasedProducts = () => {
   const loadedBrandName = useParams();
@@ -52,7 +53,7 @@ const BrandBasedProducts = () => {
             <div>
               <img src={bn3} alt="" className="w-full h-[530px]" />
             </div>
-            <div>
+            {/* <div>
               <img src={bn1} alt="" className="w-full h-[530px]" />
             </div>
             <div>
@@ -60,7 +61,7 @@ const BrandBasedProducts = () => {
             </div>
             <div>
               <img src={bn3} alt="" className="w-full h-[530px]" />
-            </div>
+            </div> */}
           </Slider>
         </div>
         <div className="max-w-screen-xl mx-auto px-28 py-12 grid grid-cols-3 gap-6 bg-[url('/public/prod-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">

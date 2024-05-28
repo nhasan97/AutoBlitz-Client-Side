@@ -1,5 +1,3 @@
-import Loading from "../../../components/Loading";
-import NoData from "../../../components/NoData";
 import useGetBrandsBasedCars from "../../../hooks/useGetBrandsBasedCars";
 import DashboardContainer from "../../../components/dashboard/shared/DashboardContainer";
 import usePerformMutation from "../../../hooks/usePerformMutation";
@@ -7,6 +5,8 @@ import { deleteCarData } from "../../../api/carsAPIs";
 import { ToastContainer } from "react-toastify";
 import MobileView from "./MobileView";
 import TabPCView from "./TabPCView";
+import Loading from "../../../components/shared/Loading";
+import NoData from "../../../components/shared/NoData";
 
 const ViewProducts = () => {
   //fetching brand based data

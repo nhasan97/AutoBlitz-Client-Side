@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 // import SharedBanner from "../shared/SharedBanner";
 import FacilityCard from "./FacilityCard";
 import useGetSingleServiceDetails from "../../hooks/useGetSingleServiceDetails";
-import Loading from "../../components/Loading";
+import Loading from "../../components/shared/Loading";
 
 const ServiceDetails = () => {
   const loadedServiceId = useParams();

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCustomers } from "../../api/customerAPIs";
-import Loading from "../../components/Loading";
-import NoData from "../../components/NoData";
+import Loading from "../../components/shared/Loading";
+import NoData from "../../components/shared/NoData";
 
 const ViewCustomers = () => {
   //fetching brands data

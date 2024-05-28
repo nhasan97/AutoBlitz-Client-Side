@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import eng from "../../public/engine.jpg";
 import tire from "../../public/tire.jpg";
 import speedometer from "../../public/speedometer.jpg";
-import Loading from "../components/Loading";
+import Loading from "../components/shared/Loading";
 import useGetSingleCarDataAndSpecs from "../hooks/useGetSingleCarDataAndSpecs";
 
 const ProductDetails = () => {
