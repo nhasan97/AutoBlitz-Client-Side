@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/Root";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import BrandBasedProducts from "../pages/BrandBasedProducts";
 import ProductDetails from "../pages/ProductDetails";
 import PrivateRoute from "./PrivateRoute";
 import Error from "../pages/Error";
@@ -21,6 +20,7 @@ import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import ServiceBooking from "../pages/ServiceBooking";
 import MyCart from "../pages/MyCart";
 import ProPayment from "../pages/Checkout/ProPayment";
+import BrandBasedProducts from "../pages/BrandBasedProducts";
 
 const router = createBrowserRouter([
   {

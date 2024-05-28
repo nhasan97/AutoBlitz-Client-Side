@@ -41,7 +41,7 @@ const Navbar = () => {
   //bg-[rgba(255,255,255,0.75)]
 
   return (
-    <div className="w-full h-fit py-2 bg-transparent absolute z-10">
+    <div className="w-full h-fit py-2 bg-transparent">
       <div className="max-w-screen-2xl mx-auto px-5 md:px-8 lg:px-10">
         <div className="navbar  text-white">
           <div className="navbar-start">
