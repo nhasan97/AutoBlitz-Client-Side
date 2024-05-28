@@ -45,7 +45,7 @@ const PopularMakesSection = () => {
         },
       },
       {
-        breakpoint: 425,
+        breakpoint: 576,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
