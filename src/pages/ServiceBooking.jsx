@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../hooks/useAuth";
 import usePerformMutation from "../hooks/usePerformMutation";
 import { saveServiceBooking } from "../api/serviceAPIs";
+import Container from "../components/shared/Container";
 
 const ServiceBooking = () => {
   const mainTitle = "Check Out";
@@ -47,45 +48,19 @@ const ServiceBooking = () => {
 
     mutation.mutate(order);
     form.reset();
-
-    //   axios.post("http://localhost:5000/orders", order).then((res) => {
-    //     if (res.data.insertedId) {
-    //       toast.success("🦄 inserted!", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     } else {
-    //       toast.error("🦄 something went wrong!", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     }
-    //   });
   };
 
   return (
-    <div>
-      {/* <SharedBanner title={title}></SharedBanner> */}
-
-      <div className=" bg-[#F3F3F3] text-center space-y-6 p-10 rounded-lg my-20">
-        <form className="space-y-6 text-left" onSubmit={handlePlaceOrder}>
+    <Container>
+      <div className="w-1/2 bg-[#f4f3f081] text-center space-y-6 p-10 rounded-lg">
+        <form
+          className=" space-y-6 text-left border"
+          onSubmit={handlePlaceOrder}
+        >
           <div className="flex justify-center items-center gap-8 mb-6">
             <div className="w-1/2 flex flex-col gap-6 ">
               <input
                 type="text"
-                id="in1"
                 name="firstName"
                 placeholder="First Name"
                 defaultValue={user?.displayName.split(" ")[0]}
@@ -94,7 +69,6 @@ const ServiceBooking = () => {
               />
               <input
                 type="text"
-                id="in2"
                 name="lastName"
                 placeholder="Last Name"
                 defaultValue={user?.displayName.split(" ")[1]}
@@ -106,7 +80,6 @@ const ServiceBooking = () => {
             <div className="w-1/2 flex flex-col gap-6">
               <input
                 type="number"
-                id="in3"
                 name="cell"
                 placeholder="Your Phone"
                 step="0.01"
@@ -115,7 +88,6 @@ const ServiceBooking = () => {
               />
               <input
                 type="email"
-                id="in4"
                 name="email"
                 placeholder="Your Email"
                 defaultValue={user?.email}
@@ -137,12 +109,12 @@ const ServiceBooking = () => {
           <input
             type="submit"
             value="Order Confirm"
-            className="input w-full bg-[#FF3811] text-white"
+            className="input w-1/2 bg-red-600 text-white"
           />
         </form>
       </div>
       <ToastContainer />
-    </div>
+    </Container>
   );
 };
 

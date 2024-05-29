@@ -120,7 +120,7 @@ const AddProduct = () => {
                     name="rating"
                     placeholder="Type here"
                     step="0.5"
-                    min="0"
+                    min="1"
                     max="5"
                     className="input w-full"
                   />

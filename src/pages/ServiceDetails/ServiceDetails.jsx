@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-// import SharedBanner from "../shared/SharedBanner";
 import FacilityCard from "./FacilityCard";
 import useGetSingleServiceDetails from "../../hooks/useGetSingleServiceDetails";
 import Loading from "../../components/shared/Loading";
@@ -12,19 +11,12 @@ const ServiceDetails = () => {
     loadedServiceId.id
   );
 
-  const title = {
-    mainTitle: "Service Details",
-    subTitle: "Home/Service Details",
-  };
-
   if (loadingServiceDetails) {
     return <Loading></Loading>;
   } else {
     return (
       <Container>
         <div>
-          {/* <SharedBanner title={title}></SharedBanner> */}
-
           <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3 lg:gap-6 py-12">
             <div className="lg:col-span-2">
               <h1 className="text-[rgba(255,255,255,.65)] font-rac text-2xl md:text-3xl lg:text-4xl font-bold">
@@ -56,6 +48,11 @@ const ServiceDetails = () => {
               <p className="text-[#151515] text-4xl font-bold">
                 Price $<span>{loadedService.price}</span>
               </p>
+
+              <button className="btn w-full bg-red-600 text-white">
+                Add to list
+              </button>
+
               <Link
                 to={`/service-booking/${loadedService.id}`}
                 className="btn w-full bg-red-600 text-white"

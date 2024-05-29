@@ -7,11 +7,17 @@ import MobileView from "./MobileView";
 import TabPCView from "./TabPCView";
 import Loading from "../../../components/shared/Loading";
 import NoData from "../../../components/shared/NoData";
+import { useState } from "react";
+import Searcher from "../../../components/shared/Searcher/Searcher";
 
 const ViewProducts = () => {
   //fetching brand based data
   const [loadingBrandBasedCars, brandBasedCars, refetchCars] =
     useGetBrandsBasedCars("");
+
+  const [search, setSearch] = useState("");
+  const [value, setValue] = useState([56456, 4000000]);
+  const [rating, setRating] = useState([1, 5]);
 
   //setting the title
   //   const title = {
@@ -34,7 +40,7 @@ const ViewProducts = () => {
 
   if (brandBasedCars.length > 0) {
     return (
-      <div className="h-screen">
+      <div className="h-screen bg-[url('/public/cart-bg.webp')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
         <DashboardContainer>
           {/* <Helmet>
             <title>PanaPoll | Dashboard | Manage Surveys</title>
@@ -42,14 +48,30 @@ const ViewProducts = () => {
 
           {/* <Title title={title}></Title> */}
 
+          <div className="w-full h-[10%] mb-4">
+            <Searcher
+              setSearch={setSearch}
+              setValue={setValue}
+              value={value}
+              setRating={setRating}
+              rating={rating}
+            ></Searcher>
+          </div>
+
           <TabPCView
             brandBasedCars={brandBasedCars}
             handleDeleteCar={handleDeleteCar}
+            search={search}
+            range={value}
+            rating={rating}
           ></TabPCView>
 
           <MobileView
             brandBasedCars={brandBasedCars}
             handleDeleteCar={handleDeleteCar}
+            search={search}
+            range={value}
+            rating={rating}
           ></MobileView>
         </DashboardContainer>
 

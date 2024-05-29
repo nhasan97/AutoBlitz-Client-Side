@@ -8,11 +8,11 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="relative flex flex-col lg:flex-row">
+    <div className=" bg-black flex flex-col xl:flex-row relative">
       <Sidebar></Sidebar>
-      <div className="flex-1 lg:ml-64 relative">
+      <div className="flex-1 xl:ml-64 relative">
         <i
-          className="fa-solid fa-arrow-left text-xl absolute top-[55px] left-5 sm:top-10 sm:left-10"
+          className="fa-solid fa-arrow-left text-xl text-white absolute top-[55px] left-5 sm:top-6 sm:left-10"
           onClick={handleGoBack}
         ></i>
         <Outlet></Outlet>

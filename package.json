@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.4",
     "react-icons": "^4.11.0",
+    "react-range-slider-input": "^3.0.7",
     "react-router-dom": "^6.17.0",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.3",

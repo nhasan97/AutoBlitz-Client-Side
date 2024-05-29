@@ -22,15 +22,15 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-end items-center p-5 lg:hidden fixed z-20">
+      <div className="w-full flex justify-end items-center p-5 xl:hidden fixed z-20">
         <HiMenuAlt3
-          className="text-2xl text-[#101322]"
+          className="text-2xl  text-white "
           onClick={() => setOpenSidebar(!openSidebar)}
         />
       </div>
       {/* bg-[#F2F2F2] */}
       <div
-        className={`w-64 h-full bg-[url(../public/sidebarBg.png)] bg-no-repeat bg-center bg-cover rounded-r-[36px] overflow-y-auto absolute lg:fixed z-10 lg:translate-x-0 ${
+        className={`w-64 h-screen bg-[rgb(10,10,10)] rounded-r-[36px] overflow-y-auto absolute xl:fixed z-10 xl:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`
@@ -42,14 +42,14 @@ const Sidebar = () => {
 
         <div className="w-full flex flex-col justify-center items-center gap-3 ">
           <div className="avatar">
-            <div className="w-16 sm:w-20 mask mask-hexagon">
+            <div className="w-16 sm:w-20 mask mask-squircle">
               <img src={user?.photoURL} />
             </div>
           </div>
-          <h1 className="normal-case text-xl sm:text-2xl text-[#71357B] font-medium">
+          <h1 className="normal-case text-xl sm:text-2xl text-red-600 font-medium">
             {user?.displayName}
           </h1>
-          <p className="normal-case text-base sm:text-lg text-[#a5a5a5]">
+          <p className="normal-case text-base sm:text-xl text-[#a5a5a5]">
             {user?.email}
           </p>
         </div>
@@ -58,7 +58,7 @@ const Sidebar = () => {
           {role === "admin" && <AdminMenu></AdminMenu>}
           {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}
           <button
-            className="btn w-full text-[#71357B] text-base sm:text-lg mt-5"
+            className="btn w-full text-red-600 text-base sm:text-xl mt-5"
             onClick={handleLogout}
           >
             Logout
