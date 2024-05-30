@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Specs = ({ formData, setFormData }) => {
   return (
     <div className="flex flex-col gap-3 sm:gap-6">
@@ -72,6 +74,11 @@ const Specs = ({ formData, setFormData }) => {
       />
     </div>
   );
+};
+
+Specs.propTypes = {
+  formData: PropTypes.object.isRequired,
+  setFormData: PropTypes.func.isRequired,
 };
 
 export default Specs;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const BasicInfo = ({ brands, formData, setFormData }) => {
   return (
     <div className="">
@@ -96,6 +98,12 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
       </div>
     </div>
   );
+};
+
+BasicInfo.propTypes = {
+  brands: PropTypes.array.isRequired,
+  formData: PropTypes.object.isRequired,
+  setFormData: PropTypes.func.isRequired,
 };
 
 export default BasicInfo;

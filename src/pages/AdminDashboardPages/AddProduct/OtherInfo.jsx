@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const OtherInfo = ({ formData, setFormData }) => {
   return (
     <div className="flex flex-col gap-3 sm:gap-6">
@@ -59,6 +61,11 @@ const OtherInfo = ({ formData, setFormData }) => {
       />
     </div>
   );
+};
+
+OtherInfo.propTypes = {
+  formData: PropTypes.object.isRequired,
+  setFormData: PropTypes.func.isRequired,
 };
 
 export default OtherInfo;

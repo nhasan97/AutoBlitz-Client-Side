@@ -1,14 +1,9 @@
-import SharedBanner from "../../components/SharedBanner";
 import usePerformMutation from "../../hooks/usePerformMutation";
 import { saveService } from "../../api/serviceAPIs";
 import { ToastContainer } from "react-toastify";
 import DashboardContainer from "../../components/dashboard/shared/DashboardContainer";
 
 const AddService = () => {
-  const mainTitle = "Add New Service";
-  const subTitle = "Home/Service";
-  const title = { mainTitle, subTitle };
-
   const mutation = usePerformMutation("saveService", saveService);
 
   const handleAddService = (e) => {
@@ -33,7 +28,7 @@ const AddService = () => {
     form.reset();
   };
   return (
-    <div className="h-screen bg-[url('/public/add-bg2.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
+    <div className="h-screen bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
       <DashboardContainer>
         {/* <Helmet>
         <title>PanaPoll | Dashboard | Manage Surveys</title>
