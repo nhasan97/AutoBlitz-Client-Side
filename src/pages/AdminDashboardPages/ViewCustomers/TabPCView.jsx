@@ -21,10 +21,10 @@ const TabPCView = ({ customers, search }) => {
           <tbody>
             {/* row 1 */}
             {customers
-              .filter((car) => {
+              .filter((customer) => {
                 return search.toLowerCase() === ""
-                  ? car
-                  : car.name.toLowerCase().includes(search);
+                  ? customer
+                  : customer.name.toLowerCase().includes(search.toLowerCase());
               })
               .map((customer) => (
                 <tr key={customer._id}>

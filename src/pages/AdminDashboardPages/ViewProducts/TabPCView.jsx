@@ -34,9 +34,11 @@ const TabPCView = ({
               .filter((car) => {
                 return search.toLowerCase() === ""
                   ? car
-                  : car.name.toLowerCase().includes(search) ||
-                      car.brandName.toLowerCase().includes(search) ||
-                      car.type.toLowerCase().includes(search);
+                  : car.name.toLowerCase().includes(search.toLowerCase()) ||
+                      car.brandName
+                        .toLowerCase()
+                        .includes(search.toLowerCase()) ||
+                      car.type.toLowerCase().includes(search.toLowerCase());
               })
               .filter((car) => {
                 return range[0] === 0 && range[1] === 100

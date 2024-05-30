@@ -9,7 +9,7 @@ import Home from "../pages/Home/Home";
 import AllRoute from "./AllRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminRoute from "./AdminRoute";
-import AddProduct from "../pages/AdminDashboardPages/AddProduct";
+import AddProduct from "../pages/AdminDashboardPages/AddProduct/AddProduct";
 import AddProductDetails from "../pages/AdminDashboardPages/AddProductDetails";
 import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct";
 import UpdateProductDetails from "../pages/AdminDashboardPages/UpdateProductDetails";

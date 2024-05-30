@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import { useState } from "react";
 
 const ViewCustomers = () => {
-  //fetching brands data
+  //fetching customers data
   const { isLoading: loadingCustomers, data: customers } = useQuery({
     queryKey: ["getCustomers"],
     queryFn: getCustomers,

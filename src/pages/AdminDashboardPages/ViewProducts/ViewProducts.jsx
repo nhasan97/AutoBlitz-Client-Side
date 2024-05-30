@@ -19,12 +19,6 @@ const ViewProducts = () => {
   const [value, setValue] = useState([56456, 4000000]);
   const [rating, setRating] = useState([1, 5]);
 
-  //setting the title
-  //   const title = {
-  //     mainTitle: "Surveys",
-  //     subTitle: "",
-  //   };
-
   //performing mutation for deleting car data
   const mutation = usePerformMutation("deleteCar", deleteCarData);
 
@@ -45,8 +39,6 @@ const ViewProducts = () => {
           {/* <Helmet>
             <title>PanaPoll | Dashboard | Manage Surveys</title>
           </Helmet> */}
-
-          {/* <Title title={title}></Title> */}
 
           <div className="w-full h-[10%] mb-4">
             <Searcher

@@ -5,10 +5,10 @@ const MobileView = ({ customers, search }) => {
   return (
     <div className="grid grid-cols-1 gap-3 sm:hidden w-full h-[85%] overflow-y-auto rounded-lg">
       {customers
-        .filter((car) => {
+        .filter((customer) => {
           return search.toLowerCase() === ""
-            ? car
-            : car.name.toLowerCase().includes(search);
+            ? customer
+            : customer.name.toLowerCase().includes(search.toLowerCase());
         })
         .map((customer) => (
           <div
