@@ -82,7 +82,7 @@ const ViewProducts = () => {
     return (
       <div className="h-screen">
         <DashboardContainer>
-          <NoData text="No Survey Found"></NoData>
+          <NoData text="No Car Found"></NoData>
         </DashboardContainer>
       </div>
     );

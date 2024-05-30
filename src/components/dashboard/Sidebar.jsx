@@ -22,7 +22,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-end items-center p-5 xl:hidden fixed z-20">
+      <div className="w-full flex justify-end items-center p-5 xl:hidden fixed z-30">
         <HiMenuAlt3
           className="text-2xl  text-white "
           onClick={() => setOpenSidebar(!openSidebar)}
@@ -30,7 +30,7 @@ const Sidebar = () => {
       </div>
       {/* bg-[#F2F2F2] */}
       <div
-        className={`w-64 h-screen bg-[rgb(10,10,10)] rounded-r-[36px] overflow-y-auto absolute xl:fixed z-10 xl:translate-x-0 ${
+        className={`w-64 h-screen bg-[rgb(10,10,10)] rounded-r-[36px] overflow-y-auto absolute xl:fixed z-20 xl:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`

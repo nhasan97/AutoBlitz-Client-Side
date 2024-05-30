@@ -31,7 +31,7 @@ const MobileView = ({
             : car.rating >= rating[0] && car.rating <= rating[1];
         })
         .map((car) => (
-          <div key={car._id} className="card bg-[#f4f3f081] shadow-xl">
+          <div key={car._id} className="h-fit card bg-[#f4f3f081] shadow-xl">
             <div className="card-body p-5 space-y-3">
               <div className="flex items-center gap-3">
                 <div className="avatar">
@@ -50,7 +50,7 @@ const MobileView = ({
 
               <div className="card-actions justify-between">
                 <button
-                  className="btn btn-circle hover:bg-[#71357B] group"
+                  className="btn btn-circle hover:bg-red-600 group"
                   onClick={() =>
                     document.getElementById("m" + car._id).showModal()
                   }

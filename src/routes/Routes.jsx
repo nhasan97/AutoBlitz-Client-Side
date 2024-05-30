@@ -11,7 +11,6 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AdminRoute from "./AdminRoute";
 import AddProduct from "../pages/AdminDashboardPages/AddProduct";
 import AddProductDetails from "../pages/AdminDashboardPages/AddProductDetails";
-import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers";
 import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct";
 import UpdateProductDetails from "../pages/AdminDashboardPages/UpdateProductDetails";
 import ViewProducts from "../pages/AdminDashboardPages/ViewProducts/ViewProducts";
@@ -21,6 +20,7 @@ import ServiceBooking from "../pages/ServiceBooking";
 import MyCart from "../pages/MyCart";
 import ProPayment from "../pages/Checkout/ProPayment";
 import BrandBasedProducts from "../pages/BrandBasedProducts";
+import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers/ViewCustomers";
 
 const router = createBrowserRouter([
   {
