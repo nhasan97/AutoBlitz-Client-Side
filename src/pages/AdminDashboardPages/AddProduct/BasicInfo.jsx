@@ -1,8 +1,8 @@
 const BasicInfo = ({ brands, formData, setFormData }) => {
   return (
     <div className="">
-      <div className="flex lg:flex-row justify-center items-center gap-3 md:gap-6 mb-3">
-        <div className="w-full lg:w-1/2 flex flex-col gap-3 md:gap-6">
+      <div className="flex lg:flex-row justify-center items-center gap-3 sm:gap-6 mb-3">
+        <div className="w-full lg:w-1/2 flex flex-col gap-3 sm:gap-6">
           <input
             type="text"
             name="name"
@@ -40,7 +40,7 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
           />
         </div>
 
-        <div className="w-full lg:w-1/2 flex flex-col gap-3 md:gap-6">
+        <div className="w-full lg:w-1/2 flex flex-col gap-3 sm:gap-6">
           <input
             type="number"
             name="price"

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../../components/shared/Loading";
 import { saveCarData } from "../../../api/carsAPIs";
@@ -15,8 +14,6 @@ import Specs from "./Specs";
 const AddProduct = () => {
   //fetching brands data
   const [loadingBrands, brands] = useGetAllBrands();
-
-  // const [carName, setCarName] = useState("");
 
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -170,41 +167,6 @@ const AddProduct = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className=" w-full lg:w-2/3 mx-auto bg-[#f4f3f081] text-center my-16 p-5 lg:p-10 space-y-6 rounded-lg backdrop-blur-sm">
-            <h1 className="font-rac text-3xl">Add New Car</h1>
-            <form
-              className="space-y-6 text-left text-black font-semibold text-lg"
-              onSubmit={handleAddCar}
-            >
-              <div className="flex flex-col lg:flex-row justify-center items-center gap-1 md:gap-3 lg:gap-8 mb-3"></div>
-
-              <div className="form-control w-full">
-                <label htmlFor="in7">
-                  PhotoUrl
-                  <input
-                    type="file"
-                    id="in7"
-                    name="photo_url"
-                    placeholder="Type here"
-                    className="file-input file-input-bordered w-full"
-                  />
-                </label>
-              </div>
-
-              <input type="submit" value="Add" className="input w-full" />
-            </form>
-            {carName ? (
-              <Link
-                className="btn"
-                to={`/dashboard/add-product-details/${carName}`}
-              >
-                Add Specs
-              </Link>
-            ) : (
-              ""
-            )}
-          </div> */}
 
           <ToastContainer />
         </DashboardContainer>
