@@ -11,7 +11,7 @@ import bn3 from "../../public/bmw.png";
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import useGetBrandsBasedCars from "../hooks/useGetBrandsBasedCars";
+import useGetCars from "../hooks/useGetCars";
 import CarCards from "../components/CarCards";
 import Loading from "../components/shared/Loading";
 import NoData from "../components/shared/NoData";
@@ -23,7 +23,7 @@ const BrandBasedProducts = () => {
   const loadedBrandName = useParams();
 
   //fetching brand based data
-  const [loadingBrandBasedCars, brandBasedCars] = useGetBrandsBasedCars(
+  const [loadingBrandBasedCars, brandBasedCars] = useGetCars(
     loadedBrandName.name
   );
 

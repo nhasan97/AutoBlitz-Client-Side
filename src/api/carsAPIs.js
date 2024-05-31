@@ -9,7 +9,7 @@ export const getPopularCars = async () => {
   return response.data;
 };
 
-export const getBrandBasedCars = async (name) => {
+export const getCars = async (name) => {
   let response;
   if (name === "") {
     response = await axiosPublic.get(`/cars`);

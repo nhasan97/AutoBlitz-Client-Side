@@ -25,6 +25,7 @@ const Navbar = () => {
   const links = (
     <div className="text-[#757575] text-base font-medium space-x-8">
       <NavLink to="/">Home</NavLink>
+      <NavLink to="/all-cars">All Cars</NavLink>
       {loading || roleLoading ? (
         <span className="loading loading-dots loading-xs"></span>
       ) : user && role === "admin" ? (

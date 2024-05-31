@@ -21,6 +21,7 @@ import MyCart from "../pages/MyCart";
 import ProPayment from "../pages/Checkout/ProPayment";
 import BrandBasedProducts from "../pages/BrandBasedProducts";
 import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers/ViewCustomers";
+import AllCars from "../pages/AllCars";
 
 const router = createBrowserRouter([
   {
@@ -37,12 +38,12 @@ const router = createBrowserRouter([
         element: <BrandBasedProducts></BrandBasedProducts>,
       },
       {
+        path: "/all-cars",
+        element: <AllCars></AllCars>,
+      },
+      {
         path: "/product-details/:id",
-        element: (
-          <PrivateRoute>
-            <ProductDetails></ProductDetails>
-          </PrivateRoute>
-        ),
+        element: <ProductDetails></ProductDetails>,
       },
       {
         path: "/my-cart",
@@ -55,11 +56,7 @@ const router = createBrowserRouter([
 
       {
         path: "/service-details/:id",
-        element: (
-          <PrivateRoute>
-            <ServiceDetails></ServiceDetails>
-          </PrivateRoute>
-        ),
+        element: <ServiceDetails></ServiceDetails>,
       },
       {
         path: "/service-booking/:id",

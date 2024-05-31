@@ -1,4 +1,4 @@
-import useGetBrandsBasedCars from "../../../hooks/useGetBrandsBasedCars";
+import useGetCars from "../../../hooks/useGetCars";
 import DashboardContainer from "../../../components/dashboard/shared/DashboardContainer";
 import usePerformMutation from "../../../hooks/usePerformMutation";
 import { deleteCarData } from "../../../api/carsAPIs";
@@ -12,8 +12,7 @@ import Searcher from "../../../components/shared/Searcher/Searcher";
 
 const ViewProducts = () => {
   //fetching brand based data
-  const [loadingBrandBasedCars, brandBasedCars, refetchCars] =
-    useGetBrandsBasedCars("");
+  const [loadingBrandBasedCars, brandBasedCars, refetchCars] = useGetCars("");
 
   const [search, setSearch] = useState("");
   const [value, setValue] = useState([56456, 4000000]);

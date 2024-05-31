@@ -9,6 +9,7 @@ import NoData from "../../components/shared/NoData";
 import Loading from "../../components/shared/Loading";
 import CarCards from "../../components/CarCards";
 import Container from "../../components/shared/Container";
+import { Link } from "react-router-dom";
 
 const PopularMakesSection = () => {
   const title = {
@@ -80,6 +81,15 @@ const PopularMakesSection = () => {
                 ></CarCards>
               ))}
             </Slider>
+          </div>
+
+          <div className="flex justify-center items-center">
+            <Link
+              to="/all-cars"
+              className="btn bg-transparent border border-red-600 text-red-600"
+            >
+              View More
+            </Link>
           </div>
         </div>
       </Container>
