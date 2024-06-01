@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
+import StarRating from "../../../components/StarRating";
 
 const TabPCView = ({
   brandBasedCars,
@@ -80,9 +81,78 @@ const TabPCView = ({
 
                     <dialog id={car._id} className="modal">
                       <div className="modal-box text-left">
-                        <h3 className="font-bold text-lg">{car.name}</h3>
-                        <p className="py-4 badge">{car.type}</p>
-                        <p className="py-4">{car.description}</p>
+                        <img src={car.imageUrl} className="rounded-lg"></img>
+                        <div className="space-y-6">
+                          <h3 className="text-2xl font-bold mt-6">
+                            {car.name}
+                          </h3>
+                          <div className="flex gap-2">
+                            <p className="badge">{car.type}</p>
+                            <StarRating rating={car.rating}></StarRating>
+                          </div>
+                          <p className="text-xl font-semibold">
+                            Price: ${car.price}
+                          </p>
+                          <div className="space-y-2">
+                            <p className="mb-6 text-justify">
+                              {car.description}
+                            </p>
+                            <p>
+                              <span className="font-medium">Brand: </span>
+                              {car.brandName}
+                            </p>
+                            <p>
+                              <span className="font-medium">Body: </span>
+                              {car.body}
+                            </p>
+                            <p>
+                              <span className="font-medium">Segment: </span>
+                              {car.seg}
+                            </p>
+                            <p>
+                              <span className="font-medium">
+                                Production Year:
+                              </span>
+                              {car.py}
+                            </p>
+                            <p>
+                              <span className="font-medium">Engine: </span>
+                              {car.eng}
+                            </p>
+                            <p>
+                              <span className="font-medium">Power: </span>
+                              {car.pow}
+                            </p>
+                            <p>
+                              <span className="font-medium">Fuel: </span>
+                              {car.fuel}
+                            </p>
+                            <p>
+                              <span className="font-medium">
+                                Fuel Capacity:
+                              </span>
+                              {car.fuelc}
+                            </p>
+                            <p>
+                              <span className="font-medium">Top speed: </span>
+                              {car.ps}
+                            </p>
+                            <p>
+                              <span className="font-medium">Dimension: </span>
+                              {car.d}
+                            </p>
+                            <p>
+                              <span className="font-medium">Tire: </span>
+                              {car.ts}
+                            </p>
+                            <p>
+                              <span className="font-medium">
+                                Gross Weight:{" "}
+                              </span>
+                              {car.gw}
+                            </p>
+                          </div>
+                        </div>
 
                         <div className="modal-action">
                           <form method="dialog">

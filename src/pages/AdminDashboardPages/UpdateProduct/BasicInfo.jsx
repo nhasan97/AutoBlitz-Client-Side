@@ -11,7 +11,6 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             placeholder="name"
             className="input w-full capitalize"
             value={formData.name}
-            required
             onChange={(e) => {
               setFormData({ ...formData, name: e.target.value });
             }}
@@ -21,8 +20,7 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             name="brand_name"
             placeholder="Brand Name"
             className="input w-full capitalize"
-            value={formData.brandName}
-            required
+            defaultValue={formData.brandName}
             onChange={(e) => {
               setFormData({ ...formData, brandName: e.target.value });
             }}
@@ -38,7 +36,6 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             placeholder="Car Type"
             className="input w-full  capitalize"
             value={formData.type}
-            required
             onChange={(e) => {
               setFormData({ ...formData, type: e.target.value });
             }}
@@ -53,7 +50,6 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             step="0.01"
             className="input w-full"
             value={formData.price}
-            required
             onChange={(e) => {
               setFormData({ ...formData, price: e.target.value });
             }}
@@ -65,7 +61,6 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             placeholder="Description"
             className="input w-full capitalize pt-2"
             value={formData.description}
-            required
             onChange={(e) => {
               setFormData({ ...formData, description: e.target.value });
             }}
@@ -80,15 +75,22 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             max="5"
             className="input w-full"
             value={formData.rating}
-            required
             onChange={(e) => {
               setFormData({ ...formData, rating: e.target.value });
             }}
           />
         </div>
       </div>
-
-      <div className="form-control">
+      <input
+        type="text"
+        name="type"
+        className="input w-full"
+        hidden
+        value={formData.photo_url}
+      />
+      {/* <div className="flex items-center gap-3 sm:gap-6"> */}
+      {/* <img src={formData.photo_url} alt="" className=" h-12 rounded-lg" /> */}
+      <div className="form-control flex-1">
         <label
           htmlFor="in7"
           className="input w-full bg-[#18293E] text-white text-left pt-2"
@@ -104,8 +106,9 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
             }}
           />
         </label>
-      </div>
+      </div>{" "}
     </div>
+    // </div>
   );
 };
 

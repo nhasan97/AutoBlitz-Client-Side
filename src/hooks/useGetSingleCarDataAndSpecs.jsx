@@ -9,12 +9,12 @@ const useGetSingleCarDataAndSpecs = (id) => {
   });
 
   //fetching single car specs
-  const { isLoading: loadingCarSpecs, data: loadedSpecs } = useQuery({
-    queryKey: ["getSingleCarSpecs"],
-    queryFn: () => getSingleCarSpecs(loadedCar.name),
-  });
+  // const { isLoading: loadingCarSpecs, data: loadedSpecs } = useQuery({
+  //   queryKey: ["getSingleCarSpecs"],
+  //   queryFn: () => getSingleCarSpecs(loadedCar.name),
+  // });
 
-  return [loadingCar, loadedCar, loadingCarSpecs, loadedSpecs];
+  return [loadingCar, loadedCar];
 };
 
 export default useGetSingleCarDataAndSpecs;

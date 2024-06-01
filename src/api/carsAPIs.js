@@ -45,7 +45,6 @@ export const updateCarInfo = async (obj) => {
     `/all-cars/${obj.id}`,
     obj.updatedCarInfo
   );
-
   if (response.data.modifiedCount === 1) {
     showToastOnSuccess("Updated!");
   } else {

@@ -9,7 +9,6 @@ const Specs = ({ formData, setFormData }) => {
         placeholder="Engine"
         className="input w-full capitalize"
         value={formData.eng}
-        required
         onChange={(e) => {
           setFormData({ ...formData, eng: e.target.value });
         }}
@@ -21,7 +20,6 @@ const Specs = ({ formData, setFormData }) => {
           name="pow"
           placeholder="Power"
           className="input w-full capitalize"
-          required
           value={formData.pow}
           onChange={(e) => {
             setFormData({ ...formData, pow: e.target.value });
@@ -34,7 +32,6 @@ const Specs = ({ formData, setFormData }) => {
           placeholder="Top Speed"
           className="input w-full capitalize"
           value={formData.ps}
-          required
           onChange={(e) => {
             setFormData({ ...formData, ps: e.target.value });
           }}
@@ -48,7 +45,6 @@ const Specs = ({ formData, setFormData }) => {
           placeholder="Fuel"
           className="input w-full capitalize"
           value={formData.fuel}
-          required
           onChange={(e) => {
             setFormData({ ...formData, fuel: e.target.value });
           }}
@@ -60,7 +56,6 @@ const Specs = ({ formData, setFormData }) => {
           placeholder="Fuel Capacity"
           className="input w-full capitalize"
           value={formData.fuelc}
-          required
           onChange={(e) => {
             setFormData({ ...formData, fuelc: e.target.value });
           }}
@@ -73,7 +68,6 @@ const Specs = ({ formData, setFormData }) => {
         placeholder="Tire Size"
         className="input w-full capitalize"
         value={formData.ts}
-        required
         onChange={(e) => {
           setFormData({ ...formData, ts: e.target.value });
         }}

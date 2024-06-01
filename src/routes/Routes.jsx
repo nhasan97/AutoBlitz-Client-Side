@@ -10,9 +10,6 @@ import AllRoute from "./AllRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminRoute from "./AdminRoute";
 import AddProduct from "../pages/AdminDashboardPages/AddProduct/AddProduct";
-import AddProductDetails from "../pages/AdminDashboardPages/AddProductDetails";
-import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct";
-import UpdateProductDetails from "../pages/AdminDashboardPages/UpdateProductDetails";
 import ViewProducts from "../pages/AdminDashboardPages/ViewProducts/ViewProducts";
 import AddService from "../pages/AdminDashboardPages/AddService";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
@@ -22,6 +19,8 @@ import ProPayment from "../pages/Checkout/ProPayment";
 import BrandBasedProducts from "../pages/BrandBasedProducts";
 import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers/ViewCustomers";
 import AllCars from "../pages/AllCars";
+import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct/UpdateProduct";
+import axiosPublic from "../api/axiosPublic";
 
 const router = createBrowserRouter([
   {
@@ -104,17 +103,6 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
-      {
-        path: "add-product-details/:name",
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <AddProductDetails></AddProductDetails>
-            </AdminRoute>
-          </PrivateRoute>
-        ),
-      },
       {
         path: "update/:id",
         element: (
@@ -124,17 +112,9 @@ const router = createBrowserRouter([
             </AdminRoute>
           </PrivateRoute>
         ),
+        loader: ({ params }) => axiosPublic.get(`/all-cars/${params.id}`),
       },
-      {
-        path: "update-product-details/:id",
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <UpdateProductDetails></UpdateProductDetails>
-            </AdminRoute>
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "add-service",
         element: (

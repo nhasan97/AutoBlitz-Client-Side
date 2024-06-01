@@ -2,17 +2,19 @@ import usePerformMutation from "../../hooks/usePerformMutation";
 import { saveService } from "../../api/serviceAPIs";
 import { ToastContainer } from "react-toastify";
 import DashboardContainer from "../../components/dashboard/shared/DashboardContainer";
+import { uploadImage } from "../../utilities/imageUploader";
 
 const AddService = () => {
   const mutation = usePerformMutation("saveService", saveService);
 
-  const handleAddService = (e) => {
+  const handleAddService = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const serviceName = form.serviceName.value;
-    const servicePhoto = form.photoUrl.value;
-    const servicePrice = form.servicePrice.value;
+    const image = await uploadImage(form.photoUrl.files[0]);
+    const servicePhoto = image.data.display_url;
+    const servicePrice = parseFloat(form.servicePrice.value);
     const serviceType = form.serviceType.value;
     const productDescription = form.productDescription.value;
 
@@ -50,13 +52,21 @@ const AddService = () => {
                   placeholder="Service Name"
                   className="input w-full"
                 />
-                <input
-                  type="text"
-                  id="in2"
-                  name="photoUrl"
-                  placeholder="Photo Url"
-                  className="input w-full"
-                />
+                <div className="form-control">
+                  <label
+                    htmlFor="in7"
+                    className="input w-full bg-[#18293E] text-white pt-3"
+                  >
+                    Choose Service Image
+                    <input
+                      type="file"
+                      id="in7"
+                      name="photoUrl"
+                      style={{ visibility: "hidden" }}
+                      // className="file-input file-input-bordered w-full border"
+                    />
+                  </label>
+                </div>
               </div>
 
               <div className="w-1/2 flex flex-col gap-3 sm:gap-6">

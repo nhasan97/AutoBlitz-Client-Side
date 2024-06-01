@@ -10,7 +10,6 @@ const OtherInfo = ({ formData, setFormData }) => {
           placeholder="Body"
           className="input w-full sm:w-1/2 capitalize"
           value={formData.body}
-          required
           onChange={(e) => {
             setFormData({ ...formData, body: e.target.value });
           }}
@@ -22,7 +21,6 @@ const OtherInfo = ({ formData, setFormData }) => {
           placeholder="Segment"
           className="input w-full sm:w-1/2 capitalize"
           value={formData.seg}
-          required
           onChange={(e) => {
             setFormData({ ...formData, seg: e.target.value });
           }}
@@ -35,7 +33,6 @@ const OtherInfo = ({ formData, setFormData }) => {
         placeholder="Production year"
         className="input w-full capitalize"
         value={formData.py}
-        required
         onChange={(e) => {
           setFormData({ ...formData, py: e.target.value });
         }}
@@ -47,7 +44,6 @@ const OtherInfo = ({ formData, setFormData }) => {
         placeholder="Dimension"
         className="input w-full capitalize"
         value={formData.d}
-        required
         onChange={(e) => {
           setFormData({ ...formData, d: e.target.value });
         }}
@@ -59,7 +55,6 @@ const OtherInfo = ({ formData, setFormData }) => {
         placeholder="Gross Weight"
         className="input w-full capitalize"
         value={formData.gw}
-        required
         onChange={(e) => {
           setFormData({ ...formData, gw: e.target.value });
         }}

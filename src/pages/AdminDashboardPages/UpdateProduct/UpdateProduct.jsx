@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../../components/shared/Loading";
-import { saveCarData } from "../../../api/carsAPIs";
+import { updateCarInfo } from "../../../api/carsAPIs";
 import { ToastContainer } from "react-toastify";
 import { uploadImage } from "../../../utilities/imageUploader";
 import DashboardContainer from "../../../components/dashboard/shared/DashboardContainer";
@@ -10,32 +10,36 @@ import usePerformMutation from "../../../hooks/usePerformMutation";
 import BasicInfo from "./BasicInfo";
 import OtherInfo from "./OtherInfo";
 import Specs from "./Specs";
+import { useLoaderData } from "react-router-dom";
 
-const AddProduct = () => {
+const UpdateProduct = () => {
+  //fetching single car data and specs
+  const loadedCar = useLoaderData();
+
   //fetching brands data
   const [loadingBrands, brands] = useGetAllBrands();
 
   const [pageNumber, setPageNumber] = useState(0);
 
   const [formData, setFormData] = useState({
-    name: "",
-    brandName: "",
-    type: "",
-    price: "",
-    description: "",
-    rating: "",
-    photo_url: "",
-    body: "",
-    seg: "",
-    py: "",
-    eng: "",
-    pow: "",
-    fuel: "",
-    fuelc: "",
-    ps: "",
-    d: "",
-    ts: "",
-    gw: "",
+    name: loadedCar.data.name,
+    brandName: loadedCar.data.brandName,
+    type: loadedCar.data.type,
+    price: loadedCar.data.price,
+    description: loadedCar.data.description,
+    rating: loadedCar.data.rating,
+    photo_url: loadedCar.data.imageUrl,
+    body: loadedCar.data.body,
+    seg: loadedCar.data.seg,
+    py: loadedCar.data.py,
+    eng: loadedCar.data.eng,
+    pow: loadedCar.data.pow,
+    fuel: loadedCar.data.fuel,
+    fuelc: loadedCar.data.fuelc,
+    ps: loadedCar.data.ps,
+    d: loadedCar.data.d,
+    ts: loadedCar.data.ts,
+    gw: loadedCar.data.gw,
   });
 
   const FormTitles = ["Basic Info", "Other Info", "Specs"];
@@ -44,6 +48,7 @@ const AddProduct = () => {
     if (pageNumber === 0) {
       return (
         <BasicInfo
+          loadedCar={loadedCar}
           brands={brands}
           formData={formData}
           setFormData={setFormData}
@@ -57,9 +62,10 @@ const AddProduct = () => {
   };
 
   //saving car data in db
-  const mutation = usePerformMutation("saveCarData", saveCarData);
+  const mutation = usePerformMutation("updateCarInfo", updateCarInfo);
 
-  const handleAddCar = async () => {
+  const handleUpdateCar = async () => {
+    const id = loadedCar.data._id;
     let imageUrl = "";
 
     const name = formData.name;
@@ -68,11 +74,11 @@ const AddProduct = () => {
     const price = parseFloat(formData.price);
     const description = formData.description;
     const rating = parseFloat(formData.rating);
-    if (formData.photo_url) {
+    if (loadedCar.data.imageUrl === formData.photo_url) {
+      imageUrl = loadedCar.data.imageUrl;
+    } else {
       const image = await uploadImage(formData.photo_url);
       imageUrl = image.data.display_url;
-    } else {
-      imageUrl = import.meta.env.VITE_NO_IMAGE_AVAILABLE;
     }
     const body = formData.body;
     const seg = formData.seg;
@@ -86,7 +92,7 @@ const AddProduct = () => {
     const ts = formData.ts;
     const gw = formData.gw;
 
-    const newCar = {
+    const updatedCarInfo = {
       name,
       brandName,
       type,
@@ -107,7 +113,7 @@ const AddProduct = () => {
       gw,
     };
 
-    mutation.mutate(newCar);
+    mutation.mutate({ id, updatedCarInfo });
     // form.reset();
   };
 
@@ -122,7 +128,7 @@ const AddProduct = () => {
           </Helmet> */}
 
           <div className="w-full lg:w-2/3 mx-auto bg-[#f4f3f081] text-center p-5 lg:p-10 space-y-3 sm:space-y-6 rounded-lg backdrop-blur-sm">
-            <h1 className="font-rac text-3xl">Add New Car</h1>
+            <h1 className="font-rac text-3xl">Update Car Info</h1>
 
             <div className="w-full h-3 bg-base-200 rounded-xl border">
               <div
@@ -159,7 +165,7 @@ const AddProduct = () => {
                   className="btn flex-1 bg-red-600 text-white"
                   onClick={() => {
                     if (pageNumber === FormTitles.length - 1) {
-                      handleAddCar();
+                      handleUpdateCar();
                     } else {
                       setPageNumber((currPageNumber) => currPageNumber + 1);
                     }
@@ -178,4 +184,4 @@ const AddProduct = () => {
   }
 };
 
-export default AddProduct;
+export default UpdateProduct;
