@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import useGetServices from "../../../hooks/useGetServices";
 import Loading from "../../../components/shared/Loading";

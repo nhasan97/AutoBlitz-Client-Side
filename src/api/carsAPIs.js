@@ -25,11 +25,6 @@ export const getSingleCarData = async (id) => {
   return response.data;
 };
 
-export const getSingleCarSpecs = async (name) => {
-  const response = await axiosPublic.get(`/car-specs/${name}`);
-  return response.data;
-};
-
 export const saveCarData = async (data) => {
   const response = await axiosPublic.post("/cars", data);
   if (response.data.insertedId) {
@@ -45,31 +40,6 @@ export const updateCarInfo = async (obj) => {
     `/all-cars/${obj.id}`,
     obj.updatedCarInfo
   );
-  if (response.data.modifiedCount === 1) {
-    showToastOnSuccess("Updated!");
-  } else {
-    showToastOnError("Error! Not Updated");
-  }
-
-  return response.data;
-};
-
-export const saveCarSpecs = async (data) => {
-  const response = await axiosPublic.post("/car-details", data);
-  if (response.data.insertedId) {
-    showToastOnSuccess("Added!");
-  } else {
-    showToastOnError("Error! Not Added");
-  }
-  return response.data;
-};
-
-export const updateCarSpecs = async (obj) => {
-  const response = await axiosPublic.patch(
-    `/car-specs/${obj.name}`,
-    obj.updatedCarInfo
-  );
-
   if (response.data.modifiedCount === 1) {
     showToastOnSuccess("Updated!");
   } else {

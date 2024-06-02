@@ -14,16 +14,6 @@ const Searcher = ({ setSearch, setValue, value, setRating, rating }) => {
       {/* ------------------------------TabPCView------------------------------ */}
 
       <div className="hidden h-full lg:flex justify-between items-center">
-        <input
-          type="text"
-          name="searchText"
-          placeholder="Search by name, brand and type"
-          className="input w-[30%]"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-
         {/* filter by price range */}
         <div className="w-[30%] flex flex-col justify-center items-center gap-2">
           <RangeSlider
@@ -37,6 +27,16 @@ const Searcher = ({ setSearch, setValue, value, setRating, rating }) => {
             Price Range | ${value[0]} - ${value[1]}
           </p>
         </div>
+
+        <input
+          type="text"
+          name="searchText"
+          placeholder="Search by name, brand and type"
+          className="input w-[30%] bg-transparent border border-orange-600 text-white"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
 
         {/* filter by rating range */}
         <div className="w-[30%] flex flex-col items-center gap-2">

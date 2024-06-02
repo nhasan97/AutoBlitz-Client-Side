@@ -10,10 +10,11 @@ const ProductDetails = () => {
   const loadedCarId = useParams();
 
   //fetching single car data and specs
-  const [loadingCar, loadedCar, loadingCarSpecs, loadedSpecs] =
-    useGetSingleCarDataAndSpecs(loadedCarId.id);
+  const [loadingCar, loadedCar] = useGetSingleCarDataAndSpecs(loadedCarId.id);
 
-  if (loadingCar || loadingCarSpecs) {
+  console.log(loadedCar);
+
+  if (loadingCar) {
     return <Loading></Loading>;
   } else {
     return (
@@ -45,31 +46,31 @@ const ProductDetails = () => {
               <div className="w-full p-3 bg-[rgb(48,48,48)]  rounded backdrop-blur-sm capitalize">
                 <p>
                   <span className="font-medium text-base">Body Style | </span>
-                  {loadedSpecs.body}
+                  {loadedCar.body}
                 </p>
               </div>
               <div className="w-full p-3 bg-[rgb(48,48,48)]  rounded backdrop-blur-sm">
                 <p>
                   <span className="font-medium text-base">Segment | </span>
-                  {loadedSpecs.seg}
+                  {loadedCar.seg}
                 </p>
               </div>
               <div className="w-full p-3 bg-[rgb(48,48,48)]  rounded backdrop-blur-sm">
                 <p>
                   <span className="font-medium text-base">Production | </span>
-                  {loadedSpecs.py}
+                  {loadedCar.py}
                 </p>
               </div>
               <div className="w-full p-3 bg-[rgb(48,48,48)]  rounded backdrop-blur-sm">
                 <p>
                   <span className="font-medium text-base">Dimension | </span>
-                  {loadedSpecs.d}
+                  {loadedCar.d}
                 </p>
               </div>
               <div className="w-full p-3 bg-[rgb(48,48,48)]  rounded backdrop-blur-sm">
                 <p>
                   <span className="font-medium text-base">Gross Weight | </span>
-                  {loadedSpecs.gw}
+                  {loadedCar.gw}
                 </p>
               </div>
             </div>
@@ -88,12 +89,12 @@ const ProductDetails = () => {
               // data-aos-duration="800"
             >
               <h2 className="text-xl md:text-2xl lg:text-3xl font-medium font-rac">
-                Engine /// {loadedSpecs.eng}
+                Engine /// {loadedCar.eng}
               </h2>
-              <p className="text-base lg:text-xl">Power | {loadedSpecs.pow}</p>
-              <p className="text-base lg:text-xl">Fuel | {loadedSpecs.fuel}</p>
+              <p className="text-base lg:text-xl">Power | {loadedCar.pow}</p>
+              <p className="text-base lg:text-xl">Fuel | {loadedCar.fuel}</p>
               <p className="text-base lg:text-xl">
-                Fuel Capacity | {loadedSpecs.fuelc}
+                Fuel Capacity | {loadedCar.fuelc}
               </p>
             </div>
 
@@ -112,7 +113,7 @@ const ProductDetails = () => {
               // data-aos-delay="500"
             >
               <h2 className="text-xl md:text-2xl lg:text-3xl font-medium font-rac">
-                Top Speed /// {loadedSpecs.ps}
+                Top Speed /// {loadedCar.ps}
               </h2>
             </div>
             <div
@@ -136,7 +137,7 @@ const ProductDetails = () => {
               // data-aos-delay="1000"
             >
               <h2 className="text-xl md:text-2xl lg:text-3xl font-medium font-rac">
-                Tire /// {loadedSpecs.ts}
+                Tire /// {loadedCar.ts}
               </h2>
             </div>
             <div

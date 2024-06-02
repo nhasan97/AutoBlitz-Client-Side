@@ -176,7 +176,7 @@ const TabPCView = ({
                     </Link>
 
                     <button
-                      className="btn btn-square hover:text-red-500"
+                      className="btn btn-square hover:text-red-600"
                       onClick={() => {
                         handleDeleteCar(car._id, car.name);
                       }}

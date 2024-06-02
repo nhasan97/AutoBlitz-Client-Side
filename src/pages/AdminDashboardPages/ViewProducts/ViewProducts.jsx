@@ -9,6 +9,7 @@ import Loading from "../../../components/shared/Loading";
 import NoData from "../../../components/shared/NoData";
 import { useState } from "react";
 import Searcher from "../../../components/shared/Searcher/Searcher";
+import Swal from "sweetalert2";
 
 const ViewProducts = () => {
   //fetching brand based data
@@ -23,8 +24,20 @@ const ViewProducts = () => {
 
   //delete button handler
   const handleDeleteCar = (_id, name) => {
-    mutation.mutate({ _id, name });
-    refetchCars();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22C45E",
+      cancelButtonColor: "#DC2626",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutation.mutate({ _id, name });
+        refetchCars();
+      }
+    });
   };
 
   if (loadingBrandBasedCars) {
