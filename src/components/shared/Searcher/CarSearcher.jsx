@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
-import "./Searcher.css";
+import "./CarSearcher.css";
 import { IoMdSearch } from "react-icons/io";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
 
-const Searcher = ({ setSearch, setValue, value, setRating, rating }) => {
+const CarSearcher = ({ setSearch, setValue, value, setRating, rating }) => {
   const [searchIconVisibility, setSearchIconVisibility] = useState(true);
 
   return (
@@ -113,7 +113,7 @@ const Searcher = ({ setSearch, setValue, value, setRating, rating }) => {
   );
 };
 
-Searcher.propTypes = {
+CarSearcher.propTypes = {
   setSearch: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
   value: PropTypes.array.isRequired,
@@ -121,4 +121,4 @@ Searcher.propTypes = {
   rating: PropTypes.array.isRequired,
 };
 
-export default Searcher;
+export default CarSearcher;

@@ -1,14 +1,19 @@
-import usePerformMutation from "../../hooks/usePerformMutation";
-import { saveService } from "../../api/serviceAPIs";
-import { ToastContainer } from "react-toastify";
+import { useLoaderData } from "react-router-dom";
 import DashboardContainer from "../../components/dashboard/shared/DashboardContainer";
-import { uploadImage } from "../../utilities/imageUploader";
+import { ToastContainer } from "react-toastify";
+import usePerformMutation from "../../hooks/usePerformMutation";
 import { useState } from "react";
+import { uploadImage } from "../../utilities/imageUploader";
+import { updateService } from "../../api/serviceAPIs";
 
-const AddService = () => {
-  const [facilityInputField, setFacilityInputField] = useState([
-    { facilityName: "", facilityDetails: "" },
-  ]);
+const UpdateService = () => {
+  const loadedService = useLoaderData();
+
+  const [facilityInputField, setFacilityInputField] = useState(
+    loadedService.data.facilities
+  );
+
+  const [changeServicePhoto, setChangeServicePhoto] = useState(false);
 
   const changeInput = (e, index) => {
     const values = [...facilityInputField];
@@ -29,26 +34,27 @@ const AddService = () => {
     setFacilityInputField(values);
   };
 
-  const mutation = usePerformMutation("saveService", saveService);
+  const mutation = usePerformMutation("updateService", updateService);
 
-  const handleAddService = async (e) => {
+  const handleUpdateService = async (e) => {
     e.preventDefault();
 
+    const id = loadedService.data._id;
     let servicePhoto = "";
 
     const form = e.target;
     const serviceName = form.serviceName.value;
-    if (form.photoUrl.files[0]) {
+    if (changeServicePhoto) {
       const image = await uploadImage(form.photoUrl.files[0]);
       servicePhoto = image.data.display_url;
     } else {
-      servicePhoto = import.meta.env.VITE_NO_IMAGE_AVAILABLE;
+      servicePhoto = loadedService.data.servicePhoto;
     }
     const servicePrice = parseFloat(form.servicePrice.value);
     const serviceDescription = form.serviceDescription.value;
     const facilities = facilityInputField;
 
-    const service = {
+    const updatedService = {
       serviceName,
       servicePhoto,
       servicePrice,
@@ -56,30 +62,30 @@ const AddService = () => {
       facilities,
     };
 
-    console.log(service);
-
-    mutation.mutate(service);
+    mutation.mutate({ id, updatedService });
     form.reset();
   };
+
   return (
     <div className="h-screen bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
       <DashboardContainer>
         {/* <Helmet>
-        <title>PanaPoll | Dashboard | Manage Surveys</title>
-      </Helmet> */}
+    <title>PanaPoll | Dashboard | Manage Surveys</title>
+  </Helmet> */}
 
         <div className="w-full lg:w-2/3 mx-auto bg-[#f4f3f081] text-center p-5 lg:p-10 space-y-3 sm:space-y-6 rounded-lg backdrop-blur-sm">
-          <h1 className="font-rac text-3xl">Add New Service</h1>
+          <h1 className="font-rac text-3xl">Update Service</h1>
 
           <form
             className="space-y-3 sm:space-y-6 text-left"
-            onSubmit={handleAddService}
+            onSubmit={handleUpdateService}
           >
             <div className="flex justify-center items-center gap-3 sm:gap-6 ">
               <input
                 type="text"
                 id="in1"
                 name="serviceName"
+                defaultValue={loadedService.data.serviceName}
                 placeholder="Service Name"
                 className="input w-full"
               />
@@ -88,6 +94,7 @@ const AddService = () => {
                 type="number"
                 id="in3"
                 name="servicePrice"
+                defaultValue={loadedService.data.servicePrice}
                 placeholder="Service Price"
                 step="0.01"
                 className="input w-full"
@@ -95,6 +102,15 @@ const AddService = () => {
             </div>
 
             <div className="form-control">
+              <input
+                type="text"
+                name="type"
+                className="input w-full"
+                hidden
+                readOnly
+                value={changeServicePhoto}
+              />
+
               <label
                 htmlFor="in7"
                 className="input w-full bg-[#18293E] text-white pt-2"
@@ -105,7 +121,9 @@ const AddService = () => {
                   id="in7"
                   name="photoUrl"
                   style={{ visibility: "hidden" }}
-                  // className="file-input file-input-bordered w-full border"
+                  onChange={() => {
+                    setChangeServicePhoto(!changeServicePhoto);
+                  }}
                 />
               </label>
             </div>
@@ -114,6 +132,7 @@ const AddService = () => {
               type="text"
               id="in5"
               name="serviceDescription"
+              defaultValue={loadedService.data.serviceDescription}
               placeholder="Service Description"
               className="input w-full h-[150px]"
             />
@@ -163,4 +182,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default UpdateService;

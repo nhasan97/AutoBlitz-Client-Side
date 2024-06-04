@@ -34,3 +34,27 @@ export const saveServiceBooking = async (order) => {
   }
   return response.data;
 };
+
+export const updateService = async (obj) => {
+  const response = await axiosPublic.patch(
+    `/services/${obj.id}`,
+    obj.updatedService
+  );
+  if (response.data.modifiedCount === 1) {
+    showToastOnSuccess("Updated!");
+  } else {
+    showToastOnError("Error! Not Updated");
+  }
+
+  return response.data;
+};
+
+export const deleteServiceData = async (_id) => {
+  const response = await axiosSecure.delete(`/delete-service/${_id}`);
+  if (response.data.deletedCount) {
+    showToastOnSuccess("Deleted!");
+  } else {
+    showToastOnError("Something went wrong!");
+  }
+  return response.data;
+};

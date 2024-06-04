@@ -3,8 +3,8 @@ import CarCards from "../components/CarCards";
 import NoData from "../components/shared/NoData";
 import useGetCars from "../hooks/useGetCars";
 import Container from "../components/shared/Container";
-import Searcher from "../components/shared/Searcher/Searcher";
 import { useState } from "react";
+import CarSearcher from "../components/shared/Searcher/CarSearcher";
 
 const AllCars = () => {
   //fetching data
@@ -22,13 +22,13 @@ const AllCars = () => {
     return (
       <Container>
         <div className="w-full flex flex-col justify-center items-center">
-          <Searcher
+          <CarSearcher
             setSearch={setSearch}
             setValue={setValue}
             value={value}
             setRating={setRating}
             rating={rating}
-          ></Searcher>
+          ></CarSearcher>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-12 bg-[url('/public/prod-bg.jpg')] bg-[rgba(0,0,0,0.80)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
             {brandBasedCars

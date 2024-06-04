@@ -18,6 +18,12 @@ const AdminMenu = () => {
 
       <SIdebarMenuItem
         icon={<i className="fa-solid fa-square-poll-vertical"></i>}
+        menuText="Services"
+        route="/dashboard/all-services"
+      ></SIdebarMenuItem>
+
+      <SIdebarMenuItem
+        icon={<i className="fa-solid fa-square-poll-vertical"></i>}
         menuText="Add service"
         route="/dashboard/add-service"
       ></SIdebarMenuItem>

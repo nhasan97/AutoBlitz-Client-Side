@@ -86,6 +86,7 @@ const BasicInfo = ({ brands, formData, setFormData }) => {
         name="type"
         className="input w-full"
         hidden
+        readOnly
         value={formData.photo_url}
       />
       {/* <div className="flex items-center gap-3 sm:gap-6"> */}

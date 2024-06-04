@@ -49,14 +49,13 @@ export const updateCarInfo = async (obj) => {
   return response.data;
 };
 
-export const deleteCarData = async (obj) => {
-  const response1 = await axiosPublic.delete(`/delete-car/${obj._id}`);
-  const response2 = await axiosPublic.delete(`/delete-car-specs/${obj.name}`);
+export const deleteCarData = async (_id) => {
+  const response = await axiosPublic.delete(`/delete-car/${_id}`);
 
-  if (response1.data.deletedCount && response2.data.deletedCount) {
+  if (response.data.deletedCount) {
     showToastOnSuccess("Deleted!");
   } else {
     showToastOnError("Something went wrong!");
   }
-  return response1.data;
+  return response.data;
 };

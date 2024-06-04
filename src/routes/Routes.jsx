@@ -21,6 +21,8 @@ import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers/ViewCustom
 import AllCars from "../pages/AllCars";
 import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct/UpdateProduct";
 import axiosPublic from "../api/axiosPublic";
+import ViewServices from "../pages/AdminDashboardPages/ViewServices/ViewServices";
+import UpdateService from "../pages/AdminDashboardPages/UpdateService";
 
 const router = createBrowserRouter([
   {
@@ -114,7 +116,16 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) => axiosPublic.get(`/all-cars/${params.id}`),
       },
-
+      {
+        path: "all-services",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ViewServices></ViewServices>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
       {
         path: "add-service",
         element: (
@@ -124,6 +135,17 @@ const router = createBrowserRouter([
             </AdminRoute>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "update-service/:id",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <UpdateService></UpdateService>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) => axiosPublic.get(`/services/${params.id}`),
       },
       {
         path: "customers",

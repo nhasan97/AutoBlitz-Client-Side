@@ -1,29 +1,26 @@
-import useGetCars from "../../../hooks/useGetCars";
 import DashboardContainer from "../../../components/dashboard/shared/DashboardContainer";
-import usePerformMutation from "../../../hooks/usePerformMutation";
-import { deleteCarData } from "../../../api/carsAPIs";
-import { ToastContainer } from "react-toastify";
-import MobileView from "./MobileView";
-import TabPCView from "./TabPCView";
 import Loading from "../../../components/shared/Loading";
+import ServiceSearcher from "../../../components/shared/Searcher/ServiceSearcher";
+import useGetServices from "../../../hooks/useGetServices";
+import TabPCView from "./TabPCView";
+import MobileView from "./MobileView";
+import { ToastContainer } from "react-toastify";
 import NoData from "../../../components/shared/NoData";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import CarSearcher from "../../../components/shared/Searcher/CarSearcher";
+import usePerformMutation from "../../../hooks/usePerformMutation";
+import { deleteServiceData } from "../../../api/serviceAPIs";
 
-const ViewProducts = () => {
-  //fetching brand based data
-  const [loadingBrandBasedCars, brandBasedCars, refetchCars] = useGetCars("");
+const ViewServices = () => {
+  //fetching Service data
+  const [loadingServices, services, refetchServices] = useGetServices();
 
   const [search, setSearch] = useState("");
-  const [value, setValue] = useState([56456, 4000000]);
-  const [rating, setRating] = useState([1, 5]);
 
-  //performing mutation for deleting car data
-  const mutation = usePerformMutation("deleteCar", deleteCarData);
+  const mutation = usePerformMutation("deleteService", deleteServiceData);
 
   //delete button handler
-  const handleDeleteCar = (_id) => {
+  const handleDeleteService = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -35,16 +32,16 @@ const ViewProducts = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         mutation.mutate(_id);
-        refetchCars();
+        refetchServices();
       }
     });
   };
 
-  if (loadingBrandBasedCars) {
+  if (loadingServices) {
     return <Loading />;
   }
 
-  if (brandBasedCars.length > 0) {
+  if (services.length > 0) {
     return (
       <div className="h-screen bg-[url('/public/cart-bg.webp')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
         <DashboardContainer>
@@ -53,29 +50,19 @@ const ViewProducts = () => {
           </Helmet> */}
 
           <div className="w-full h-[10%] mb-4">
-            <CarSearcher
-              setSearch={setSearch}
-              setValue={setValue}
-              value={value}
-              setRating={setRating}
-              rating={rating}
-            ></CarSearcher>
+            <ServiceSearcher setSearch={setSearch}></ServiceSearcher>
           </div>
 
           <TabPCView
-            brandBasedCars={brandBasedCars}
-            handleDeleteCar={handleDeleteCar}
+            services={services}
+            handleDeleteService={handleDeleteService}
             search={search}
-            range={value}
-            rating={rating}
           ></TabPCView>
 
           <MobileView
-            brandBasedCars={brandBasedCars}
-            handleDeleteCar={handleDeleteCar}
+            services={services}
+            handleDeleteService={handleDeleteService}
             search={search}
-            range={value}
-            rating={rating}
           ></MobileView>
         </DashboardContainer>
 
@@ -86,11 +73,11 @@ const ViewProducts = () => {
     return (
       <div className="h-screen">
         <DashboardContainer>
-          <NoData text="No Car Found"></NoData>
+          <NoData text="No Service Found"></NoData>
         </DashboardContainer>
       </div>
     );
   }
 };
 
-export default ViewProducts;
+export default ViewServices;
