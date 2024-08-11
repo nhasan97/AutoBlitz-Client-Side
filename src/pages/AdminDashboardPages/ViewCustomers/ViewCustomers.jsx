@@ -34,7 +34,7 @@ const ViewCustomers = () => {
               type="text"
               name="searchText"
               placeholder="Search by name"
-              className="input w-full lg:w-[30%]"
+              className="input w-full lg:w-[30%] bg-transparent border border-orange-600 focus:border-red-600 text-white"
               onChange={(e) => {
                 setSearch(e.target.value);
               }}

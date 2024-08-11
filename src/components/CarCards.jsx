@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const CarCards = ({ car, caller }) => {
   const navigate = useNavigate();
 
-  const [user] = useUserRole();
+  const [user, , role] = useUserRole();
 
   const { _id, name, brandName, type, price, rating, imageUrl } = car;
 
@@ -48,19 +48,35 @@ const CarCards = ({ car, caller }) => {
 
   return (
     <div
-      className={`card bg-[rgba(255,255,255,.3)] shadow-xl text-white text-lg ${
+      className={`card group bg-[rgba(255,255,255,.3)] shadow-xl text-white text-lg ${
         caller === "PopularMakesSection" ? "mx-2" : ""
       } backdrop-blur-lg`}
     >
       <figure>
         <img src={imageUrl} alt="Shoes" className="w-full h-[200px]" />
+        <div className="p-2 absolute right-0 top-0">
+          <Link
+            className="btn btn-xs btn-circle group-hover:animate-bounce"
+            to={`/product-details/${_id}`}
+          >
+            <i className="fa-solid fa-info"></i>
+          </Link>
+        </div>
       </figure>
-      <div className="card-body gap-6 p-0 px-4 py-5 justify-center ">
-        <h2 className="card-title capitalize text-xl md:text-2xl text-black font-semibold">
-          {name}
-          {/* <div className="badge badge-secondary">NEW</div> */}
-        </h2>
-
+      <div className="card-body gap-4 p-0 px-4 py-5 justify-center">
+        <div className="flex justify-between items-center">
+          <h2 className="card-title capitalize text-xl md:text-2xl text-black font-semibold">
+            {name}
+            {/* <div className="badge badge-secondary">NEW</div> */}
+          </h2>
+          <button
+            className="btn btn-circle bg-transparent text-white hover:text-black border-none"
+            disabled={role === "admin"}
+            onClick={handleAddToCart}
+          >
+            <i className="fa-solid fa-cart-plus text-lg"></i>
+          </button>
+        </div>
         <div className="card-actions">
           <div className="badge badge-outline capitalize">{brandName}</div>
           <div className="badge badge-outline capitalize">{type}</div>
@@ -71,15 +87,13 @@ const CarCards = ({ car, caller }) => {
           <StarRating rating={rating}></StarRating>
         </p>
 
-        <div className="flex gap-4">
-          <Link className="btn btn-square" to={`/product-details/${_id}`}>
-            <i className="fa-solid fa-info text-lg"></i>
-          </Link>
-
-          <button className="btn btn-square" onClick={handleAddToCart}>
-            <i className="fa-solid fa-cart-plus text-lg"></i>
-          </button>
-        </div>
+        {/* <button
+          className="btn btn-sm"
+          disabled={role === "admin"}
+          onClick={handleAddToCart}
+        >
+          Add to<i className="fa-solid fa-cart-plus text-lg"></i>
+        </button> */}
       </div>
     </div>
   );

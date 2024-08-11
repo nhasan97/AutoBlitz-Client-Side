@@ -3,26 +3,35 @@ import CarCards from "../components/CarCards";
 import NoData from "../components/shared/NoData";
 import useGetCars from "../hooks/useGetCars";
 import Container from "../components/shared/Container";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CarSearcher from "../components/shared/Searcher/CarSearcher";
+import { ToastContainer } from "react-toastify";
 
 const AllCars = () => {
   //fetching data
-  const [loadingBrandBasedCars, brandBasedCars] = useGetCars("");
+  const [loadingCars, cars, maxPrice, minPrice] = useGetCars("");
 
   const [search, setSearch] = useState("");
-  const [value, setValue] = useState([56456, 4000000]);
+  const [value, setValue] = useState([0, 0]);
   const [rating, setRating] = useState([1, 5]);
 
-  if (loadingBrandBasedCars) {
+  useEffect(() => {
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      setValue([minPrice, maxPrice]);
+    }
+  }, [minPrice, maxPrice]);
+
+  if (loadingCars) {
     return <Loading />;
   }
 
-  if (brandBasedCars.length > 0) {
+  if (cars.length > 0) {
     return (
       <Container>
         <div className="w-full flex flex-col justify-center items-center">
           <CarSearcher
+            maxPrice={maxPrice}
+            minPrice={minPrice}
             setSearch={setSearch}
             setValue={setValue}
             value={value}
@@ -30,8 +39,8 @@ const AllCars = () => {
             rating={rating}
           ></CarSearcher>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-12 bg-[url('/public/prod-bg.jpg')] bg-[rgba(0,0,0,0.80)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
-            {brandBasedCars
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-12 bg-[url('/public/prod-bg.jpg')] bg-[rgba(0,0,0,0.80)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+            {cars
               .filter((car) => {
                 return search.toLowerCase() === ""
                   ? car
@@ -59,21 +68,12 @@ const AllCars = () => {
                 ></CarCards>
               ))}
           </div>
-          {/* <ToastContainer /> */}
+          <ToastContainer></ToastContainer>
         </div>
       </Container>
     );
   } else {
-    return (
-      <Container>
-        <NoData text="Sorry no autos found"></NoData>
-      </Container>
-      // <div className="max-w-screen-xl mx-auto h-screen flex justify-center items-center">
-      //   <h1 className="font-rac text-7xl font-bold text-white">
-      //     Sorry no autos found
-      //   </h1>
-      // </div>
-    );
+    return <NoData text="Sorry no autos found"></NoData>;
   }
 };
 

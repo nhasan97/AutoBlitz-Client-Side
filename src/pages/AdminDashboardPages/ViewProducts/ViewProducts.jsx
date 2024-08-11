@@ -7,17 +7,24 @@ import MobileView from "./MobileView";
 import TabPCView from "./TabPCView";
 import Loading from "../../../components/shared/Loading";
 import NoData from "../../../components/shared/NoData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import CarSearcher from "../../../components/shared/Searcher/CarSearcher";
 
 const ViewProducts = () => {
   //fetching brand based data
-  const [loadingBrandBasedCars, brandBasedCars, refetchCars] = useGetCars("");
+  //fetching data
+  const [loadingCars, cars, maxPrice, minPrice, refetchCars] = useGetCars("");
 
   const [search, setSearch] = useState("");
-  const [value, setValue] = useState([56456, 4000000]);
+  const [value, setValue] = useState([0, 0]);
   const [rating, setRating] = useState([1, 5]);
+
+  useEffect(() => {
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      setValue([minPrice, maxPrice]);
+    }
+  }, [minPrice, maxPrice]);
 
   //performing mutation for deleting car data
   const mutation = usePerformMutation("deleteCar", deleteCarData);
@@ -40,11 +47,11 @@ const ViewProducts = () => {
     });
   };
 
-  if (loadingBrandBasedCars) {
+  if (loadingCars) {
     return <Loading />;
   }
 
-  if (brandBasedCars.length > 0) {
+  if (cars.length > 0) {
     return (
       <div className="h-screen bg-[url('/public/cart-bg.webp')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
         <DashboardContainer>
@@ -54,6 +61,8 @@ const ViewProducts = () => {
 
           <div className="w-full h-[10%] mb-4">
             <CarSearcher
+              maxPrice={maxPrice}
+              minPrice={minPrice}
               setSearch={setSearch}
               setValue={setValue}
               value={value}
@@ -63,7 +72,7 @@ const ViewProducts = () => {
           </div>
 
           <TabPCView
-            brandBasedCars={brandBasedCars}
+            cars={cars}
             handleDeleteCar={handleDeleteCar}
             search={search}
             range={value}
@@ -71,7 +80,7 @@ const ViewProducts = () => {
           ></TabPCView>
 
           <MobileView
-            brandBasedCars={brandBasedCars}
+            cars={cars}
             handleDeleteCar={handleDeleteCar}
             search={search}
             range={value}

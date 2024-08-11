@@ -1,14 +1,4 @@
 import { useParams } from "react-router-dom";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-
-import bn1 from "../../public/Picture1.png";
-import bn2 from "../../public/gridfiti.png";
-import bn3 from "../../public/bmw.png";
-
-// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import useGetCars from "../hooks/useGetCars";
@@ -33,21 +23,6 @@ const BrandBasedProducts = () => {
     queryFn: () => getSingleBrand(loadedBrandName.name),
   });
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   speed: 4000,
-  //   autoplaySpeed: 4000,
-  //   cssEase: "linear",
-  // };
-
-  // const style = {
-  //   background: `linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3)),url('${brand.image}');`,
-  // };
-
   if (loadingBrandBasedCars || loadingBrand) {
     return <Loading />;
   }
@@ -56,29 +31,6 @@ const BrandBasedProducts = () => {
     return (
       <Container>
         <div className="w-full flex flex-col justify-center items-center">
-          {/* <div className="max-w-screen-xl mx-auto px-28 pt-20">
-            <Slider {...settings}>
-              <div>
-                <img src={bn1} alt="" className="w-full h-[530px]" />
-              </div>
-              <div>
-                <img src={bn2} alt="" className="w-full h-[530px]" />
-              </div>
-              <div>
-                <img src={bn3} alt="" className="w-full h-[530px]" />
-              </div>
-              <div>
-                <img src={bn1} alt="" className="w-full h-[530px]" />
-              </div>
-              <div>
-                <img src={bn2} alt="" className="w-full h-[530px]" />
-              </div>
-              <div>
-                <img src={bn3} alt="" className="w-full h-[530px]" />
-              </div>
-            </Slider>
-          </div> */}
-
           <div
             // style={style}
             className={`w-full h-full flex flex-col sm:flex-row justify-center items-center gap-4 pb-6 border-b`}

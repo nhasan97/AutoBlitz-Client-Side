@@ -6,7 +6,15 @@ import { IoMdSearch } from "react-icons/io";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
 
-const CarSearcher = ({ setSearch, setValue, value, setRating, rating }) => {
+const CarSearcher = ({
+  maxPrice,
+  minPrice,
+  setSearch,
+  setValue,
+  value,
+  setRating,
+  rating,
+}) => {
   const [searchIconVisibility, setSearchIconVisibility] = useState(true);
 
   return (
@@ -18,8 +26,8 @@ const CarSearcher = ({ setSearch, setValue, value, setRating, rating }) => {
         <div className="w-[30%] flex flex-col justify-center items-center gap-2">
           <RangeSlider
             className="range-slider-gradient"
-            min={56456}
-            max={4000000}
+            min={minPrice}
+            max={maxPrice}
             value={value}
             onInput={setValue}
           />
@@ -32,7 +40,7 @@ const CarSearcher = ({ setSearch, setValue, value, setRating, rating }) => {
           type="text"
           name="searchText"
           placeholder="Search by name, brand and type"
-          className="input w-[30%] bg-transparent border border-orange-600 text-white"
+          className="input w-[30%] bg-transparent border border-orange-600 focus:border-red-600 text-white"
           onChange={(e) => {
             setSearch(e.target.value);
           }}
@@ -84,8 +92,8 @@ const CarSearcher = ({ setSearch, setValue, value, setRating, rating }) => {
           <div className="w-full flex flex-col justify-center items-center gap-2">
             <RangeSlider
               className="range-slider-gradient"
-              min={56456}
-              max={4000000}
+              min={minPrice}
+              max={maxPrice}
               value={value}
               onInput={setValue}
             />
@@ -114,6 +122,8 @@ const CarSearcher = ({ setSearch, setValue, value, setRating, rating }) => {
 };
 
 CarSearcher.propTypes = {
+  maxPrice: PropTypes.number.isRequired,
+  minPrice: PropTypes.number.isRequired,
   setSearch: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
   value: PropTypes.array.isRequired,

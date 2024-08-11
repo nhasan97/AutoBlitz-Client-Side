@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
 import StarRating from "../../../components/StarRating";
 
-const TabPCView = ({
-  brandBasedCars,
-  handleDeleteCar,
-  search,
-  range,
-  rating,
-}) => {
+const TabPCView = ({ cars, handleDeleteCar, search, range, rating }) => {
   return (
     <div className="hidden sm:block w-full h-[80%] p-5 space-y-6 text-center bg-[#f4f3f081] backdrop-blur-sm rounded-lg">
       <h1 className="font-rac text-3xl text-white">Products</h1>
@@ -31,7 +25,7 @@ const TabPCView = ({
           </thead>
           <tbody>
             {/* row  */}
-            {brandBasedCars
+            {cars
               .filter((car) => {
                 return search.toLowerCase() === ""
                   ? car
@@ -194,7 +188,7 @@ const TabPCView = ({
 };
 
 TabPCView.propTypes = {
-  brandBasedCars: PropTypes.array.isRequired,
+  cars: PropTypes.array.isRequired,
   handleDeleteCar: PropTypes.func.isRequired,
   search: PropTypes.string,
   range: PropTypes.array.isRequired,

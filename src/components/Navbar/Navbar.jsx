@@ -26,20 +26,21 @@ const Navbar = () => {
     <div className="text-[#757575] text-base font-medium space-x-8">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/all-cars">All Cars</NavLink>
+      <NavLink to="/all-servicing">All Services</NavLink>
       {loading || roleLoading ? (
         <span className="loading loading-dots loading-xs"></span>
       ) : user && role === "admin" ? (
-        <NavLink to="/dashboard/add-product">Dashboard</NavLink>
+        <NavLink to="/dashboard/orders">Dashboard</NavLink>
       ) : user && role === "customer" ? (
-        // <NavLink to="/dashboard/my-cart">My Cart</NavLink>
-        <NavLink to="/my-cart">My Cart</NavLink>
+        <>
+          <NavLink to="/my-cart">My Cart</NavLink>
+          <NavLink to="/my-orders">Order History</NavLink>
+        </>
       ) : (
         ""
       )}
     </div>
   );
-
-  //bg-[rgba(255,255,255,0.75)]
 
   return (
     <div className="w-full h-fit py-2 bg-transparent">
@@ -65,7 +66,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="w-24 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box"
+                className="w-24 menu menu-sm dropdown-content mt-3 z-20 p-2 shadow bg-base-100 rounded-box"
               >
                 {links}
               </ul>

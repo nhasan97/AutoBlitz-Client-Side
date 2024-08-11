@@ -14,8 +14,6 @@ import ViewProducts from "../pages/AdminDashboardPages/ViewProducts/ViewProducts
 import AddService from "../pages/AdminDashboardPages/AddService";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import ServiceBooking from "../pages/ServiceBooking";
-import MyCart from "../pages/MyCart";
-import ProPayment from "../pages/Checkout/ProPayment";
 import BrandBasedProducts from "../pages/BrandBasedProducts";
 import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers/ViewCustomers";
 import AllCars from "../pages/AllCars";
@@ -23,6 +21,11 @@ import UpdateProduct from "../pages/AdminDashboardPages/UpdateProduct/UpdateProd
 import axiosPublic from "../api/axiosPublic";
 import ViewServices from "../pages/AdminDashboardPages/ViewServices/ViewServices";
 import UpdateService from "../pages/AdminDashboardPages/UpdateService";
+import AllServices from "../pages/AllServices";
+import MyCart from "../pages/CustomerPages/MyCart";
+import Payment from "../pages/CustomerPages/Checkout/Payment";
+import ViewOrders from "../pages/AdminDashboardPages/ViewOrders/ViewOrders";
+import MyOrders from "../pages/CustomerPages/MyOrders/MyOrders";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +46,10 @@ const router = createBrowserRouter([
         element: <AllCars></AllCars>,
       },
       {
+        path: "/all-servicing",
+        element: <AllServices></AllServices>,
+      },
+      {
         path: "/product-details/:id",
         element: <ProductDetails></ProductDetails>,
       },
@@ -54,7 +61,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
+      {
+        path: "/my-orders",
+        element: (
+          <PrivateRoute>
+            <MyOrders></MyOrders>
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/service-details/:id",
         element: <ServiceDetails></ServiceDetails>,
@@ -69,7 +83,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <ProPayment></ProPayment>,
+        element: <Payment></Payment>,
       },
     ],
   },
@@ -78,9 +92,9 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: (
       <PrivateRoute>
-        <AllRoute>
+        <AdminRoute>
           <DashboardLayout></DashboardLayout>
-        </AllRoute>
+        </AdminRoute>
       </PrivateRoute>
     ),
     errorElement: <Error></Error>,
@@ -153,6 +167,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <ViewCustomers></ViewCustomers>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ViewOrders></ViewOrders>
             </AdminRoute>
           </PrivateRoute>
         ),

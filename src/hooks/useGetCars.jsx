@@ -3,15 +3,23 @@ import { getCars } from "../api/carsAPIs";
 
 const useGetCars = (brandName) => {
   const {
-    isLoading: loadingBrandBasedCars,
-    data: brandBasedCars,
+    isLoading: loadingCars,
+    data: carInfo,
     refetch: refetchCars,
   } = useQuery({
     queryKey: ["getCars"],
     queryFn: () => getCars(brandName),
   });
 
-  return [loadingBrandBasedCars, brandBasedCars, refetchCars];
+  let cars, maxPrice, minPrice;
+
+  if (!loadingCars) {
+    cars = carInfo?.cars;
+    maxPrice = carInfo?.maxPrice;
+    minPrice = carInfo?.minPrice;
+  }
+
+  return [loadingCars, cars, maxPrice, minPrice, refetchCars];
 };
 
 export default useGetCars;

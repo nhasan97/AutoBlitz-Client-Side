@@ -1,9 +1,10 @@
-import ServiceCard from "./ServiceCard";
 import useGetServices from "../../../hooks/useGetServices";
 import Loading from "../../../components/shared/Loading";
 import NoData from "../../../components/shared/NoData";
 import Container from "../../../components/shared/Container";
 import Title from "../../../components/shared/Title";
+import ServiceCard from "../../../components/ServiceCard";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const title = {
@@ -29,9 +30,12 @@ const Services = () => {
             ))}
           </div>
           <div className="flex justify-center items-center">
-            <button className="btn bg-transparent border border-red-600 text-red-600">
+            <Link
+              to="/all-servicing"
+              className="btn bg-transparent border border-red-600 text-red-600"
+            >
               More Services
-            </button>
+            </Link>
           </div>
         </div>
       </Container>

@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import Banner from "./Banner";
 import Brands from "./Brands/Brands";
 import OfferSection from "./OfferSection/OfferSection";
@@ -13,6 +14,7 @@ const Home = () => {
       <OfferSection></OfferSection>
       <PopularMakesSection></PopularMakesSection>
       <Services></Services>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

@@ -3,16 +3,10 @@ import { Link } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
 import StarRating from "../../../components/StarRating";
 
-const MobileView = ({
-  brandBasedCars,
-  handleDeleteCar,
-  search,
-  range,
-  rating,
-}) => {
+const MobileView = ({ cars, handleDeleteCar, search, range, rating }) => {
   return (
     <div className="grid grid-cols-1 gap-3 sm:hidden w-full h-[85%] overflow-y-auto rounded-lg">
-      {brandBasedCars
+      {cars
         .filter((car) => {
           return search.toLowerCase() === ""
             ? car
@@ -98,7 +92,7 @@ const MobileView = ({
 };
 
 MobileView.propTypes = {
-  brandBasedCars: PropTypes.array.isRequired,
+  cars: PropTypes.array.isRequired,
   handleDeleteCar: PropTypes.func.isRequired,
   search: PropTypes.string,
   range: PropTypes.array.isRequired,
