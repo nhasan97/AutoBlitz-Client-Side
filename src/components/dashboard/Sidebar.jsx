@@ -1,13 +1,13 @@
+import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
-import SurveyorMenu from "./SurveyorMenu";
 import useUserRole from "../../hooks/useUserRole";
 import AdminMenu from "./AdminMenu";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { showToastOnError } from "../../utilities/displayToast";
 import MainLogo from "../shared/MainLogo";
 
-const Sidebar = () => {
+const Sidebar = ({ handleGoBack }) => {
   const { user, logoutUser } = useAuth();
   const [, , role, ,] = useUserRole();
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -22,7 +22,11 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-end items-center p-5 xl:hidden fixed z-30">
+      <div className="w-full flex justify-between items-center p-4 md:px-10 xl:hidden fixed z-20">
+        <i
+          className="fa-solid fa-arrow-left text-lg text-white"
+          onClick={handleGoBack}
+        ></i>
         <HiMenuAlt3
           className="text-2xl  text-white "
           onClick={() => setOpenSidebar(!openSidebar)}
@@ -40,7 +44,7 @@ const Sidebar = () => {
           <MainLogo caller={"d"}></MainLogo>
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center gap-3 ">
+        <div className="w-full flex flex-col justify-center items-center gap-3">
           <div className="avatar">
             <div className="w-16 sm:w-20 mask mask-squircle">
               <img src={user?.photoURL} />
@@ -54,11 +58,13 @@ const Sidebar = () => {
           </p>
         </div>
 
-        <div className="flex flex-col justify items-start text-[#a5a5a5] p-6">
+        <div className="flex flex-col justify items-start text-[#a5a5a5] p-6 overflow-y-auto">
           {role === "admin" && <AdminMenu></AdminMenu>}
-          {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}
+        </div>
+
+        <div className="text-center">
           <button
-            className="btn w-full text-red-600 text-base sm:text-xl mt-5"
+            className="btn w-2/3 text-red-600 text-base sm:text-lg"
             onClick={handleLogout}
           >
             Logout
@@ -67,6 +73,10 @@ const Sidebar = () => {
       </div>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  handleGoBack: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

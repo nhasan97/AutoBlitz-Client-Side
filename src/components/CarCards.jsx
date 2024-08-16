@@ -53,10 +53,10 @@ const CarCards = ({ car, caller }) => {
       } backdrop-blur-lg`}
     >
       <figure>
-        <img src={imageUrl} alt="Shoes" className="w-full h-[200px]" />
+        <img src={imageUrl} alt="Car Photo" className="w-full h-[200px]" />
         <div className="p-2 absolute right-0 top-0">
           <Link
-            className="btn btn-xs btn-circle group-hover:animate-bounce"
+            className="btn btn-xs btn-circle hover:text-red-600 group-hover:animate-bounce"
             to={`/product-details/${_id}`}
           >
             <i className="fa-solid fa-info"></i>
@@ -70,7 +70,7 @@ const CarCards = ({ car, caller }) => {
             {/* <div className="badge badge-secondary">NEW</div> */}
           </h2>
           <button
-            className="btn btn-circle bg-transparent text-white hover:text-black border-none"
+            className="btn btn-circle bg-transparent text-white hover:text-red-600 border-none"
             disabled={role === "admin"}
             onClick={handleAddToCart}
           >
