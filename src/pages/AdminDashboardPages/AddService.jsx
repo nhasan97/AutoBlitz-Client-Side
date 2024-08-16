@@ -5,6 +5,8 @@ import DashboardContainer from "../../components/dashboard/shared/DashboardConta
 import { uploadImage } from "../../utilities/imageUploader";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { showToastOnError } from "../../utilities/displayToast";
+import { FaAsterisk } from "react-icons/fa6";
 
 const AddService = () => {
   const [facilityInputField, setFacilityInputField] = useState([
@@ -35,32 +37,40 @@ const AddService = () => {
   const handleAddService = async (e) => {
     e.preventDefault();
 
-    let servicePhoto = "";
-
     const form = e.target;
-    const serviceName = form.serviceName.value;
-    if (form.photoUrl.files[0]) {
-      const image = await uploadImage(form.photoUrl.files[0]);
-      servicePhoto = image.data.display_url;
+
+    if (
+      form.serviceName.value.length <= 0 ||
+      form.servicePrice.value.length <= 0
+    ) {
+      showToastOnError("Please fill all the required fields");
+    } else if (facilityInputField.length <= 0) {
+      showToastOnError("Atleast one facility has to be added");
     } else {
-      servicePhoto = import.meta.env.VITE_NO_IMAGE_AVAILABLE;
+      let servicePhoto = "";
+
+      const serviceName = form.serviceName.value;
+      if (form.photoUrl.files[0]) {
+        const image = await uploadImage(form.photoUrl.files[0]);
+        servicePhoto = image.data.display_url;
+      } else {
+        servicePhoto = import.meta.env.VITE_NO_IMAGE_AVAILABLE;
+      }
+      const servicePrice = parseFloat(form.servicePrice.value);
+      const serviceDescription = form.serviceDescription.value;
+      const facilities = facilityInputField;
+
+      const service = {
+        serviceName,
+        servicePhoto,
+        servicePrice,
+        serviceDescription,
+        facilities,
+      };
+
+      mutation.mutate(service);
+      form.reset();
     }
-    const servicePrice = parseFloat(form.servicePrice.value);
-    const serviceDescription = form.serviceDescription.value;
-    const facilities = facilityInputField;
-
-    const service = {
-      serviceName,
-      servicePhoto,
-      servicePrice,
-      serviceDescription,
-      facilities,
-    };
-
-    console.log(service);
-
-    mutation.mutate(service);
-    form.reset();
   };
   return (
     <div className="h-screen bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
@@ -76,23 +86,29 @@ const AddService = () => {
             className="space-y-3 sm:space-y-6 text-left"
             onSubmit={handleAddService}
           >
-            <div className="flex justify-center items-center gap-3 sm:gap-6 ">
-              <input
-                type="text"
-                id="in1"
-                name="serviceName"
-                placeholder="Service Name"
-                className="input w-full"
-              />
+            <div className="w-full flex justify-center items-center gap-3 sm:gap-6 ">
+              <div className="w-full flex items-center relative">
+                <input
+                  type="text"
+                  id="in1"
+                  name="serviceName"
+                  placeholder="Service Name"
+                  className="input w-full"
+                />
+                <FaAsterisk className="text-[10px] text-red-600 left-1 absolute" />
+              </div>
 
-              <input
-                type="number"
-                id="in3"
-                name="servicePrice"
-                placeholder="Service Price"
-                step="0.01"
-                className="input w-full"
-              />
+              <div className="w-full flex items-center relative">
+                <input
+                  type="number"
+                  id="in3"
+                  name="servicePrice"
+                  placeholder="Service Price"
+                  step="0.01"
+                  className="input w-full"
+                />
+                <FaAsterisk className="text-[10px] text-red-600 left-1 absolute" />
+              </div>
             </div>
 
             <div className="form-control">
@@ -106,7 +122,7 @@ const AddService = () => {
                   id="in7"
                   name="photoUrl"
                   style={{ visibility: "hidden" }}
-                  // className="file-input file-input-bordered w-full border"
+                  className="file-input file-input-bordered w-full border"
                 />
               </label>
             </div>
@@ -116,40 +132,42 @@ const AddService = () => {
               id="in5"
               name="serviceDescription"
               placeholder="Service Description"
-              className="input w-full h-[150px]"
+              className="input w-full "
             />
 
-            {facilityInputField.map((inputField, index) => (
-              <div key={index} className="flex gap-3 sm:gap-6">
-                <input
-                  type="text"
-                  name="facilityName"
-                  placeholder="Facility Name"
-                  className="input w-full"
-                  value={inputField.facilityName}
-                  onChange={(e) => changeInput(e, index)}
-                />
-                <input
-                  type="text"
-                  name="facilityDetails"
-                  placeholder="Facility Details"
-                  className="input w-full"
-                  value={inputField.facilityDetails}
-                  onChange={(e) => changeInput(e, index)}
-                />
+            <div className="max-h-[125px] space-y-3 overflow-y-auto">
+              {facilityInputField.map((inputField, index) => (
+                <div key={index} className="flex gap-2 sm:gap-6">
+                  <input
+                    type="text"
+                    name="facilityName"
+                    placeholder="Facility Name"
+                    className="input w-full"
+                    value={inputField.facilityName}
+                    onChange={(e) => changeInput(e, index)}
+                  />
+                  <input
+                    type="text"
+                    name="facilityDetails"
+                    placeholder="Facility Details"
+                    className="input w-full"
+                    value={inputField.facilityDetails}
+                    onChange={(e) => changeInput(e, index)}
+                  />
 
-                <i
-                  className="fa-solid fa-circle-plus btn text-lg hover:text-green-500"
-                  onClick={handleAddFields}
-                ></i>
+                  <i
+                    className="fa-solid fa-circle-plus btn text-lg hover:text-green-500"
+                    onClick={handleAddFields}
+                  ></i>
 
-                <i
-                  className="fa-solid fa-circle-minus btn text-lg hover:text-red-600"
-                  onClick={() => handleRemoveFields(index)}
-                  disabled={facilityInputField.length === 1}
-                ></i>
-              </div>
-            ))}
+                  <i
+                    className="fa-solid fa-circle-minus btn text-lg hover:text-red-600"
+                    onClick={() => handleRemoveFields(index)}
+                    disabled={facilityInputField.length === 1}
+                  ></i>
+                </div>
+              ))}
+            </div>
 
             <input
               type="submit"

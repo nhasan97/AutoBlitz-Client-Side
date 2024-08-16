@@ -6,6 +6,8 @@ import { useState } from "react";
 import { uploadImage } from "../../utilities/imageUploader";
 import { updateService } from "../../api/serviceAPIs";
 import { Helmet } from "react-helmet-async";
+import { showToastOnError } from "../../utilities/displayToast";
+import { FaAsterisk } from "react-icons/fa6";
 
 const UpdateService = () => {
   const loadedService = useLoaderData();
@@ -40,31 +42,41 @@ const UpdateService = () => {
   const handleUpdateService = async (e) => {
     e.preventDefault();
 
-    const id = loadedService.data._id;
-    let servicePhoto = "";
-
     const form = e.target;
-    const serviceName = form.serviceName.value;
-    if (changeServicePhoto) {
-      const image = await uploadImage(form.photoUrl.files[0]);
-      servicePhoto = image.data.display_url;
+
+    if (
+      form.serviceName.value.length <= 0 ||
+      form.servicePrice.value.length <= 0
+    ) {
+      showToastOnError("Please fill all the required fields");
+    } else if (facilityInputField.length <= 0) {
+      showToastOnError("Atleast one facility has to be added");
     } else {
-      servicePhoto = loadedService.data.servicePhoto;
+      const id = loadedService.data._id;
+      let servicePhoto = "";
+
+      const serviceName = form.serviceName.value;
+      if (changeServicePhoto) {
+        const image = await uploadImage(form.photoUrl.files[0]);
+        servicePhoto = image.data.display_url;
+      } else {
+        servicePhoto = loadedService.data.servicePhoto;
+      }
+      const servicePrice = parseFloat(form.servicePrice.value);
+      const serviceDescription = form.serviceDescription.value;
+      const facilities = facilityInputField;
+
+      const updatedService = {
+        serviceName,
+        servicePhoto,
+        servicePrice,
+        serviceDescription,
+        facilities,
+      };
+
+      mutation.mutate({ id, updatedService });
+      form.reset();
     }
-    const servicePrice = parseFloat(form.servicePrice.value);
-    const serviceDescription = form.serviceDescription.value;
-    const facilities = facilityInputField;
-
-    const updatedService = {
-      serviceName,
-      servicePhoto,
-      servicePrice,
-      serviceDescription,
-      facilities,
-    };
-
-    mutation.mutate({ id, updatedService });
-    form.reset();
   };
 
   return (
@@ -82,24 +94,30 @@ const UpdateService = () => {
             onSubmit={handleUpdateService}
           >
             <div className="flex justify-center items-center gap-3 sm:gap-6 ">
-              <input
-                type="text"
-                id="in1"
-                name="serviceName"
-                defaultValue={loadedService.data.serviceName}
-                placeholder="Service Name"
-                className="input w-full"
-              />
+              <div className="w-full flex items-center relative">
+                <input
+                  type="text"
+                  id="in1"
+                  name="serviceName"
+                  defaultValue={loadedService.data.serviceName}
+                  placeholder="Service Name"
+                  className="input w-full"
+                />
+                <FaAsterisk className="text-[10px] text-red-600 left-1 absolute" />
+              </div>
 
-              <input
-                type="number"
-                id="in3"
-                name="servicePrice"
-                defaultValue={loadedService.data.servicePrice}
-                placeholder="Service Price"
-                step="0.01"
-                className="input w-full"
-              />
+              <div className="w-full flex items-center relative">
+                <input
+                  type="number"
+                  id="in3"
+                  name="servicePrice"
+                  defaultValue={loadedService.data.servicePrice}
+                  placeholder="Service Price"
+                  step="0.01"
+                  className="input w-full"
+                />
+                <FaAsterisk className="text-[10px] text-red-600 left-1 absolute" />
+              </div>
             </div>
 
             <div className="form-control">
@@ -121,6 +139,7 @@ const UpdateService = () => {
                   type="file"
                   id="in7"
                   name="photoUrl"
+                  className="file-input file-input-bordered w-full border"
                   style={{ visibility: "hidden" }}
                   onChange={() => {
                     setChangeServicePhoto(!changeServicePhoto);
@@ -135,40 +154,42 @@ const UpdateService = () => {
               name="serviceDescription"
               defaultValue={loadedService.data.serviceDescription}
               placeholder="Service Description"
-              className="input w-full h-[150px]"
+              className="input w-full"
             />
 
-            {facilityInputField.map((inputField, index) => (
-              <div key={index} className="flex gap-3 sm:gap-6">
-                <input
-                  type="text"
-                  name="facilityName"
-                  placeholder="Facility Name"
-                  className="input w-full"
-                  value={inputField.facilityName}
-                  onChange={(e) => changeInput(e, index)}
-                />
-                <input
-                  type="text"
-                  name="facilityDetails"
-                  placeholder="Facility Details"
-                  className="input w-full"
-                  value={inputField.facilityDetails}
-                  onChange={(e) => changeInput(e, index)}
-                />
+            <div className="max-h-[125px] space-y-3 overflow-y-auto">
+              {facilityInputField.map((inputField, index) => (
+                <div key={index} className="flex gap-2 sm:gap-6">
+                  <input
+                    type="text"
+                    name="facilityName"
+                    placeholder="Facility Name"
+                    className="input w-full"
+                    value={inputField.facilityName}
+                    onChange={(e) => changeInput(e, index)}
+                  />
+                  <input
+                    type="text"
+                    name="facilityDetails"
+                    placeholder="Facility Details"
+                    className="input w-full"
+                    value={inputField.facilityDetails}
+                    onChange={(e) => changeInput(e, index)}
+                  />
 
-                <i
-                  className="fa-solid fa-circle-plus btn text-lg hover:text-green-500"
-                  onClick={handleAddFields}
-                ></i>
+                  <i
+                    className="fa-solid fa-circle-plus btn text-lg hover:text-green-500"
+                    onClick={handleAddFields}
+                  ></i>
 
-                <i
-                  className="fa-solid fa-circle-minus btn text-lg hover:text-red-600"
-                  onClick={() => handleRemoveFields(index)}
-                  disabled={facilityInputField.length === 1}
-                ></i>
-              </div>
-            ))}
+                  <i
+                    className="fa-solid fa-circle-minus btn text-lg hover:text-red-600"
+                    onClick={() => handleRemoveFields(index)}
+                    disabled={facilityInputField.length === 1}
+                  ></i>
+                </div>
+              ))}
+            </div>
 
             <input
               type="submit"
