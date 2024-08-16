@@ -10,6 +10,7 @@ import NoData from "../../../components/shared/NoData";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import CarSearcher from "../../../components/shared/Searcher/CarSearcher";
+import { Helmet } from "react-helmet-async";
 
 const ViewProducts = () => {
   //fetching brand based data
@@ -55,37 +56,39 @@ const ViewProducts = () => {
     return (
       <div className="h-screen bg-[url('/public/cart-bg.webp')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
         <DashboardContainer>
-          {/* <Helmet>
-            <title>PanaPoll | Dashboard | Manage Surveys</title>
-          </Helmet> */}
+          <Helmet>
+            <title>AutoBlitz | Cars</title>
+          </Helmet>
 
-          <div className="w-full h-[10%] mb-4">
-            <CarSearcher
-              maxPrice={maxPrice}
-              minPrice={minPrice}
-              setSearch={setSearch}
-              setValue={setValue}
-              value={value}
-              setRating={setRating}
+          <div className="w-full h-[calc(100vh-60px)] md:h-full flex flex-col md:justify-center gap-2 md:gap-4 mt-[60px] md:mt-0 ">
+            <div className="w-full h-[10%] 2xl:h-[5%] relative">
+              <CarSearcher
+                maxPrice={maxPrice}
+                minPrice={minPrice}
+                setSearch={setSearch}
+                setValue={setValue}
+                value={value}
+                setRating={setRating}
+                rating={rating}
+              ></CarSearcher>
+            </div>
+
+            <TabPCView
+              cars={cars}
+              handleDeleteCar={handleDeleteCar}
+              search={search}
+              range={value}
               rating={rating}
-            ></CarSearcher>
+            ></TabPCView>
+
+            <MobileView
+              cars={cars}
+              handleDeleteCar={handleDeleteCar}
+              search={search}
+              range={value}
+              rating={rating}
+            ></MobileView>
           </div>
-
-          <TabPCView
-            cars={cars}
-            handleDeleteCar={handleDeleteCar}
-            search={search}
-            range={value}
-            rating={rating}
-          ></TabPCView>
-
-          <MobileView
-            cars={cars}
-            handleDeleteCar={handleDeleteCar}
-            search={search}
-            range={value}
-            rating={rating}
-          ></MobileView>
         </DashboardContainer>
 
         <ToastContainer></ToastContainer>

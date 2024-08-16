@@ -10,6 +10,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import usePerformMutation from "../../../hooks/usePerformMutation";
 import { deleteServiceData } from "../../../api/serviceAPIs";
+import { Helmet } from "react-helmet-async";
 
 const ViewServices = () => {
   //fetching Service data
@@ -45,25 +46,27 @@ const ViewServices = () => {
     return (
       <div className="h-screen bg-[url('/public/cart-bg.webp')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
         <DashboardContainer>
-          {/* <Helmet>
-            <title>PanaPoll | Dashboard | Manage Surveys</title>
-          </Helmet> */}
+          <Helmet>
+            <title>AutoBlitz | Services</title>
+          </Helmet>
 
-          <div className="w-full h-[10%] mb-4">
-            <ServiceSearcher setSearch={setSearch}></ServiceSearcher>
+          <div className="w-full h-[calc(100vh-60px)] md:h-full flex flex-col md:justify-center gap-2 md:gap-4 mt-[60px] md:mt-0 ">
+            <div className="w-full h-[10%] 2xl:h-[5%]">
+              <ServiceSearcher setSearch={setSearch}></ServiceSearcher>
+            </div>
+
+            <TabPCView
+              services={services}
+              handleDeleteService={handleDeleteService}
+              search={search}
+            ></TabPCView>
+
+            <MobileView
+              services={services}
+              handleDeleteService={handleDeleteService}
+              search={search}
+            ></MobileView>
           </div>
-
-          <TabPCView
-            services={services}
-            handleDeleteService={handleDeleteService}
-            search={search}
-          ></TabPCView>
-
-          <MobileView
-            services={services}
-            handleDeleteService={handleDeleteService}
-            search={search}
-          ></MobileView>
         </DashboardContainer>
 
         <ToastContainer></ToastContainer>

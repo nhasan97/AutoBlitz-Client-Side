@@ -5,6 +5,7 @@ import { useState } from "react";
 import NoData from "../components/shared/NoData";
 import Loading from "../components/shared/Loading";
 import ServiceCard from "../components/ServiceCard";
+import { Helmet } from "react-helmet-async";
 
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -36,9 +37,14 @@ const AllServices = () => {
 
   if (services.length > 0) {
     return (
-      <Container>
-        <div className="w-full flex flex-col justify-center items-center">
-          {/*<div className="w-full">
+      <div className="bg-[url('/public/car-care.webp')] bg-[rgba(0,0,0,0.96)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+        <Container>
+          <div className="w-full flex flex-col justify-center items-center">
+            <Helmet>
+              <title>AutoBlitz | All Services</title>
+            </Helmet>
+
+            {/* <div className="w-full">
              <Slider {...settings}>
               <div>
                 <img src={bn1} alt="" className="w-full h-[530px]" />
@@ -59,31 +65,33 @@ const AllServices = () => {
                 <img src={bn3} alt="" className="w-full h-[530px]" />
               </div>
             </Slider> 
-          </div>*/}
+          </div> */}
 
-          <div className="w-full h-[10%] my-4">
             <ServiceSearcher setSearch={setSearch}></ServiceSearcher>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-12 bg-[url('/public/car-care.webp')] bg-[rgba(0,0,0,0.96)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
-            {services
-              .filter((service) => {
-                return search.toLowerCase() === ""
-                  ? service
-                  : service.serviceName
-                      .toLowerCase()
-                      .includes(search.toLowerCase()) ||
-                      service.serviceDescription
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-12">
+              {services
+                .filter((service) => {
+                  return search.toLowerCase() === ""
+                    ? service
+                    : service.serviceName
                         .toLowerCase()
-                        .includes(search.toLowerCase());
-              })
-              .map((service) => (
-                <ServiceCard key={service._id} service={service}></ServiceCard>
-              ))}
+                        .includes(search.toLowerCase()) ||
+                        service.serviceDescription
+                          .toLowerCase()
+                          .includes(search.toLowerCase());
+                })
+                .map((service) => (
+                  <ServiceCard
+                    key={service._id}
+                    service={service}
+                  ></ServiceCard>
+                ))}
+            </div>
+            {/* <ToastContainer /> */}
           </div>
-          {/* <ToastContainer /> */}
-        </div>
-      </Container>
+        </Container>
+      </div>
     );
   } else {
     return (
