@@ -11,6 +11,7 @@ import BasicInfo from "./BasicInfo";
 import OtherInfo from "./OtherInfo";
 import Specs from "./Specs";
 import { useLoaderData } from "react-router-dom";
+import { showToastOnError } from "../../../utilities/displayToast";
 
 const UpdateProduct = () => {
   //fetching single car data and specs
@@ -65,56 +66,70 @@ const UpdateProduct = () => {
   const mutation = usePerformMutation("updateCarInfo", updateCarInfo);
 
   const handleUpdateCar = async () => {
-    const id = loadedCar.data._id;
-    let imageUrl = "";
-
-    const name = formData.name;
-    const brandName = formData.brandName;
-    const type = formData.type;
-    const price = parseFloat(formData.price);
-    const description = formData.description;
-    const rating = parseFloat(formData.rating);
-    if (loadedCar.data.imageUrl === formData.photo_url) {
-      imageUrl = loadedCar.data.imageUrl;
+    if (
+      formData.name.length <= 0 ||
+      formData.brandName.length <= 0 ||
+      formData.type.length <= 0 ||
+      formData.price.length <= 0 ||
+      formData.rating.length <= 0
+    ) {
+      showToastOnError("Please fill all the required fields");
+    } else if (
+      parseFloat(formData.rating) <= 0 ||
+      parseFloat(formData.rating) > 5
+    ) {
+      showToastOnError("Rating range is 1 to 5");
     } else {
-      const image = await uploadImage(formData.photo_url);
-      imageUrl = image.data.display_url;
+      const id = loadedCar.data._id;
+      let imageUrl = "";
+
+      const name = formData.name;
+      const brandName = formData.brandName;
+      const type = formData.type;
+      const price = parseFloat(formData.price);
+      const description = formData.description;
+      const rating = parseFloat(formData.rating);
+      if (loadedCar.data.imageUrl === formData.photo_url) {
+        imageUrl = loadedCar.data.imageUrl;
+      } else {
+        const image = await uploadImage(formData.photo_url);
+        imageUrl = image.data.display_url;
+      }
+      const body = formData.body;
+      const seg = formData.seg;
+      const py = formData.py;
+      const eng = formData.eng;
+      const pow = formData.pow;
+      const fuel = formData.fuel;
+      const fuelc = formData.fuelc;
+      const ps = formData.ps;
+      const d = formData.d;
+      const ts = formData.ts;
+      const gw = formData.gw;
+
+      const updatedCarInfo = {
+        name,
+        brandName,
+        type,
+        price,
+        description,
+        rating,
+        imageUrl,
+        body,
+        seg,
+        py,
+        eng,
+        pow,
+        fuel,
+        fuelc,
+        ps,
+        d,
+        ts,
+        gw,
+      };
+
+      mutation.mutate({ id, updatedCarInfo });
     }
-    const body = formData.body;
-    const seg = formData.seg;
-    const py = formData.py;
-    const eng = formData.eng;
-    const pow = formData.pow;
-    const fuel = formData.fuel;
-    const fuelc = formData.fuelc;
-    const ps = formData.ps;
-    const d = formData.d;
-    const ts = formData.ts;
-    const gw = formData.gw;
-
-    const updatedCarInfo = {
-      name,
-      brandName,
-      type,
-      price,
-      description,
-      rating,
-      imageUrl,
-      body,
-      seg,
-      py,
-      eng,
-      pow,
-      fuel,
-      fuelc,
-      ps,
-      d,
-      ts,
-      gw,
-    };
-
-    mutation.mutate({ id, updatedCarInfo });
-    // form.reset();
   };
 
   if (loadingBrands) {
