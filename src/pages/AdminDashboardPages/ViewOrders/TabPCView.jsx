@@ -2,19 +2,10 @@ import PropTypes from "prop-types";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import OrderItemsCard from "./OrderItemsCard";
 import timeStampToDateConverter from "../../../utilities/timeStampToDateConverter";
-import Loading from "../../../components/shared/Loading";
 
-const TabPCView = ({
-  orders,
-  loadingOrders,
-  search,
-  handleUpdateOrderStatus,
-}) => {
-  // if (loadingOrders) {
-  //   return <Loading></Loading>;
-  // } else {
+const TabPCView = ({ orders, search, handleUpdateOrderStatus }) => {
   return (
-    <div className="hidden sm:block w-full h-[80%] p-5 space-y-6 text-center bg-[#f4f3f081] backdrop-blur-sm rounded-lg">
+    <div className="hidden sm:block w-full h-[80%] 2xl:h-[90%] p-5 space-y-6 text-center bg-[#f4f3f081] backdrop-blur-sm rounded-lg">
       <h1 className="font-rac text-3xl text-white">Orders</h1>
 
       <div className="h-[calc(100%-76px)] overflow-y-auto rounded-lg ">
@@ -57,7 +48,7 @@ const TabPCView = ({
                     <p>{order.orderId}</p>
                   </td>
 
-                  <td className="flex justify-center items-center gap-3">
+                  <td className="flex justify-end items-center gap-3">
                     <p>{order.name}</p>
                     <button
                       className="btn btn-circle hover:text-red-500"
@@ -177,7 +168,7 @@ const TabPCView = ({
                     </dialog>
                   </td>
 
-                  <td className="flex justify-center items-center gap-3">
+                  <td className="flex justify-end items-center gap-3">
                     <p>{order.status}</p>
                     <button
                       className="btn btn-circle hover:text-red-500"
@@ -238,7 +229,6 @@ const TabPCView = ({
     </div>
   );
 };
-// };
 
 TabPCView.propTypes = {
   orders: PropTypes.array.isRequired,

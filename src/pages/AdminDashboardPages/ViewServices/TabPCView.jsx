@@ -4,7 +4,7 @@ import { AiTwotoneEdit } from "react-icons/ai";
 
 const TabPCView = ({ services, handleDeleteService, search }) => {
   return (
-    <div className="hidden sm:block w-full h-[80%] p-5 space-y-6 text-center bg-[#f4f3f081] backdrop-blur-sm rounded-lg">
+    <div className="hidden sm:block w-full h-[80%] 2xl:h-[90%] p-5 space-y-6 text-center bg-[#f4f3f081] backdrop-blur-sm rounded-lg">
       <h1 className="font-rac text-3xl text-white">Services</h1>
 
       <div className="h-[calc(100%-76px)] overflow-y-auto rounded-lg ">
