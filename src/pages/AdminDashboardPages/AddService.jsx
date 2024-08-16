@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import DashboardContainer from "../../components/dashboard/shared/DashboardContainer";
 import { uploadImage } from "../../utilities/imageUploader";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AddService = () => {
   const [facilityInputField, setFacilityInputField] = useState([
@@ -64,9 +65,9 @@ const AddService = () => {
   return (
     <div className="h-screen bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
       <DashboardContainer>
-        {/* <Helmet>
-        <title>PanaPoll | Dashboard | Manage Surveys</title>
-      </Helmet> */}
+        <Helmet>
+          <title>AutoBlitz | Add Service</title>
+        </Helmet>
 
         <div className="w-full lg:w-2/3 mx-auto bg-[#f4f3f081] text-center p-5 lg:p-10 space-y-3 sm:space-y-6 rounded-lg backdrop-blur-sm">
           <h1 className="font-rac text-3xl">Add New Service</h1>

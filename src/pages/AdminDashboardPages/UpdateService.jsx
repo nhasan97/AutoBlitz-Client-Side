@@ -5,6 +5,7 @@ import usePerformMutation from "../../hooks/usePerformMutation";
 import { useState } from "react";
 import { uploadImage } from "../../utilities/imageUploader";
 import { updateService } from "../../api/serviceAPIs";
+import { Helmet } from "react-helmet-async";
 
 const UpdateService = () => {
   const loadedService = useLoaderData();
@@ -69,9 +70,9 @@ const UpdateService = () => {
   return (
     <div className="h-screen bg-[url('/public/update-bg.jpg')] bg-[rgba(20,20,20,0.73)] bg-no-repeat bg-center bg-cover bg-blend-overlay">
       <DashboardContainer>
-        {/* <Helmet>
-    <title>PanaPoll | Dashboard | Manage Surveys</title>
-  </Helmet> */}
+        <Helmet>
+          <title>AutoBlitz | Update Car Info</title>
+        </Helmet>
 
         <div className="w-full lg:w-2/3 mx-auto bg-[#f4f3f081] text-center p-5 lg:p-10 space-y-3 sm:space-y-6 rounded-lg backdrop-blur-sm">
           <h1 className="font-rac text-3xl">Update Service</h1>
@@ -171,7 +172,7 @@ const UpdateService = () => {
 
             <input
               type="submit"
-              value="Add"
+              value="Save"
               className="input btn w-full bg-red-600 text-white"
             />
           </form>

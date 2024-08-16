@@ -5,6 +5,7 @@ import speedometer from "../../public/speedometer.jpg";
 import Loading from "../components/shared/Loading";
 import useGetSingleCarDataAndSpecs from "../hooks/useGetSingleCarDataAndSpecs";
 import Container from "../components/shared/Container";
+import { Helmet } from "react-helmet-async";
 
 const ProductDetails = () => {
   const loadedCarId = useParams();
@@ -12,14 +13,16 @@ const ProductDetails = () => {
   //fetching single car data and specs
   const [loadingCar, loadedCar] = useGetSingleCarDataAndSpecs(loadedCarId.id);
 
-  console.log(loadedCar);
-
   if (loadingCar) {
     return <Loading></Loading>;
   } else {
     return (
       <Container>
-        <div className="w-full flex flex-col lg:justify-center lg:items-center">
+        <Helmet>
+          <title>AutoBlitz | Car Details</title>
+        </Helmet>
+
+        <div className="w-full min-h-[calc(100vh-160px)] flex flex-col lg:justify-center lg:items-center">
           <div className="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-0">
             <div className="w-full lg:w-[80%] relative lg:pr-5 lg:mr-5 lg:border-dashed lg:border-r-2 border-red-500 ">
               <img

@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-
 import useGetCars from "../hooks/useGetCars";
 import CarCards from "../components/CarCards";
 import Loading from "../components/shared/Loading";
@@ -8,6 +7,7 @@ import NoData from "../components/shared/NoData";
 import Container from "../components/shared/Container";
 import { useQuery } from "@tanstack/react-query";
 import { getSingleBrand } from "../api/brandAPIs";
+import { Helmet } from "react-helmet-async";
 
 const BrandBasedProducts = () => {
   const loadedBrandName = useParams();
@@ -31,6 +31,10 @@ const BrandBasedProducts = () => {
     return (
       <Container>
         <div className="w-full flex flex-col justify-center items-center">
+          <Helmet>
+            <title>AutoBlitz | Brand Based Cars</title>
+          </Helmet>
+
           <div
             // style={style}
             className={`w-full h-full flex flex-col sm:flex-row justify-center items-center gap-4 pb-6 border-b`}
