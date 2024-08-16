@@ -11,10 +11,10 @@ import TabPCView from "./TabPCView";
 import MobileView from "./MobileView";
 import Container from "../../../components/shared/Container";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyOrders = () => {
   const [user, loading] = useUserRole();
-
   const [loadingOrders, orders, refetchOrders] = useGetOrders(user?.email);
   const [search, setSearch] = useState("");
 
@@ -48,31 +48,31 @@ const MyOrders = () => {
 
   if (orders.length > 0) {
     return (
-      <Container>
-        <div className="w-full flex flex-col justify-center items-center gap-12 bg-[url('/public/prod-bg.jpg')] bg-[rgba(0,0,0,0.80)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
-          {/* <Helmet>
-              <title>PanaPoll | Dashboard | Manage Surveys</title>
-            </Helmet> */}
+      <div className="bg-[url('/public/prod-bg.jpg')] bg-[rgba(0,0,0,0.80)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-fixed">
+        <Container>
+          <div className="w-full h-[calc(100vh-160px)] flex flex-col justify-center items-center gap-6">
+            <Helmet>
+              <title>AutoBlitz | Order History</title>
+            </Helmet>
 
-          {/* <div className="w-full h-[10%] mb-4"> */}
-          <OrderSearcher setSearch={setSearch}></OrderSearcher>
-          {/* </div> */}
+            <OrderSearcher setSearch={setSearch}></OrderSearcher>
 
-          <TabPCView
-            orders={orders}
-            handleUpdateOrderStatus={handleUpdateOrderStatus}
-            search={search}
-          ></TabPCView>
+            <TabPCView
+              orders={orders}
+              handleUpdateOrderStatus={handleUpdateOrderStatus}
+              search={search}
+            ></TabPCView>
 
-          <MobileView
-            orders={orders}
-            handleUpdateOrderStatus={handleUpdateOrderStatus}
-            search={search}
-          ></MobileView>
+            <MobileView
+              orders={orders}
+              handleUpdateOrderStatus={handleUpdateOrderStatus}
+              search={search}
+            ></MobileView>
 
-          <ToastContainer></ToastContainer>
-        </div>
-      </Container>
+            <ToastContainer></ToastContainer>
+          </div>
+        </Container>
+      </div>
     );
   } else {
     return <NoData text="No Orders Found"></NoData>;

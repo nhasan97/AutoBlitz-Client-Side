@@ -30,8 +30,6 @@ const Brands = () => {
         <div className="w-full flex flex-col justify-center items-center bg-[url('/public/smoke.png')] bg-no-repeat bg-contain bg-left bg-fixed">
           <Title title={title}></Title>
 
-          {/* <div className="max-w-screen-xl mx-auto my-10 px-28 py-10 bg-[url('/public/smoke.png')] bg-no-repeat bg-contain bg-left bg-fixed"> */}
-          {/* <Title title={title}></Title> */}
           <div className="flex items-center justify-center flex-wrap gap-6 mx-auto py-12 border-dotted border-r-4 border-[#df454596]">
             {brands.map((brand) => (
               <BrandCard

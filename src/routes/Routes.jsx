@@ -6,14 +6,13 @@ import ProductDetails from "../pages/ProductDetails";
 import PrivateRoute from "./PrivateRoute";
 import Error from "../pages/Error";
 import Home from "../pages/Home/Home";
-import AllRoute from "./AllRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminRoute from "./AdminRoute";
 import AddProduct from "../pages/AdminDashboardPages/AddProduct/AddProduct";
 import ViewProducts from "../pages/AdminDashboardPages/ViewProducts/ViewProducts";
 import AddService from "../pages/AdminDashboardPages/AddService";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
-import ServiceBooking from "../pages/ServiceBooking";
+import ServiceBooking from "../pages/CustomerPages/ServiceBooking";
 import BrandBasedProducts from "../pages/BrandBasedProducts";
 import ViewCustomers from "../pages/AdminDashboardPages/ViewCustomers/ViewCustomers";
 import AllCars from "../pages/AllCars";
@@ -22,42 +21,69 @@ import axiosPublic from "../api/axiosPublic";
 import ViewServices from "../pages/AdminDashboardPages/ViewServices/ViewServices";
 import UpdateService from "../pages/AdminDashboardPages/UpdateService";
 import AllServices from "../pages/AllServices";
-import MyCart from "../pages/CustomerPages/MyCart";
+import MyCart from "../pages/CustomerPages/MyCart/MyCart";
 import Payment from "../pages/CustomerPages/Checkout/Payment";
 import ViewOrders from "../pages/AdminDashboardPages/ViewOrders/ViewOrders";
 import MyOrders from "../pages/CustomerPages/MyOrders/MyOrders";
+import MyServiceList from "../pages/CustomerPages/MyServiceList/MyServiceList";
+import MyServiceBookings from "../pages/CustomerPages/MyServiceBookings/MyServiceBookings";
+import ViewServiceBookings from "../pages/AdminDashboardPages/ViewServiceBookings/ViewServiceBookings";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-    errorElement: <Error></Error>,
+    element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/branded-car/:name",
-        element: <BrandBasedProducts></BrandBasedProducts>,
+        element: <BrandBasedProducts />,
       },
       {
         path: "/all-cars",
-        element: <AllCars></AllCars>,
-      },
-      {
-        path: "/all-servicing",
-        element: <AllServices></AllServices>,
+        element: <AllCars />,
       },
       {
         path: "/product-details/:id",
-        element: <ProductDetails></ProductDetails>,
+        element: <ProductDetails />,
+      },
+      {
+        path: "/all-servicing",
+        element: <AllServices />,
+      },
+      {
+        path: "/service-details/:id",
+        element: <ServiceDetails />,
       },
       {
         path: "/my-cart",
         element: (
           <PrivateRoute>
-            <MyCart></MyCart>
+            <MyCart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: <Payment />,
+      },
+      {
+        path: "/my-service-list",
+        element: (
+          <PrivateRoute>
+            <MyServiceList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/service-booking",
+        element: (
+          <PrivateRoute>
+            <ServiceBooking />
           </PrivateRoute>
         ),
       },
@@ -65,25 +91,17 @@ const router = createBrowserRouter([
         path: "/my-orders",
         element: (
           <PrivateRoute>
-            <MyOrders></MyOrders>
+            <MyOrders />
           </PrivateRoute>
         ),
       },
       {
-        path: "/service-details/:id",
-        element: <ServiceDetails></ServiceDetails>,
-      },
-      {
-        path: "/service-booking/:id",
+        path: "/my-service-bookings",
         element: (
           <PrivateRoute>
-            <ServiceBooking></ServiceBooking>
+            <MyServiceBookings />
           </PrivateRoute>
         ),
-      },
-      {
-        path: "/checkout",
-        element: <Payment></Payment>,
       },
     ],
   },
@@ -93,7 +111,7 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <AdminRoute>
-          <DashboardLayout></DashboardLayout>
+          <DashboardLayout />
         </AdminRoute>
       </PrivateRoute>
     ),
@@ -104,7 +122,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ViewProducts></ViewProducts>
+              <ViewProducts />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -114,7 +132,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <AddProduct></AddProduct>
+              <AddProduct />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -124,7 +142,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <UpdateProduct></UpdateProduct>
+              <UpdateProduct />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -135,7 +153,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ViewServices></ViewServices>
+              <ViewServices />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -145,7 +163,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <AddService></AddService>
+              <AddService />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -155,7 +173,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <UpdateService></UpdateService>
+              <UpdateService />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -166,7 +184,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ViewCustomers></ViewCustomers>
+              <ViewCustomers />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -176,7 +194,17 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ViewOrders></ViewOrders>
+              <ViewOrders />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "view-bookings",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ViewServiceBookings />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -186,13 +214,13 @@ const router = createBrowserRouter([
 
   {
     path: "/login",
-    element: <Login></Login>,
-    errorElement: <Error></Error>,
+    element: <Login />,
+    errorElement: <Error />,
   },
   {
     path: "/register",
-    element: <Register></Register>,
-    errorElement: <Error></Error>,
+    element: <Register />,
+    errorElement: <Error />,
   },
 ]);
 
