@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import "./CarSearcher.css";
-import { IoMdSearch } from "react-icons/io";
+import { LuListFilter } from "react-icons/lu";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
 
@@ -63,20 +63,20 @@ const CarSearcher = ({
 
       {/* ------------------------------MobileView------------------------------ */}
 
-      <details className="lg:hidden collapse bg-transparent z-10 border">
+      <details className="lg:hidden collapse transition-all duration-300 ease-in-out bg-transparent z-10 absolute">
         <summary
-          className="collapse-title text-xl font-medium text-white"
+          className="collapse-title px-0 transition-all duration-300 ease-in-out text-xl font-medium text-white"
           onClick={() => setSearchIconVisibility(!searchIconVisibility)}
         >
           {searchIconVisibility ? (
-            <div>
-              <IoMdSearch />
+            <div className="flex items-center gap-1">
+              <LuListFilter /> <p className="text-base">Filter</p>
             </div>
           ) : (
             <HiMiniXMark />
           )}
         </summary>
-        <div className="collapse-content bg-base-200 flex flex-col justify-center items-center gap-4 text-black rounded-t-xl">
+        <div className="collapse-content p-5 transition-all duration-300 ease-in-out bg-gray-300 flex flex-col justify-center items-center gap-4 text-black rounded-t-xl">
           <input
             tabIndex={0}
             type="text"
