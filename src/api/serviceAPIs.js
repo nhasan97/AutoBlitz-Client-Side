@@ -25,8 +25,13 @@ export const getSingleServiceData = async (id) => {
   return response.data;
 };
 
-export const saveServiceBooking = async (order) => {
-  const response = await axiosSecure.post("/service-bookings", order);
+export const getAllServiceBookings = async (email = "") => {
+  const response = await axiosPublic.get(`/service-bookings?email=${email}`);
+  return response.data;
+};
+
+export const saveServiceBooking = async (data) => {
+  const response = await axiosSecure.post("/service-bookings", data);
   if (response.data.insertedId) {
     showToastOnSuccess("Service booked successfully!");
   } else {
@@ -46,6 +51,15 @@ export const updateService = async (obj) => {
     showToastOnError("Error! Not Updated");
   }
 
+  return response.data;
+};
+
+export const updateBookingStatus = async (obj) => {
+  const response = await axiosSecure.patch(
+    `/bookings/update-status/${obj?._id}`,
+    obj?.updatedStatus
+  );
+  console.log(response);
   return response.data;
 };
 

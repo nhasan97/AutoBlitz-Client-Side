@@ -10,13 +10,7 @@ export const getPopularCars = async () => {
 };
 
 export const getCars = async (name) => {
-  let response;
-  if (name === "") {
-    response = await axiosPublic.get(`/cars`);
-  } else {
-    response = await axiosPublic.get(`/cars?brandName=${name}`);
-  }
-
+  const response = await axiosPublic.get(`/cars?brandName=${name}`);
   return response.data;
 };
 
